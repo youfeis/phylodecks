@@ -15,7 +15,7 @@
 {
 }
 
-// returns a CCScene that contains the HelloWorldLayer as the only child
+// returns a CCScene that contains the Introlayer as the only child
 +(CCScene *) scene;
 
 @end

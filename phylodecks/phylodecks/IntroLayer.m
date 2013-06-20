@@ -9,15 +9,15 @@
 
 // Import the interfaces
 #import "IntroLayer.h"
-#import "HelloWorldLayer.h"
+#import "MainMenuLayer.h"
 
 
 #pragma mark - IntroLayer
 
-// HelloWorldLayer implementation
+// MainMenuLayer implementation
 @implementation IntroLayer
 
-// Helper class method that creates a Scene with the HelloWorldLayer as the only child.
+// Helper class method that creates a Scene with the MainMenuLayer as the only child.
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -60,6 +60,6 @@
 
 -(void) makeTransition:(ccTime)dt
 {
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene] withColor:ccWHITE]];
 }
 @end

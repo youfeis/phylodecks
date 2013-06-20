@@ -1,5 +1,5 @@
 //
-//  HelloWorldLayer.m
+//  MainMenuLayer.h
 //  phylodecks
 //
 //  Created by Sun, You Fei on 13-06-01.
@@ -8,24 +8,24 @@
 
 
 // Import the interfaces
-#import "HelloWorldLayer.h"
+#import "MainMenuLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
-#pragma mark - HelloWorldLayer
+#pragma mark - MainMenuLayer
 
-// HelloWorldLayer implementation
-@implementation HelloWorldLayer
+// MainMenuLayer implementation
+@implementation MainMenuLayer
 
-// Helper class method that creates a Scene with the HelloWorldLayer as the only child.
+// Helper class method that creates a Scene with the MainMenuLayer as the only child.
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	HelloWorldLayer *layer = [HelloWorldLayer node];
+	MainMenuLayer *layer = [MainMenuLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -42,13 +42,13 @@
 	if( (self=[super init]) ) {
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"PHYLODECKS" fontName:@"Marker Felt" fontSize:64];
 
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
 	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
+		// position the label on the center top of the screen
+		label.position =  ccp( size.width /2 , 4*size.height/5 );
 		
 		// add the label as a child to this Layer
 		[self addChild: label];
@@ -56,49 +56,61 @@
 		
 		
 		//
-		// Leaderboards and Achievements
+		// MenuItems
 		//
 		
 		// Default font size will be 28 points.
 		[CCMenuItemFont setFontSize:28];
 		
 		// Achievement Menu Item using blocks
-		CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
+		CCMenuItem *itemTutorial = [CCMenuItemFont itemWithString:@"Tutorial" block:^(id sender) {
 			
 			
-			GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-			achivementViewController.achievementDelegate = self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:achivementViewController animated:YES];
-			
-			[achivementViewController release];
+			NSLog(@"itemTutorialClicked");
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[TutorialLayer scene] withColor:ccWHITE]];
+            
 		}
 									   ];
-
+	
 		// Leaderboard Menu Item using blocks
-		CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
+		CCMenuItem *itemSinglePlayer = [CCMenuItemFont itemWithString:@"Single Player" block:^(id sender) {
 			
 			
-			GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-			leaderboardViewController.leaderboardDelegate = self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-			
-			[leaderboardViewController release];
+			NSLog(@"itemSinglePlayerClicked");
 		}
 									   ];
+        
+        CCMenuItem *itemSetting = [CCMenuItemFont itemWithString:@"Setting " block:^(id sender) {
+			
+			
+			NSLog(@"itemSettingClicked");
+		}
+                                    ];
+        
+		// Leaderboard Menu Item using blocks
+		CCMenuItem *itemExit = [CCMenuItemFont itemWithString:@"     Exit    " block:^(id sender) {
+			
+			
+			NSLog(@"itemExitClicked");
+            exit(0);
+		}
+                                        ];
+        
+        
 		
-		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
+		CCMenu *menuLine1 = [CCMenu menuWithItems:itemTutorial, itemSinglePlayer, nil];
 		
-		[menu alignItemsHorizontallyWithPadding:20];
-		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
+		[menuLine1 alignItemsHorizontallyWithPadding:20];
+		[menuLine1 setPosition:ccp( size.width/2, size.height - 150)];
+        
+        CCMenu *menuLine2 = [CCMenu menuWithItems:itemSetting, itemExit, nil];
+        
+        [menuLine2 alignItemsHorizontallyWithPadding:20];
+		[menuLine2 setPosition:ccp( size.width/2, size.height - 180)];
 		
 		// Add the menu to the layer
-		[self addChild:menu];
+		[self addChild:menuLine1];
+        [self addChild:menuLine2];
 
 	}
 	return self;
