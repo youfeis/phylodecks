@@ -20,7 +20,7 @@
     GDataXMLDocument *_xmlDoc;
 }
 @property (assign,readwrite) int playerLevel;
-@property (retain,readonly) NSString *playerName;
+@property (retain,readwrite) NSString *playerName;
 @property (assign,readonly) BOOL isLastPlayerExist;
 @property (retain,readwrite) NSMutableArray *playerInventory;
 

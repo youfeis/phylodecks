@@ -38,4 +38,17 @@
     return self;
 }
 
+- (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==0) {
+        
+        if (alert.alertViewStyle == UIAlertViewStylePlainTextInput){
+            [[Player currentPlayer] setPlayerName: [[alert textFieldAtIndex:0] text]];
+        }
+    }
+    if(buttonIndex==1) {
+        //goto player selection scene
+    }
+}
+
 @end

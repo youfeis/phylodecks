@@ -22,6 +22,9 @@
 		097897D4178112A7001EA837 /* GoogleMapUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097897D3178112A7001EA837 /* GoogleMapUIViewController.m */; };
 		097897D717815B3E001EA837 /* GPSMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 097897D617815B3D001EA837 /* GPSMenuLayer.m */; };
 		097897DA17824A78001EA837 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 097897D917824A78001EA837 /* Player.m */; };
+		0978AD0F1786028100455B03 /* GameBoardLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD0E1786028100455B03 /* GameBoardLayer.m */; };
+		0978AD141786094B00455B03 /* CCMenuAdvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD111786094B00455B03 /* CCMenuAdvanced.m */; };
+		0978AD151786094B00455B03 /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD131786094B00455B03 /* CCLayerPanZoom.m */; };
 		09792ECA177F6E4D0065057E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09792EC9177F6E4D0065057E /* QuartzCore.framework */; };
 		09792ECC177F6E4D0065057E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09792ECB177F6E4D0065057E /* OpenGLES.framework */; };
 		09792ECE177F6E4D0065057E /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09792ECD177F6E4D0065057E /* OpenAL.framework */; };
@@ -178,6 +181,12 @@
 		097897D617815B3D001EA837 /* GPSMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSMenuLayer.m; sourceTree = "<group>"; };
 		097897D817824A78001EA837 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		097897D917824A78001EA837 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		0978AD0D1786028100455B03 /* GameBoardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardLayer.h; sourceTree = "<group>"; };
+		0978AD0E1786028100455B03 /* GameBoardLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoardLayer.m; sourceTree = "<group>"; };
+		0978AD101786094B00455B03 /* CCMenuAdvanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuAdvanced.h; sourceTree = "<group>"; };
+		0978AD111786094B00455B03 /* CCMenuAdvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuAdvanced.m; sourceTree = "<group>"; };
+		0978AD121786094B00455B03 /* CCLayerPanZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoom.h; sourceTree = "<group>"; };
+		0978AD131786094B00455B03 /* CCLayerPanZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoom.m; sourceTree = "<group>"; };
 		09792EC6177F6E4D0065057E /* phylodecks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = phylodecks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09792EC9177F6E4D0065057E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		09792ECB177F6E4D0065057E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -539,6 +548,8 @@
 				097897D617815B3D001EA837 /* GPSMenuLayer.m */,
 				097897B41780EB6E001EA837 /* LocationConfirmationScene.h */,
 				097897B51780EB6E001EA837 /* LocationConfirmationScene.m */,
+				0978AD0D1786028100455B03 /* GameBoardLayer.h */,
+				0978AD0E1786028100455B03 /* GameBoardLayer.m */,
 				097897D2178112A7001EA837 /* GoogleMapUIViewController.h */,
 				097897D3178112A7001EA837 /* GoogleMapUIViewController.m */,
 				09793064177F74830065057E /* IntroScene.h */,
@@ -587,6 +598,10 @@
 		09792EF6177F6E4D0065057E /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				0978AD101786094B00455B03 /* CCMenuAdvanced.h */,
+				0978AD111786094B00455B03 /* CCMenuAdvanced.m */,
+				0978AD121786094B00455B03 /* CCLayerPanZoom.h */,
+				0978AD131786094B00455B03 /* CCLayerPanZoom.m */,
 				DFD9A85C1783911100D632CC /* GDataXMLNode.m */,
 				DFD9A85D1783911100D632CC /* GDataXMLNode.h */,
 				0979300D177F6E4F0065057E /* LICENSE_cocos2d.txt */,
@@ -1118,6 +1133,9 @@
 				097897D717815B3E001EA837 /* GPSMenuLayer.m in Sources */,
 				097897DA17824A78001EA837 /* Player.m in Sources */,
 				DFD9A85E1783911100D632CC /* GDataXMLNode.m in Sources */,
+				0978AD0F1786028100455B03 /* GameBoardLayer.m in Sources */,
+				0978AD141786094B00455B03 /* CCMenuAdvanced.m in Sources */,
+				0978AD151786094B00455B03 /* CCLayerPanZoom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
