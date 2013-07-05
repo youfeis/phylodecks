@@ -1,14 +1,58 @@
 <Users>
     
     <Player>
-        <Name recent="YES"></Name>
+        <Name recent="YES">Test</Name>
     </Player>
     <Player>
-        <Name></Name>
+        <Name>Test</Name>
         <Level>1</Level>
         <Experience>0</Experience>
         <Inventory>
-            <CardID>0</CardID>
+            <CardID>1</CardID>
+            <CardID>2</CardID>
+            <CardID>3</CardID>
+            <CardID>4</CardID>
+            <CardID>5</CardID>
+            <CardID>1</CardID>
+            <CardID>2</CardID>
+            <CardID>3</CardID>
+            <CardID>4</CardID>
+            <CardID>5</CardID>
+            <CardID>1</CardID>
+            <CardID>2</CardID>
+            <CardID>3</CardID>
+            <CardID>4</CardID>
+            <CardID>5</CardID>
+            <CardID>1</CardID>
+            <CardID>2</CardID>
+            <CardID>3</CardID>
+            <CardID>4</CardID>
+            <CardID>5</CardID>
+            <CardID>1</CardID>
+            <CardID>2</CardID>
+            <CardID>3</CardID>
+            <CardID>4</CardID>
+            <CardID>5</CardID>
+            <CardID>1</CardID>
+            <CardID>2</CardID>
+            <CardID>3</CardID>
+            <CardID>4</CardID>
+            <CardID>5</CardID>
+            <CardID>1</CardID>
+            <CardID>2</CardID>
+            <CardID>3</CardID>
+            <CardID>4</CardID>
+            <CardID>5</CardID>
+            <CardID>1</CardID>
+            <CardID>2</CardID>
+            <CardID>3</CardID>
+            <CardID>4</CardID>
+            <CardID>5</CardID>
+            <CardID>1</CardID>
+            <CardID>2</CardID>
+            <CardID>3</CardID>
+            <CardID>4</CardID>
+            <CardID>5</CardID>
         </Inventory>
     </Player>
     

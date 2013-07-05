@@ -12,7 +12,9 @@ enum nodeTags
 {
     mainMenuLayerTag,
     gameModeChoiceLayerTag,
-    currentPlayerTag
+    currentPlayerTag,
+    gameBoardBackgroundTag,
+    dragableTag
 };
 
 

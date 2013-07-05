@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0960AA6E1786240E009E76FF /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0960AA6D1786240E009E76FF /* libsqlite3.0.dylib */; };
+		0960AA71178624EB009E76FF /* ChallengeModePrepareScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AA70178624EB009E76FF /* ChallengeModePrepareScene.m */; };
+		0960AA8917862943009E76FF /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AA7F17862943009E76FF /* FMDatabase.m */; };
+		0960AA8A17862943009E76FF /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AA8117862943009E76FF /* FMDatabaseAdditions.m */; };
+		0960AA8B17862943009E76FF /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AA8317862943009E76FF /* FMDatabasePool.m */; };
+		0960AA8C17862943009E76FF /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AA8517862943009E76FF /* FMDatabaseQueue.m */; };
+		0960AA8E17862943009E76FF /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AA8817862943009E76FF /* FMResultSet.m */; };
+		0960AA9217863B51009E76FF /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 0960AA9117863B51009E76FF /* db.sqlite3 */; };
+		0960AA951786472C009E76FF /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AA941786472C009E76FF /* Card.m */; };
+		0960AA981786637D009E76FF /* InventorySelectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AA971786637D009E76FF /* InventorySelectionLayer.m */; };
+		0960AA9B17866879009E76FF /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AA9A17866879009E76FF /* CCScrollLayer.m */; };
+		0960AAA117866CB2009E76FF /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0960AA9C17866CB2009E76FF /* 1.png */; };
+		0960AAA217866CB2009E76FF /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0960AA9D17866CB2009E76FF /* 2.png */; };
+		0960AAA317866CB2009E76FF /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0960AA9E17866CB2009E76FF /* 3.png */; };
+		0960AAA417866CB2009E76FF /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 0960AA9F17866CB2009E76FF /* 4.png */; };
+		0960AAA517866CB2009E76FF /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 0960AAA017866CB2009E76FF /* 5.png */; };
+		0960AAA81786A6A6009E76FF /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960AAA71786A6A4009E76FF /* Map.m */; };
 		097897B61780EB6E001EA837 /* LocationConfirmationScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 097897B51780EB6E001EA837 /* LocationConfirmationScene.m */; };
 		097897B91780EB9B001EA837 /* GPSMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 097897B81780EB9B001EA837 /* GPSMapLayer.m */; };
 		097897BB1780F3A4001EA837 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097897BA1780F3A4001EA837 /* GoogleMaps.framework */; };
@@ -25,6 +42,8 @@
 		0978AD0F1786028100455B03 /* GameBoardLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD0E1786028100455B03 /* GameBoardLayer.m */; };
 		0978AD141786094B00455B03 /* CCMenuAdvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD111786094B00455B03 /* CCMenuAdvanced.m */; };
 		0978AD151786094B00455B03 /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD131786094B00455B03 /* CCLayerPanZoom.m */; };
+		0978AD1817860B4800455B03 /* ChallengeModeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD1717860B4800455B03 /* ChallengeModeScene.m */; };
+		0978AD1A17860FC500455B03 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0978AD1917860FC500455B03 /* background.png */; };
 		09792ECA177F6E4D0065057E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09792EC9177F6E4D0065057E /* QuartzCore.framework */; };
 		09792ECC177F6E4D0065057E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09792ECB177F6E4D0065057E /* OpenGLES.framework */; };
 		09792ECE177F6E4D0065057E /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09792ECD177F6E4D0065057E /* OpenAL.framework */; };
@@ -161,6 +180,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0960AA6D1786240E009E76FF /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		0960AA6F178624EB009E76FF /* ChallengeModePrepareScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeModePrepareScene.h; sourceTree = "<group>"; };
+		0960AA70178624EB009E76FF /* ChallengeModePrepareScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeModePrepareScene.m; sourceTree = "<group>"; };
+		0960AA7E17862943009E76FF /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		0960AA7F17862943009E76FF /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		0960AA8017862943009E76FF /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		0960AA8117862943009E76FF /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		0960AA8217862943009E76FF /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		0960AA8317862943009E76FF /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		0960AA8417862943009E76FF /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		0960AA8517862943009E76FF /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		0960AA8617862943009E76FF /* fmdb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fmdb.m; sourceTree = "<group>"; };
+		0960AA8717862943009E76FF /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		0960AA8817862943009E76FF /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		0960AA9117863B51009E76FF /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
+		0960AA931786472C009E76FF /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		0960AA941786472C009E76FF /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		0960AA961786637C009E76FF /* InventorySelectionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventorySelectionLayer.h; sourceTree = "<group>"; };
+		0960AA971786637D009E76FF /* InventorySelectionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventorySelectionLayer.m; sourceTree = "<group>"; };
+		0960AA9917866879009E76FF /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCScrollLayer.h; path = FMDB/CCScrollLayer.h; sourceTree = "<group>"; };
+		0960AA9A17866879009E76FF /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCScrollLayer.m; path = FMDB/CCScrollLayer.m; sourceTree = "<group>"; };
+		0960AA9C17866CB2009E76FF /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		0960AA9D17866CB2009E76FF /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		0960AA9E17866CB2009E76FF /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		0960AA9F17866CB2009E76FF /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		0960AAA017866CB2009E76FF /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
+		0960AAA61786A6A2009E76FF /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		0960AAA71786A6A4009E76FF /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		097897B41780EB6E001EA837 /* LocationConfirmationScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationConfirmationScene.h; sourceTree = "<group>"; };
 		097897B51780EB6E001EA837 /* LocationConfirmationScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationConfirmationScene.m; sourceTree = "<group>"; };
 		097897B71780EB9B001EA837 /* GPSMapLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMapLayer.h; sourceTree = "<group>"; };
@@ -187,6 +234,9 @@
 		0978AD111786094B00455B03 /* CCMenuAdvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuAdvanced.m; sourceTree = "<group>"; };
 		0978AD121786094B00455B03 /* CCLayerPanZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoom.h; sourceTree = "<group>"; };
 		0978AD131786094B00455B03 /* CCLayerPanZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoom.m; sourceTree = "<group>"; };
+		0978AD1617860B4700455B03 /* ChallengeModeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeModeScene.h; sourceTree = "<group>"; };
+		0978AD1717860B4800455B03 /* ChallengeModeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeModeScene.m; sourceTree = "<group>"; };
+		0978AD1917860FC500455B03 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		09792EC6177F6E4D0065057E /* phylodecks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = phylodecks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09792EC9177F6E4D0065057E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		09792ECB177F6E4D0065057E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -468,6 +518,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0960AA6E1786240E009E76FF /* libsqlite3.0.dylib in Frameworks */,
 				097897D11780F5A4001EA837 /* SystemConfiguration.framework in Frameworks */,
 				09792ECA177F6E4D0065057E /* QuartzCore.framework in Frameworks */,
 				09792ECC177F6E4D0065057E /* OpenGLES.framework in Frameworks */,
@@ -493,6 +544,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0960AA7D17862943009E76FF /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				0960AA7E17862943009E76FF /* FMDatabase.h */,
+				0960AA7F17862943009E76FF /* FMDatabase.m */,
+				0960AA8017862943009E76FF /* FMDatabaseAdditions.h */,
+				0960AA8117862943009E76FF /* FMDatabaseAdditions.m */,
+				0960AA8217862943009E76FF /* FMDatabasePool.h */,
+				0960AA8317862943009E76FF /* FMDatabasePool.m */,
+				0960AA8417862943009E76FF /* FMDatabaseQueue.h */,
+				0960AA8517862943009E76FF /* FMDatabaseQueue.m */,
+				0960AA8617862943009E76FF /* fmdb.m */,
+				0960AA8717862943009E76FF /* FMResultSet.h */,
+				0960AA8817862943009E76FF /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
 		09792EBD177F6E4C0065057E = {
 			isa = PBXGroup;
 			children = (
@@ -512,6 +581,7 @@
 		09792EC8177F6E4D0065057E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0960AA6D1786240E009E76FF /* libsqlite3.0.dylib */,
 				DFD9A85F178392C900D632CC /* GoogleMaps.bundle */,
 				097897D01780F5A4001EA837 /* SystemConfiguration.framework */,
 				097897CE1780F582001EA837 /* libz.dylib */,
@@ -542,34 +612,45 @@
 			children = (
 				09793053177F6E4F0065057E /* AppDelegate.h */,
 				09793054177F6E4F0065057E /* AppDelegate.m */,
-				097930751780479C0065057E /* GameModeChoiceLayer.h */,
-				097930761780479C0065057E /* GameModeChoiceLayer.m */,
-				097897D517815B3D001EA837 /* GPSMenuLayer.h */,
-				097897D617815B3D001EA837 /* GPSMenuLayer.m */,
-				097897B41780EB6E001EA837 /* LocationConfirmationScene.h */,
-				097897B51780EB6E001EA837 /* LocationConfirmationScene.m */,
+				0960AA931786472C009E76FF /* Card.h */,
+				0960AA941786472C009E76FF /* Card.m */,
+				0960AA6F178624EB009E76FF /* ChallengeModePrepareScene.h */,
+				0960AA70178624EB009E76FF /* ChallengeModePrepareScene.m */,
+				0978AD1617860B4700455B03 /* ChallengeModeScene.h */,
+				0978AD1717860B4800455B03 /* ChallengeModeScene.m */,
 				0978AD0D1786028100455B03 /* GameBoardLayer.h */,
 				0978AD0E1786028100455B03 /* GameBoardLayer.m */,
+				097930751780479C0065057E /* GameModeChoiceLayer.h */,
+				097930761780479C0065057E /* GameModeChoiceLayer.m */,
 				097897D2178112A7001EA837 /* GoogleMapUIViewController.h */,
 				097897D3178112A7001EA837 /* GoogleMapUIViewController.m */,
-				09793064177F74830065057E /* IntroScene.h */,
-				09793065177F74830065057E /* IntroScene.m */,
-				097897D817824A78001EA837 /* Player.h */,
-				097897D917824A78001EA837 /* Player.m */,
-				09793067177F76E00065057E /* IntroLayer.h */,
-				09793068177F76E00065057E /* IntroLayer.m */,
 				097897B71780EB9B001EA837 /* GPSMapLayer.h */,
 				097897B81780EB9B001EA837 /* GPSMapLayer.m */,
-				0979306E177F83660065057E /* MainMenuScene.h */,
-				0979306F177F83670065057E /* MainMenuScene.m */,
+				097897D517815B3D001EA837 /* GPSMenuLayer.h */,
+				097897D617815B3D001EA837 /* GPSMenuLayer.m */,
+				09793067177F76E00065057E /* IntroLayer.h */,
+				09793068177F76E00065057E /* IntroLayer.m */,
+				09793064177F74830065057E /* IntroScene.h */,
+				09793065177F74830065057E /* IntroScene.m */,
+				0960AA961786637C009E76FF /* InventorySelectionLayer.h */,
+				0960AA971786637D009E76FF /* InventorySelectionLayer.m */,
+				097897B41780EB6E001EA837 /* LocationConfirmationScene.h */,
+				097897B51780EB6E001EA837 /* LocationConfirmationScene.m */,
 				09793071177F83AA0065057E /* MainMenuLayer.h */,
 				09793072177F83AA0065057E /* MainMenuLayer.m */,
+				0979306E177F83660065057E /* MainMenuScene.h */,
+				0979306F177F83670065057E /* MainMenuScene.m */,
+				0960AAA61786A6A2009E76FF /* Map.h */,
+				0960AAA71786A6A4009E76FF /* Map.m */,
 				09793074178036900065057E /* nodeTags.h */,
-				09792EDC177F6E4D0065057E /* Resources */,
+				097897D817824A78001EA837 /* Player.h */,
+				097897D917824A78001EA837 /* Player.m */,
 				09792EC8177F6E4D0065057E /* Frameworks */,
 				09792EF6177F6E4D0065057E /* libs */,
+				09792EDC177F6E4D0065057E /* Resources */,
 				0979304F177F6E4F0065057E /* Supporting Files */,
 				097FCEF5178337F000893549 /* userData.xml */,
+				0960AA9117863B51009E76FF /* db.sqlite3 */,
 			);
 			path = phylodecks;
 			sourceTree = "<group>";
@@ -577,6 +658,12 @@
 		09792EDC177F6E4D0065057E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0960AA9C17866CB2009E76FF /* 1.png */,
+				0960AA9D17866CB2009E76FF /* 2.png */,
+				0960AA9E17866CB2009E76FF /* 3.png */,
+				0960AA9F17866CB2009E76FF /* 4.png */,
+				0960AAA017866CB2009E76FF /* 5.png */,
+				0978AD1917860FC500455B03 /* background.png */,
 				0979306A177F77880065057E /* Default-568h@2x.png */,
 				0979306C177F80E00065057E /* Default.png */,
 				09792EDF177F6E4D0065057E /* Default-Landscape~ipad.png */,
@@ -598,12 +685,15 @@
 		09792EF6177F6E4D0065057E /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				0960AA7D17862943009E76FF /* FMDB */,
 				0978AD101786094B00455B03 /* CCMenuAdvanced.h */,
 				0978AD111786094B00455B03 /* CCMenuAdvanced.m */,
 				0978AD121786094B00455B03 /* CCLayerPanZoom.h */,
 				0978AD131786094B00455B03 /* CCLayerPanZoom.m */,
 				DFD9A85C1783911100D632CC /* GDataXMLNode.m */,
 				DFD9A85D1783911100D632CC /* GDataXMLNode.h */,
+				0960AA9917866879009E76FF /* CCScrollLayer.h */,
+				0960AA9A17866879009E76FF /* CCScrollLayer.m */,
 				0979300D177F6E4F0065057E /* LICENSE_cocos2d.txt */,
 				0979301C177F6E4F0065057E /* LICENSE_CocosDenshion.txt */,
 				0979304E177F6E4F0065057E /* LICENSE_Kazmath.txt */,
@@ -1010,6 +1100,13 @@
 				0979306D177F80E00065057E /* Default.png in Resources */,
 				097FCEF6178337F000893549 /* userData.xml in Resources */,
 				DFD9A860178392C900D632CC /* GoogleMaps.bundle in Resources */,
+				0978AD1A17860FC500455B03 /* background.png in Resources */,
+				0960AA9217863B51009E76FF /* db.sqlite3 in Resources */,
+				0960AAA117866CB2009E76FF /* 1.png in Resources */,
+				0960AAA217866CB2009E76FF /* 2.png in Resources */,
+				0960AAA317866CB2009E76FF /* 3.png in Resources */,
+				0960AAA417866CB2009E76FF /* 4.png in Resources */,
+				0960AAA517866CB2009E76FF /* 5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1136,6 +1233,17 @@
 				0978AD0F1786028100455B03 /* GameBoardLayer.m in Sources */,
 				0978AD141786094B00455B03 /* CCMenuAdvanced.m in Sources */,
 				0978AD151786094B00455B03 /* CCLayerPanZoom.m in Sources */,
+				0978AD1817860B4800455B03 /* ChallengeModeScene.m in Sources */,
+				0960AA71178624EB009E76FF /* ChallengeModePrepareScene.m in Sources */,
+				0960AA8917862943009E76FF /* FMDatabase.m in Sources */,
+				0960AA8A17862943009E76FF /* FMDatabaseAdditions.m in Sources */,
+				0960AA8B17862943009E76FF /* FMDatabasePool.m in Sources */,
+				0960AA8C17862943009E76FF /* FMDatabaseQueue.m in Sources */,
+				0960AA8E17862943009E76FF /* FMResultSet.m in Sources */,
+				0960AA951786472C009E76FF /* Card.m in Sources */,
+				0960AA981786637D009E76FF /* InventorySelectionLayer.m in Sources */,
+				0960AA9B17866879009E76FF /* CCScrollLayer.m in Sources */,
+				0960AAA81786A6A6009E76FF /* Map.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

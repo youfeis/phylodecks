@@ -8,9 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "CCLayerPanZoom.h"
 
-@interface GameBoardLayer : CCLayer {
+@interface GameBoardLayer : CCLayer <CCLayerPanZoomClickDelegate>{
+    
+    CCLayerPanZoom *_tutorialGameboard;
+    CCSprite *_selectedCard;
+    NSMutableArray *_tilesArray;
     
 }
+
+-(void) updateForScreenReshape;
+-(void) setToSheetMode;
+-(void) setToFrameMode;
+-(void) showSelected :(CCMenuItemSprite*) sender;
+-(void) drawTiles:(int) dimension;
 
 @end

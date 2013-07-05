@@ -8,6 +8,7 @@
 
 #import "GameModeChoiceLayer.h"
 #import "LocationConfirmationScene.h"
+#import "ChallengeModePrepareScene.h"
 
 
 @implementation GameModeChoiceLayer
@@ -46,10 +47,7 @@
                                     ];
         
 		CCMenuItem *itemChallengeMode = [CCMenuItemFont itemWithString:@"Challenge Mode" block:^(id sender) {
-			
-			
-			NSLog(@"item challengeMode clicked");
-        
+            [self transitToChallengeModePrepareScene];
 		}
                                         ];
         //Locating menu items before adding them to the layer
@@ -73,5 +71,8 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[LocationConfirmationScene alloc] init] withColor:ccWHITE]];
 }
 
+- (void)transitToChallengeModePrepareScene{
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[ChallengeModePrepareScene alloc] init] withColor:ccWHITE]];
+}
 
 @end
