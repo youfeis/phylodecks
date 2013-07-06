@@ -16,7 +16,7 @@
     int foodChain;
     int cardID;
     int scale;
-    NSString *image;
+    NSString *imageName;
     NSString *thumbnail;
     NSString *diet;
     NSString *type;
@@ -29,7 +29,7 @@
 @property (assign,readonly) int foodChain;
 @property (assign,readonly) int cardID;
 @property (assign,readonly) int scale;
-@property (retain,readonly) NSString *image;
+@property (retain,readonly) NSString *imageName;
 @property (retain,readonly) NSString *thumbnail;
 @property (retain,readonly) NSString *diet;
 @property (retain,readonly) NSString *type;

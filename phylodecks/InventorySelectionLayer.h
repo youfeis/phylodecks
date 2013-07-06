@@ -13,6 +13,9 @@
 #import "FMDatabaseAdditions.h"
 #import "Card.h"
 #import "Player.h"
+#import "Map.h"
+#import "CCMenuAdvanced.h"
+#import "ChallengeModeScene.h"
 
 @interface InventorySelectionLayer : CCLayer <CCScrollLayerDelegate>{
     NSMutableArray * cardSprites;
@@ -20,7 +23,10 @@
 	BOOL databaseOpened;
 }
 
+@property (retain, readwrite) NSMutableArray * cardSprites;
+
 - (void) updateForScreenReshape;
+- (void) transitToChallengeModeScene;
 
 
 @end

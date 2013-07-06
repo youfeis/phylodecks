@@ -11,6 +11,8 @@
 
 @implementation InventorySelectionLayer
 
+@synthesize cardSprites;
+
 enum nodeTags
 {
 	kScrollLayer = 256,
@@ -32,13 +34,31 @@ enum nodeTags
 		// Add fast page change menu.
 		[self updateFastPageChangeMenu];
         
-        [self placeInventoryCards];
         
-      
-
 		
 		// Do initial positioning & create scrollLayer.
 		[self updateForScreenReshape];
+        [self placeInventoryCards];
+        [self changeColorPressed:self];
+        
+        
+        
+        CCMenu *playMenu = [CCMenu menuWithItems: nil];
+        
+        
+          
+            CCLabelTTF *labelWithNumber = [CCLabelTTF labelWithString:@"go>>" fontName:@"Marker Felt" fontSize:22];
+        CCMenuItemLabel *item = [CCMenuItemLabel itemWithLabel:labelWithNumber block:^(id sender){
+            [self transitToChallengeModeScene];
+        }];
+            [playMenu addChild: item z: 0];
+        
+        [self addChild: playMenu z: 0];
+        
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        playMenu.position = ccp( 0.9f * screenSize.width, 15.0f);
+        
+        
 	}
 	return self;
 }
@@ -97,7 +117,7 @@ enum nodeTags
 	
 	scrollLayer = [self scrollLayer];
 	[self addChild: scrollLayer z: 0 tag: kScrollLayer];
-	[scrollLayer selectPage: 1];
+	[scrollLayer selectPage: 0];
 	scrollLayer.delegate = self;
 }
 
@@ -106,16 +126,10 @@ enum nodeTags
 // Returns array of CCLayers - pages for ScrollLayer.
 - (NSArray *) scrollLayerPages
 {
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	
-	// PAGE 1 - Simple Label in the center.
+    // PAGE 2 - Custom Font Menu in the center.
 	CCLayer *pageOne = [CCLayer node];
-	CCLabelTTF *label = [CCLabelTTF labelWithString:@"Page 1" fontName:@"Arial Rounded MT Bold" fontSize:44];
-	label.position =  ccp( screenSize.width /2 , screenSize.height/2 );
-	[pageOne addChild:label];
-	
-	// PAGE 2 - Custom Font Menu in the center.
-	CCLayer *pageTwo = [CCLayer node];
+    /*
 	CCLabelTTF *labelTwo = [CCLabelTTF labelWithString:@"Add Page!" fontName:@"Marker Felt" fontSize:44];
 	CCMenuItemLabel *titem = [CCMenuItemLabel itemWithLabel:labelTwo target:self selector:@selector(addPagePressed:)];
 	CCLabelTTF *labelTwo2 = [CCLabelTTF labelWithString:@"Remove Page!" fontName:@"Marker Felt" fontSize:44];
@@ -125,9 +139,9 @@ enum nodeTags
 	CCMenu *menu = [CCMenu menuWithItems: titem, titem2, titem3, nil];
 	[menu alignItemsVertically];
 	menu.position = ccp(screenSize.width/2, screenSize.height/2);
-	[pageTwo addChild:menu];
+	[pageOne addChild:menu]; */
 	
-	return [NSArray arrayWithObjects: pageOne,pageTwo,nil];
+	return [NSArray arrayWithObjects: pageOne,nil];
 }
 
 // Creates new Scroll Layer with pages returned from scrollLayerPages.
@@ -136,7 +150,7 @@ enum nodeTags
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	
 	// Create the scroller and pass-in the pages (set widthOffset to 0 for fullscreen pages).
-	CCScrollLayer *scroller = [CCScrollLayer nodeWithLayers: [self scrollLayerPages] widthOffset: 0.48f * screenSize.width ];
+	CCScrollLayer *scroller = [CCScrollLayer nodeWithLayers: [self scrollLayerPages] widthOffset: 0];
 	scroller.pagesIndicatorPosition = ccp(screenSize.width * 0.5f, screenSize.height - 30.0f);
     
     // New feature: margin offset - to slowdown scrollLayer when scrolling out of it contents.
@@ -172,18 +186,11 @@ enum nodeTags
 {
 	NSLog(@"CCScrollLayerTestLayer#addPagePressed: called!");
 	
-	// Add page with label with number.
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
+
 	
 	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
 	
-	int x = [scroller.pages count] + 1;
 	CCLayer *pageX = [CCLayer node];
-	CCLabelTTF *label = [CCLabelTTF labelWithString: [NSString stringWithFormat:@"Page %d", x]
-										   fontName: @"Arial Rounded MT Bold"
-										   fontSize:44];
-	label.position =  ccp( screenSize.width /2 , screenSize.height/2 );
-	[pageX addChild:label];
 	
 	[scroller addPage: pageX];
 	
@@ -232,10 +239,6 @@ enum nodeTags
 	NSLog(@"CCScrollLayerTestLayer#scrollLayer:scrolledToPageNumber: %@ %d", sender, page);
 }
 
-- (void) placeInventoryCards{
-
-}
-
 -(void)loadCardDatabase{
  	NSLog(@">>>>>>>>>>>>>>>>> openDatabase");
     //	BOOL success;
@@ -277,15 +280,53 @@ enum nodeTags
     FMResultSet * rs;
     for(id obj in [[Player currentPlayer] playerInventory]){
         rs = [db executeQuery:@"SELECT *,point FROM card WHERE cardID = ?",obj];
-        Card *aCard = [[[Card alloc] init] initWithData:rs card:[obj intValue]];
-        
+        [rs next];
+        Card *aCard = [[Card spriteWithFile:[rs stringForColumn:@"image"]]  initWithData:rs card:[obj intValue]];
         [cardSprites addObject:aCard];
-        NSLog(@"a card of %@ added",[aCard diet]);
+        NSLog(@"Now there are %i cards in the list",[cardSprites count]);
+        NSLog(@"Now there are %@",[aCard diet]);
+
     }
     
     
 }
+- (void) placeInventoryCards{
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    CCMenuAdvanced* menu = [CCMenuAdvanced menuWithItems: nil];
+    int i = 1;
+    int j = 1;
+    int k = 0;
+    
+    for(id obj in cardSprites){
+        CCMenuItem *item = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[obj imageName]] selectedSprite:nil block:^(id sender){
+            NSLog(@"%i is clicked", [obj cardID]);
+            [[[Map currentMap] mapInventory] addObject:obj];
+            NSLog(@"%@ is in the mapinventory now", [[Map currentMap] mapInventory]);
+        }];
+        if(i>5){
+            i=1;
+            j++;
+            if(j>5){
+                j=1;
+                 [[[[self getChildByTag:256]children] objectAtIndex:k] addChild:menu];
+                menu = [CCMenuAdvanced menuWithItems: nil];
+                k++;
+                [self addPagePressed:self];
+            }
+        }
+        [item setScaleY: 72/item.contentSize.height];
+        [item setScaleX: 52/item.contentSize.width];
+        [item setPosition:ccp(i * screenSize.width/6, (6-j)*screenSize.height/6)];
+        [menu addChild:item];
 
+        i++;
+    }
+    [[[[self getChildByTag:256]children] objectAtIndex:k] addChild:menu];
+}
+
+-(void)transitToChallengeModeScene{
+       [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[ChallengeModeScene alloc] init] withColor:ccWHITE]];
+}
 
 @end
 

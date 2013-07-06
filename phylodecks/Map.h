@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Map : NSObject
+@interface Map : NSObject{
+    NSMutableArray *mapInventory;
+}
+@property (retain,readwrite) NSMutableArray *mapInventory;
 
++(Map *)currentMap;
 @end

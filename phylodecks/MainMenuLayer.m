@@ -70,7 +70,7 @@
 			
 			//todo: save user profile
 			NSLog(@"itemExitClicked");
-            exit(0);
+           // exit(0);
 		}
                                 ];
         
