@@ -17,7 +17,9 @@
     if (self != nil) {
         // add gameboardLayer
         GameBoardLayer *gameBoardLayer = [GameBoardLayer node];
-        [self addChild:gameBoardLayer z: -1];
+        [self addChild:gameBoardLayer z: -1 tag:0];
+        MapInventoryLayer *mapInventoryLayer = [MapInventoryLayer node];
+        [self addChild:mapInventoryLayer z: 0 tag:1];
     }
     return self;
 }

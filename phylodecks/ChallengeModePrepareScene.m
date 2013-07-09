@@ -7,6 +7,7 @@
 //
 
 #import "ChallengeModePrepareScene.h"
+#import "nodeTags.h"
 
 
 @implementation ChallengeModePrepareScene
@@ -18,7 +19,7 @@
     if (self != nil) {
 
         InventorySelectionLayer *inventorySelectionLayer = [InventorySelectionLayer node];
-        [self addChild: inventorySelectionLayer];
+        [self addChild: inventorySelectionLayer z:0 tag:inventorySelectionLayerTag];
         
     }
     return self;

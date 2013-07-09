@@ -90,6 +90,8 @@
     // Google Api Key
     [GMSServices provideAPIKey:@"AIzaSyABt-0PtIn0e_qtezOjUIf9h804FrVKKHw"];
 	
+    //enable multipletouch
+    [glView setMultipleTouchEnabled:YES];
 	return YES;
 }
 

@@ -14,7 +14,8 @@ enum nodeTags
     gameModeChoiceLayerTag,
     currentPlayerTag,
     gameBoardBackgroundTag,
-    dragableTag
+    dragableTag,
+    inventorySelectionLayerTag
 };
 
 

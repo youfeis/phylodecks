@@ -16,6 +16,8 @@
 #import "Map.h"
 #import "CCMenuAdvanced.h"
 #import "ChallengeModeScene.h"
+#import "FullScreenCardViewLayer.h"
+#import "nodeTags.h"
 
 @interface InventorySelectionLayer : CCLayer <CCScrollLayerDelegate>{
     NSMutableArray * cardSprites;

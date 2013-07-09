@@ -21,16 +21,21 @@
         MainMenuLayer *mainMenuLayer = [MainMenuLayer node];
         [self addChild: mainMenuLayer z:-1 tag:mainMenuLayerTag];
         // when call player currentplayer side effect is that currentplayer will be initialized
-        if([[Player currentPlayer] isLastPlayerExist]){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Welcome!" message:[NSString stringWithFormat:@"%@",[[Player currentPlayer] playerName]] delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:@"Not You?", nil];
-            alert.alertViewStyle = UIAlertViewStyleDefault;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            if([[Player currentPlayer] isLastPlayerExist]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Welcome!" message:[NSString stringWithFormat:@"%@",[[Player currentPlayer] playerName]] delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:@"Not You?", nil];
+                alert.alertViewStyle = UIAlertViewStyleDefault;
+                
+                [alert show];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Welcome!" message:@"Please enter your name to play" delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil];
+                alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                [alert show];
+            }
             
-            [alert show];
-        }else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Welcome!" message:@"Please enter your name to play" delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil];
-            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-            [alert show];
-        }
+        });
+        
        
         
         

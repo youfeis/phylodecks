@@ -13,7 +13,7 @@
 
 @synthesize cardSprites;
 
-enum nodeTags
+enum nodeTags2
 {
 	kScrollLayer = 256,
 	kAdviceLabel = 257,
@@ -302,6 +302,14 @@ enum nodeTags
             NSLog(@"%i is clicked", [obj cardID]);
             [[[Map currentMap] mapInventory] addObject:obj];
             NSLog(@"%@ is in the mapinventory now", [[Map currentMap] mapInventory]);
+            
+            FullScreenCardViewLayer * viewer = [[FullScreenCardViewLayer alloc] initWithCard:obj];
+            [(CCSprite *)sender setColor:ccGRAY];
+            [[self parent]addChild:viewer];
+            [self setPosition:CGPointMake(-1000, -1000)];
+            
+            
+            
         }];
         if(i>5){
             i=1;
@@ -327,6 +335,9 @@ enum nodeTags
 -(void)transitToChallengeModeScene{
        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[ChallengeModeScene alloc] init] withColor:ccWHITE]];
 }
+
+
+
 
 @end
 

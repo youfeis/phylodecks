@@ -102,4 +102,8 @@ static Player *sharedInstance = nil;
 }
 
 
+- (oneway void)release{
+    
+}
+
 @end

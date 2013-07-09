@@ -8,7 +8,7 @@
 
 #import "GameBoardLayer.h"
 #import "nodeTags.h"
-
+#import "Map.h"
 
 @implementation GameBoardLayer
 -(id) init
@@ -34,7 +34,7 @@
         
         _tilesArray = [[NSMutableArray alloc] init];
         
-    //    [self drawTiles: 4];
+        [self drawTiles: 5];//sqrt([[[Map currentMap] tiles] count])];
         
 		[self updateForScreenReshape];
 
