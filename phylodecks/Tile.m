@@ -10,4 +10,15 @@
 
 @implementation Tile
 
+@synthesize card;
+@synthesize posX;
+@synthesize posY;
+
+-(id)initWithPosX: (int)x posY: (int)y{
+    self  = [super init];
+    posX = x;
+    posY = y;
+    return self;
+}
+
 @end

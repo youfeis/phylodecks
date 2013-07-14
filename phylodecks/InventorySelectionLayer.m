@@ -30,7 +30,7 @@ enum nodeTags2
         cardSprites = [[NSMutableArray alloc] init];
         [self loadCardDatabase];
         [self inventoryInit];
-		
+		[self homeAndTargetInit];
 		// Add fast page change menu.
 		[self updateFastPageChangeMenu];
         
@@ -279,12 +279,10 @@ enum nodeTags2
 -(void)inventoryInit{
     FMResultSet * rs;
     for(id obj in [[Player currentPlayer] playerInventory]){
-        rs = [db executeQuery:@"SELECT *,point FROM card WHERE cardID = ?",obj];
+        rs = [db executeQuery:@"SELECT * FROM card WHERE cardID = ?",obj];
         [rs next];
         Card *aCard = [[Card spriteWithFile:[rs stringForColumn:@"image"]]  initWithData:rs card:[obj intValue]];
         [cardSprites addObject:aCard];
-        NSLog(@"Now there are %i cards in the list",[cardSprites count]);
-        NSLog(@"Now there are %@",[aCard diet]);
 
     }
     
@@ -301,7 +299,6 @@ enum nodeTags2
         CCMenuItem *item = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[obj imageName]] selectedSprite:nil block:^(id sender){
             NSLog(@"%i is clicked", [obj cardID]);
             [[[Map currentMap] mapInventory] addObject:obj];
-            NSLog(@"%@ is in the mapinventory now", [[Map currentMap] mapInventory]);
             
             FullScreenCardViewLayer * viewer = [[FullScreenCardViewLayer alloc] initWithCard:obj];
             [(CCSprite *)sender setColor:ccGRAY];
@@ -337,7 +334,17 @@ enum nodeTags2
 }
 
 
-
+-(void)homeAndTargetInit{
+    FMResultSet * rs;
+    rs = [db executeQuery:@"SELECT * FROM card WHERE cardID = 1"];
+	[rs next];
+    Card *home = [[Card spriteWithFile:[rs stringForColumn:@"image"]]  initWithData:rs card:1];
+    [[Map currentMap] setHome:home];
+    rs = [db executeQuery:@"SELECT * FROM card WHERE type = \"SPECIES\" ORDER BY RANDOM() LIMIT 1" ];
+    [rs next];
+    Card *target = [[Card spriteWithFile:[rs stringForColumn:@"image"]]  initWithData:rs card:[rs intForColumn:@"cardID"]];
+    [[Map currentMap] setTarget:target];
+}
 
 @end
 

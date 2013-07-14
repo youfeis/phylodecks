@@ -7,7 +7,7 @@
 //
 
 #import "ChallengeModeScene.h"
-
+#import "nodeTags.h"
 
 @implementation ChallengeModeScene
 
@@ -17,9 +17,9 @@
     if (self != nil) {
         // add gameboardLayer
         GameBoardLayer *gameBoardLayer = [GameBoardLayer node];
-        [self addChild:gameBoardLayer z: -1 tag:0];
+        [self addChild:gameBoardLayer z: -1 tag:gameBoardLayerTag];
         MapInventoryLayer *mapInventoryLayer = [MapInventoryLayer node];
-        [self addChild:mapInventoryLayer z: 0 tag:1];
+        [self addChild:mapInventoryLayer z: 0 tag:mapInventoryLayerTag];
     }
     return self;
 }

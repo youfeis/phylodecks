@@ -9,6 +9,7 @@
 #import "GameBoardLayer.h"
 #import "nodeTags.h"
 #import "Map.h"
+#import "Card.h"
 
 @implementation GameBoardLayer
 -(id) init
@@ -34,7 +35,8 @@
         
         _tilesArray = [[NSMutableArray alloc] init];
         
-        [self drawTiles: 5];//sqrt([[[Map currentMap] tiles] count])];
+        [self drawTiles: 5];
+        [self locateHomeAndTarget];
         
 		[self updateForScreenReshape];
 
@@ -68,7 +70,7 @@
     
     // Stay in screen bounds (1 screen = minScale), allow to zoom 2x.
     _tutorialGameboard.minScale =  1.0f *  winSize.width / [background boundingBox].size.width;
-    _tutorialGameboard.maxScale =  15.0f *  winSize.width / [background boundingBox].size.width;
+    _tutorialGameboard.maxScale =  25.0f *  winSize.width / [background boundingBox].size.width;
 }
 
 - (void) dragSelectedCard: (CGPoint) point
@@ -93,6 +95,21 @@
              tapCount: (NSUInteger) tapCount
 {
 	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f }", sender, point.x, point.y);
+    if(CGRectContainsPoint([_toConfirm boundingBox], point)){
+        [_toConfirm setColor:ccWHITE];
+        int dragIndex = [_tilesArray indexOfObject:_toConfirm];
+        _toConfirm = 0;
+        // check if the card is compatitable at that tile
+        [[[Map currentMap] tiles] setObject:[[Map currentMap] selected] atIndexedSubscript:dragIndex];
+    }
+    else{
+        CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
+        [emptyCard setScaleY: 72/emptyCard.contentSize.height];
+        [emptyCard setScaleX: 52/emptyCard.contentSize.width];
+        [_toConfirm setTexture:[emptyCard texture]];
+        _toConfirm = 0;
+        
+    }
     [self dragSelectedCard: point];
 }
 
@@ -132,7 +149,10 @@
         if([self draggedToTile:endPos]!= -1){
             [[_tilesArray objectAtIndex: [self draggedToTile:endPos]] setTexture:[_selectedCard texture]];
             [_tutorialGameboard removeChildByTag:dragableTag cleanup:YES];
+            _toConfirm = [_tilesArray objectAtIndex: [self draggedToTile:endPos]];
+            [_toConfirm setColor:ccGRAY];
             _selectedCard = 0;
+            
             [self setToSheetMode];
         }
     }
@@ -146,44 +166,53 @@
 {
     _tutorialGameboard.mode = kCCLayerPanZoomModeFrame;
 }
--(void) showSelected :(id) sender
+-(void) showSelected :(id) sender atPos:(CGPoint)pos
 {
-    
-    CCSprite *dragable = [CCSprite spriteWithTexture:[[[sender children] objectAtIndex:0] texture]];
-    [dragable setScaleY: 100/dragable.contentSize.height];
-    [dragable setScaleX: 75/dragable.contentSize.width];
+    [self setToFrameMode];
+    NSLog(@"%@",sender);
+    CCSprite *dragable = [CCSprite spriteWithTexture:[sender texture]];
+    [dragable setScaleY: 72/dragable.contentSize.height];
+    [dragable setScaleX: 52/dragable.contentSize.width];
     
     [_tutorialGameboard addChild : dragable
                                 z: 6
                               tag:dragableTag
      ];
-    dragable.color = ccBLUE;
     CGRect boundingRect = CGRectMake(0, 0, 0, 0);
     CCNode *background = [_tutorialGameboard getChildByTag: gameBoardBackgroundTag];
 	boundingRect.size = [background boundingBox].size;
 	[_tutorialGameboard setContentSize: boundingRect.size];
-    dragable.position = ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f - 56);
+  
+    dragable.position = ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    _tutorialGameboard.position = ccp(0.5f * winSize.width, 0.5f * winSize.height);
+    _tutorialGameboard.scale = 1.0f;
+    
+    
+
 }
 
 -(void) drawTiles:(int) dimension{
     CCNode *background = [_tutorialGameboard getChildByTag: gameBoardBackgroundTag];
     CGRect boundingRect = CGRectMake(0, 0, 0, 0);
 	boundingRect.size = [background boundingBox].size;
-    CGPoint initPos = ccp(boundingRect.size.width * 0.6f, boundingRect.size.height * 0.5f - 56);
+    CGPoint initPos = ccp(25,10);
     CCSprite *genericEmptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
-    [genericEmptyCard setScaleY: 100/genericEmptyCard.contentSize.height];
-    [genericEmptyCard setScaleX: 75/genericEmptyCard.contentSize.width];
+    [genericEmptyCard setScaleY: 72/genericEmptyCard.contentSize.height];
+    [genericEmptyCard setScaleX: 52/genericEmptyCard.contentSize.width];
     
-    for(int i = 0; i < dimension; i++){
-        for (int i = 0; i < dimension; i++){
+    
+    for(int i = 0; i < 9; i++){
+        for (int i = 0; i < 22; i++){
             CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
-            [emptyCard setScaleY: 100/emptyCard.contentSize.height];
-            [emptyCard setScaleX: 75/emptyCard.contentSize.width];
-            emptyCard.position = ccp(initPos.x,initPos.y + i * [emptyCard boundingBox].size.height);
+            [emptyCard setScaleY: 72/emptyCard.contentSize.height];
+            [emptyCard setScaleX: 52/emptyCard.contentSize.width];
+            [emptyCard setAnchorPoint:CGPointZero];
+            emptyCard.position = ccp(initPos.x + i * [emptyCard boundingBox].size.width ,initPos.y );
             [_tutorialGameboard addChild:emptyCard];
             [_tilesArray addObject:emptyCard];
         }
-        initPos = ccp(initPos.x + [genericEmptyCard boundingBox].size.width,initPos.y);
+        initPos = ccp(initPos.x ,initPos.y + [genericEmptyCard boundingBox].size.height );
         
     }
 }
@@ -202,5 +231,31 @@
 -(void) cleanSelected
 {
     [_tutorialGameboard removeChildByTag:dragableTag cleanup:YES];
+}
+
+-(void) locateHomeAndTarget{
+    [[_tilesArray objectAtIndex:99] setTexture:[[[Map currentMap] home] texture]];
+    [[[Map currentMap] tiles] setObject:[[Map currentMap] home] atIndexedSubscript:99];
+    if([[Player currentPlayer] playerLevel] == 1){
+        int distance = 4;
+        int x = [self indexToX:99];
+        int y = [self indexToY:99];
+        int randomValue = arc4random() % distance;
+        x = x + randomValue;
+        y = y + distance - randomValue;
+        [[_tilesArray objectAtIndex:[self toIndexPosX:x posY:y]] setTexture:[[[Map currentMap] target] texture]];
+        [[[Map currentMap] tiles] setObject:[[Map currentMap] target] atIndexedSubscript:[self toIndexPosX:x posY:y]];
+    }
+}
+-(int) indexToX: (int)index{
+    return 1+(index % 22);
+}
+
+-(int) indexToY: (int)index{
+    return 1+(index / 22);
+}
+
+-(int) toIndexPosX:(int)x posY:(int)y{
+    return (y-1)*22+(x-1);
 }
 @end

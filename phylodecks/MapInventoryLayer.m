@@ -132,6 +132,7 @@ enum nodeTags2
 		[CCMenuItemSprite itemWithNormalSprite: obj
 								selectedSprite: nil
                                          block:^(id sender){
+                                             [[Map currentMap] setSelected:obj];
                                              FullScreenCardViewLayer * viewer = [[FullScreenCardViewLayer alloc] initWithCard:obj];
                                              for(id obj in [[self parent] children]){
                                                  [obj setPosition:CGPointMake(-1000, -1000)];
@@ -203,6 +204,14 @@ enum nodeTags2
     [self removeChildByTag:toggleButtonTag cleanup:YES];
     
 }
+
+- (void) reformatMenu{
+    [self removeChildByTag:kWidget cleanup:YES];
+    CCNode *widget = [self widget];
+    [self addChild: widget z: 1 tag: kWidget];
+    [self updateForScreenReshape];
+}
+
 -(void) removeCard:(CCSprite *) cardSprite
 {
     

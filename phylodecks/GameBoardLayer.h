@@ -14,6 +14,7 @@
     
     CCLayerPanZoom *_tutorialGameboard;
     CCSprite *_selectedCard;
+    CCSprite *_toConfirm;
     NSMutableArray *_tilesArray;
     
 }
@@ -21,7 +22,7 @@
 -(void) updateForScreenReshape;
 -(void) setToSheetMode;
 -(void) setToFrameMode;
--(void) showSelected :(CCMenuItemSprite*) sender;
+-(void) showSelected :(id)sender atPos:(CGPoint)pos;
 -(void) drawTiles:(int) dimension;
 
 @end

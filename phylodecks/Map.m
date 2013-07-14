@@ -13,12 +13,15 @@ static Map *sharedInstance = nil;
 
 @synthesize mapInventory = _mapInventory;
 @synthesize tiles = _tiles;
+@synthesize selected = _selected;
+@synthesize home = _home;
+@synthesize target = _target;
 
 -(id) init{
     self = [super init];
     if (self != nil){
         _mapInventory = [[NSMutableArray alloc] init];
-        _tiles = [[NSMutableArray alloc] init];
+        [self generateNewMap:[[Player currentPlayer] playerLevel]];
     }
     
     return self;
@@ -33,14 +36,20 @@ static Map *sharedInstance = nil;
 
 -(void)generateNewMap:(int)level{
     _tiles = [[NSMutableArray alloc] init];
-    [self setMapSize: level];
+    
+
+    for(int x = 1; x < 23; x++){
+        for (int y = 1; y < 10; y++){
+            Tile *aTile = [[Tile alloc]init];
+            [aTile initWithPosX:x posY:y];
+            [_tiles addObject: aTile];
+        }
+    }
 }
 
 -(void)setMapSize:(int)level{
     if(level <= 3){
-        for(int i = 0;i<25;i++){
-            [_tiles addObject:[[Tile alloc] init]];
-        }
+       
     }else if(level <= 6){
         
     }else if(level <= 10){
@@ -51,9 +60,8 @@ static Map *sharedInstance = nil;
 
 
 -(Tile*)getTileAtPosX:(int)x posY:(int)y{
-    int total = [_tiles count];
-    int width = sqrt(total);
-    return [_tiles objectAtIndex: (y-1)*width+(x-1)];
+
+    return [_tiles objectAtIndex: (y-1)*22+(x-1)];
 }
 
 @end

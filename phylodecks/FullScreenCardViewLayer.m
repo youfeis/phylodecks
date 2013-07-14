@@ -7,6 +7,7 @@
 //
 
 #import "FullScreenCardViewLayer.h"
+#import "nodeTags.h"
 
 enum nodeTags2
 {
@@ -20,6 +21,15 @@ enum nodeTags2
     // always call super init
     self = [self init];
     if (self != nil) {
+        
+        _card = card;
+        UILongPressGestureRecognizer* recognizer =
+        [[UILongPressGestureRecognizer alloc]
+         initWithTarget:self
+         action:@selector(handleLongPressFrom:)];
+        recognizer.minimumPressDuration = 1.0; // seconds
+        [[[CCDirector sharedDirector] view]
+         addGestureRecognizer:recognizer];
         
         _panZoomer = [[CCLayerPanZoom alloc] init];
         [self addChild:_panZoomer];
@@ -100,6 +110,36 @@ enum nodeTags2
 {
     NSLog(@"released finger at position %@  {%f,%f}",sender,endPos.x,endPos.y);
 
+}
+
+-(void) handleLongPressFrom:(UILongPressGestureRecognizer*)recognizer{
+    if ( recognizer.state != UIGestureRecognizerStateBegan ){
+        return;
+    }
+    NSLog(@"2 seconds hold");
+    for(id obj in [[self parent] children]){
+        [obj setPosition:CGPointZero];
+    }
+    
+    if( [[self parent] isKindOfClass:[ChallengeModeScene class]] ) {
+        [[[self parent] getChildByTag:gameBoardLayerTag ]showSelected: _card atPos:[recognizer locationInView:[UIApplication sharedApplication].keyWindow]];
+        [[[Map currentMap] mapInventory] removeObject:_card];
+        [[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
+        
+        [self removeFromParentAndCleanup:YES];
+    }
+   
+}
+
+-(void) onExit{
+    [super onExit];
+    NSArray *grs = [[[CCDirector sharedDirector] view] gestureRecognizers];
+    
+    for (UIGestureRecognizer *gesture in grs){
+        if([gesture isKindOfClass:[UILongPressGestureRecognizer class]]){
+            [[[CCDirector sharedDirector] view] removeGestureRecognizer:gesture];
+        }
+    }
 }
 
 

@@ -11,10 +11,14 @@
 #import "CCLayerPanZoom.h"
 #import "Card.h"
 #import "InventorySelectionLayer.h"
+#import "ChallengeModeScene.h"
+
 @interface FullScreenCardViewLayer : CCLayer <CCLayerPanZoomClickDelegate> {
     CCLayerPanZoom *_panZoomer;
+    Card *_card;
 }
 
 -(id)initWithCard:(Card*)card;
+-(void) handleLongPressFrom: (UILongPressGestureRecognizer*)recognizer;
 
 @end

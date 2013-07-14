@@ -11,7 +11,9 @@
 enum nodeTags
 {
     mainMenuLayerTag,
+    mapInventoryLayerTag,
     gameModeChoiceLayerTag,
+    gameBoardLayerTag,
     currentPlayerTag,
     gameBoardBackgroundTag,
     dragableTag,

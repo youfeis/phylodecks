@@ -33,5 +33,7 @@
 // Updates position for node with tag kWidget (Used in updateForScreenReshape).
 - (void) updateWidget;
 
+- (void) reformatMenu;
+
 
 @end
