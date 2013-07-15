@@ -38,8 +38,8 @@ static Map *sharedInstance = nil;
     _tiles = [[NSMutableArray alloc] init];
     
 
-    for(int x = 1; x < 23; x++){
-        for (int y = 1; y < 10; y++){
+    for(int y = 1; y < 10; y++){
+        for (int x = 1; x < 23; x++){
             Tile *aTile = [[Tile alloc]init];
             [aTile initWithPosX:x posY:y];
             [_tiles addObject: aTile];
@@ -47,19 +47,8 @@ static Map *sharedInstance = nil;
     }
 }
 
--(void)setMapSize:(int)level{
-    if(level <= 3){
-       
-    }else if(level <= 6){
-        
-    }else if(level <= 10){
-        
-    }
-    
-}
 
-
--(Tile*)getTileAtPosX:(int)x posY:(int)y{
+-(Tile *)getTileAtPosX:(int)x posY:(int)y{
 
     return [_tiles objectAtIndex: (y-1)*22+(x-1)];
 }

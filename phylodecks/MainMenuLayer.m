@@ -21,11 +21,12 @@
 		// create and initialize a Label
         // todo: change text labels to images
         // todo: add a background layer for the mainmenuscene/setting scene
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"PHYLODECKS" fontName:@"Marker Felt" fontSize:64];
+		CCSprite *label = [CCSprite spriteWithFile:@"title.png"];
         
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
         
+        [label setScale:0.5f];
 		// position the label on the center top of the screen
 		label.position =  ccp( size.width /2 , 4*size.height/5 );
 		
@@ -40,7 +41,7 @@
 		[CCMenuItemFont setFontSize:28];
 		
 		// Create mainmenu items
-		CCMenuItem *itemTutorial = [CCMenuItemFont itemWithString:@"Tutorial" block:^(id sender) {
+		CCMenuItem *itemTutorial = [CCMenuItemImage itemWithNormalImage:@"tutorial1.png" selectedImage:@"tutorial2.png" block:^(id sender) {
 			
 			
 			NSLog(@"itemTutorialClicked");
@@ -48,8 +49,10 @@
   //          [self toTutorialScene];
 		}
                                     ];
+        [itemTutorial setScale:0.2f];
         
-		CCMenuItem *itemSinglePlayer = [CCMenuItemFont itemWithString:@"Single Player" block:^(id sender) {
+		CCMenuItem *itemSinglePlayer = [CCMenuItemImage itemWithNormalImage:@"play1.png" selectedImage:@"play2.png" block:^(id sender) {
+
 			
 			
 			NSLog(@"itemSinglePlayerClicked");
@@ -58,7 +61,7 @@
            
 		}
                                         ];
-        
+        [itemSinglePlayer setScale:0.2f];
         CCMenuItem *itemSetting = [CCMenuItemFont itemWithString:@"Setting " block:^(id sender) {
 			
 			//todo: setting interface

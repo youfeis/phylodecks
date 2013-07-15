@@ -11,6 +11,7 @@
 #import "Tile.h"
 #import "Player.h"
 
+@class Tile;
 
 @interface Map : NSObject{
     NSMutableArray *mapInventory;
@@ -27,6 +28,6 @@
 
 +(Map *)currentMap;
 -(void)generateNewMap:(int)level;
--(void)setMapSize:(int)level;
--(Tile*)getTileAtPosX:(int)x posY:(int)y;
+-(Tile *)getTileAtPosX:(int)x posY:(int)y;
+
 @end

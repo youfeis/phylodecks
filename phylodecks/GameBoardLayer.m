@@ -10,6 +10,7 @@
 #import "nodeTags.h"
 #import "Map.h"
 #import "Card.h"
+#import "Tile.h"
 
 @implementation GameBoardLayer
 -(id) init
@@ -21,7 +22,7 @@
         [self addChild: _tutorialGameboard];
 		_tutorialGameboard.delegate = self;
         // background
-        CCSprite *background = [CCSprite spriteWithFile: @"background.png"];
+        CCSprite *background = [CCSprite spriteWithFile: @"gameboard.png"];
         background.anchorPoint = ccp(0,0);
 		background.scale = CC_CONTENT_SCALE_FACTOR();
         [_tutorialGameboard addChild: background
@@ -35,8 +36,9 @@
         
         _tilesArray = [[NSMutableArray alloc] init];
         
-        [self drawTiles: 5];
         [self locateHomeAndTarget];
+        [self drawTiles];
+        
         
 		[self updateForScreenReshape];
 
@@ -99,7 +101,14 @@
         [_toConfirm setColor:ccWHITE];
         int dragIndex = [_tilesArray indexOfObject:_toConfirm];
         _toConfirm = 0;
+        
+        
         // check if the card is compatitable at that tile
+        BOOL tester = [[[[Map currentMap] tiles] objectAtIndex:dragIndex] isCompatible:[[Map currentMap] selected]];
+        if(tester == YES){
+            NSLog(@"dsfsfdf34==============================>");
+        }
+        
         [[[Map currentMap] tiles] setObject:[[Map currentMap] selected] atIndexedSubscript:dragIndex];
     }
     else{
@@ -192,11 +201,30 @@
 
 }
 
--(void) drawTiles:(int) dimension{
+-(void) drawTiles{
+    CGPoint initPos = ccp(25,10);
+    
+    for (id obj in [[Map currentMap] tiles]){
+        CCSprite * card;
+        if ([obj card] == 0){
+            card = [CCSprite spriteWithFile:@"emptyTile.png"];
+            
+        }else{
+            card = [obj card];
+            
+        }
+        [card setScaleY: 72/card.contentSize.height];
+        [card setScaleX: 52/card.contentSize.width];
+        [card setAnchorPoint:CGPointZero];
+        card.position = ccp(initPos.x + ([obj posX]-1) * [card boundingBox].size.width ,initPos.y + ([obj posY]-1) * [card boundingBox].size.height);
+        [_tutorialGameboard addChild:card];
+        [_tilesArray addObject:card];
+    }
+    /*
     CCNode *background = [_tutorialGameboard getChildByTag: gameBoardBackgroundTag];
     CGRect boundingRect = CGRectMake(0, 0, 0, 0);
 	boundingRect.size = [background boundingBox].size;
-    CGPoint initPos = ccp(25,10);
+    
     CCSprite *genericEmptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
     [genericEmptyCard setScaleY: 72/genericEmptyCard.contentSize.height];
     [genericEmptyCard setScaleX: 52/genericEmptyCard.contentSize.width];
@@ -210,11 +238,12 @@
             [emptyCard setAnchorPoint:CGPointZero];
             emptyCard.position = ccp(initPos.x + i * [emptyCard boundingBox].size.width ,initPos.y );
             [_tutorialGameboard addChild:emptyCard];
-            [_tilesArray addObject:emptyCard];
+            
         }
         initPos = ccp(initPos.x ,initPos.y + [genericEmptyCard boundingBox].size.height );
         
     }
+     */
 }
 
 -(int) draggedToTile: (CGPoint) endPos{
@@ -234,8 +263,7 @@
 }
 
 -(void) locateHomeAndTarget{
-    [[_tilesArray objectAtIndex:99] setTexture:[[[Map currentMap] home] texture]];
-    [[[Map currentMap] tiles] setObject:[[Map currentMap] home] atIndexedSubscript:99];
+    [[[[Map currentMap] tiles] objectAtIndex:99] setCard:[[Map currentMap] home]];
     if([[Player currentPlayer] playerLevel] == 1){
         int distance = 4;
         int x = [self indexToX:99];
@@ -243,8 +271,8 @@
         int randomValue = arc4random() % distance;
         x = x + randomValue;
         y = y + distance - randomValue;
-        [[_tilesArray objectAtIndex:[self toIndexPosX:x posY:y]] setTexture:[[[Map currentMap] target] texture]];
-        [[[Map currentMap] tiles] setObject:[[Map currentMap] target] atIndexedSubscript:[self toIndexPosX:x posY:y]];
+        [[[[Map currentMap] tiles] objectAtIndex:[self toIndexPosX:x posY:y]] setCard:[[Map currentMap] target]];
+        
     }
 }
 -(int) indexToX: (int)index{

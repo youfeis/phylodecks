@@ -23,6 +23,6 @@
 -(void) setToSheetMode;
 -(void) setToFrameMode;
 -(void) showSelected :(id)sender atPos:(CGPoint)pos;
--(void) drawTiles:(int) dimension;
+-(void) drawTiles;
 
 @end

@@ -20,6 +20,11 @@
         // add the introlayer into introscene
         MainMenuLayer *mainMenuLayer = [MainMenuLayer node];
         [self addChild: mainMenuLayer z:-1 tag:mainMenuLayerTag];
+        
+        CCSprite *background = [CCSprite spriteWithFile:@"background.png"];
+        [self addChild:background z:-2];
+        
+        
         // when call player currentplayer side effect is that currentplayer will be initialized
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
@@ -33,10 +38,11 @@
                 alert.alertViewStyle = UIAlertViewStylePlainTextInput;
                 [alert show];
             }
+        
             
         });
         
-       
+        
         
         
     }
