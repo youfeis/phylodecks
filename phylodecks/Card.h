@@ -20,22 +20,22 @@
     NSString *thumbnail;
     NSString *diet;
     NSString *type;
-    NSArray *terrains;
-    NSArray *climates;
-    NSArray *keyWords;
+    NSMutableArray *terrains;
+    NSMutableArray *climates;
+    NSMutableArray *keyWords;
 }
 @property (assign,readonly) int point;
 @property (assign,readonly) int move;
 @property (assign,readonly) int foodChain;
 @property (assign,readonly) int cardID;
 @property (assign,readonly) int scale;
-@property (retain,readonly) NSString *imageName;
-@property (retain,readonly) NSString *thumbnail;
-@property (retain,readonly) NSString *diet;
-@property (retain,readonly) NSString *type;
-@property (retain,readonly) NSArray *terrains;
-@property (retain,readonly) NSArray *climates;
-@property (retain,readonly) NSArray *keywords;
+@property (retain,readwrite) NSString *imageName;
+@property (retain,readwrite) NSString *thumbnail;
+@property (retain,readwrite) NSString *diet;
+@property (retain,readwrite) NSString *type;
+@property (retain,readwrite) NSMutableArray *terrains;
+@property (retain,readwrite) NSMutableArray *climates;
+@property (retain,readwrite) NSMutableArray *keywords;
 
 -(id)initWithData:(FMResultSet*)rs card:(int)card;
 //-(void)eventCardEvent: (Map*) map;

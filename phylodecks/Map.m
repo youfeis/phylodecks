@@ -16,12 +16,16 @@ static Map *sharedInstance = nil;
 @synthesize selected = _selected;
 @synthesize home = _home;
 @synthesize target = _target;
+@synthesize maxInventory;
+@synthesize stepCounter;
+
 
 -(id) init{
     self = [super init];
     if (self != nil){
         _mapInventory = [[NSMutableArray alloc] init];
         [self generateNewMap:[[Player currentPlayer] playerLevel]];
+        
     }
     
     return self;
@@ -35,9 +39,11 @@ static Map *sharedInstance = nil;
 }
 
 -(void)generateNewMap:(int)level{
+    maxInventory = 9+[[Player currentPlayer] playerLevel] * 3;
+    stepCounter = maxInventory + 5;
     _tiles = [[NSMutableArray alloc] init];
     
-
+    
     for(int y = 1; y < 10; y++){
         for (int x = 1; x < 23; x++){
             Tile *aTile = [[Tile alloc]init];

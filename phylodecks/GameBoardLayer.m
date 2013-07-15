@@ -36,6 +36,7 @@
         
         _tilesArray = [[NSMutableArray alloc] init];
         
+        [[Map currentMap]generateNewMap:[[Player currentPlayer] playerLevel]];
         [self locateHomeAndTarget];
         [self drawTiles];
         
@@ -100,16 +101,27 @@
     if(CGRectContainsPoint([_toConfirm boundingBox], point)){
         [_toConfirm setColor:ccWHITE];
         int dragIndex = [_tilesArray indexOfObject:_toConfirm];
-        _toConfirm = 0;
-        
         
         // check if the card is compatitable at that tile
-        BOOL tester = [[[[Map currentMap] tiles] objectAtIndex:dragIndex] isCompatible:[[Map currentMap] selected]];
-        if(tester == YES){
-            NSLog(@"dsfsfdf34==============================>");
+        BOOL isCompatible = [[[[Map currentMap] tiles] objectAtIndex:dragIndex] isCompatible:[[Map currentMap] selected]];
+        if(isCompatible){
+            [[[[Map currentMap] tiles] objectAtIndex:dragIndex] setCard:[[Map currentMap] selected]];
+            _toConfirm = 0;
+        }else{
+            CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
+            [emptyCard setScaleY: 72/emptyCard.contentSize.height];
+            [emptyCard setScaleX: 52/emptyCard.contentSize.width];
+            [_toConfirm setTexture:[emptyCard texture]];
+            _toConfirm = 0;
         }
         
-        [[[Map currentMap] tiles] setObject:[[Map currentMap] selected] atIndexedSubscript:dragIndex];
+        [Map currentMap].stepCounter--;
+        [(HUDLayer*)[[self parent] getChildByTag:HUDLayerTag] updateHUD];
+  //      NSLog(@"%@",[[[Map currentMap] selected] climates]);
+        if([Map currentMap].stepCounter == 0){
+            //game end
+        }
+        
     }
     else{
         CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
@@ -264,16 +276,16 @@
 
 -(void) locateHomeAndTarget{
     [[[[Map currentMap] tiles] objectAtIndex:99] setCard:[[Map currentMap] home]];
+    int distance;
     if([[Player currentPlayer] playerLevel] == 1){
-        int distance = 4;
-        int x = [self indexToX:99];
-        int y = [self indexToY:99];
-        int randomValue = arc4random() % distance;
-        x = x + randomValue;
-        y = y + distance - randomValue;
-        [[[[Map currentMap] tiles] objectAtIndex:[self toIndexPosX:x posY:y]] setCard:[[Map currentMap] target]];
-        
+        distance = 4;
     }
+    NSMutableArray *targetList = [[[[Map currentMap] tiles] objectAtIndex:99] getArrayWithRadius:distance];
+    int randomIndex = arc4random() % [targetList count];
+    [[targetList objectAtIndex:randomIndex] setCard:[[Map currentMap] target]];
+    [[targetList objectAtIndex:randomIndex] setIsTarget:YES];
+        
+    
 }
 -(int) indexToX: (int)index{
     return 1+(index % 22);

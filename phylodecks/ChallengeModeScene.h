@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "GameBoardLayer.h"
 #import "MapInventoryLayer.h"
+#import "HUDLayer.h"
 
 @interface ChallengeModeScene : CCScene {
     

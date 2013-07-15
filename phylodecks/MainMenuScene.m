@@ -22,6 +22,9 @@
         [self addChild: mainMenuLayer z:-1 tag:mainMenuLayerTag];
         
         CCSprite *background = [CCSprite spriteWithFile:@"background.png"];
+        background.anchorPoint = ccp(0,0);
+        [background setScaleY: 480/background.contentSize.height];
+        [background setScaleX: 320/background.contentSize.width];
         [self addChild:background z:-2];
         
         

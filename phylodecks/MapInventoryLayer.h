@@ -17,10 +17,6 @@
     
 }
 
-
-// Creates advice label (test description)
-- (CCLabelTTF *) adviceLabel;
-
 // Creates widget (can be anything you want, in Vertical Test it is a vertical menu).
 - (CCNode *) widget;
 

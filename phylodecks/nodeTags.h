@@ -17,7 +17,9 @@ enum nodeTags
     currentPlayerTag,
     gameBoardBackgroundTag,
     dragableTag,
-    inventorySelectionLayerTag
+    inventorySelectionLayerTag,
+    HUDStepCounterTag,
+    HUDLayerTag
 };
 
 

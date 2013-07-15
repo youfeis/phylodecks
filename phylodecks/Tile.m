@@ -13,39 +13,146 @@
 @synthesize card;
 @synthesize posX;
 @synthesize posY;
+@synthesize isTarget;
 
 -(id)initWithPosX: (int)x posY: (int)y{
     self  = [super init];
     posX = x;
     posY = y;
     card = 0;
+    isTarget = NO;
     return self;
 }
 
--(BOOL)isCompatible: (Card*) card{
-    BOOL hasNeighbour = NO;
-    for(id obj in [self getNeighbours]){
-        if([obj card]!=0){
-            hasNeighbour = YES;
-        }
+-(BOOL)isCompatible: (Card*) selectedCard{
+    //todo: implement event card compatiblilities
+    if (![self hasNeighbour]){
+        return NO;
+    }else if(![self climateOK:selectedCard]){
+        return NO;
+    }else if(![self terrainOK:selectedCard]){
+        return NO;
     }
-    return hasNeighbour;
+    
+    // todo: implement foodChain,diet,scale,and special requirement relations.
+    return YES;
 }
 
 -(NSMutableArray *)getArrayWithRadius: (int)distance{
     NSMutableArray *tileArray = [[NSMutableArray alloc] init];
     
-    [tileArray addObject:[[Map currentMap] getTileAtPosX:posX+1 posY:+1]];
+    int index;
+    int maxIndex = [[[Map currentMap] tiles] count] - 1;
+    for(int i = 0;i < distance; i++){
+        index = [self toIndexPosX:posX+i posY:posY+distance-i];
+        if(index<=maxIndex && index >= 0){
+            [tileArray addObject:[[Map currentMap] getTileAtPosX:posX + i posY:posY + distance - i]];
+        }
+    }
+    for(int i = 0;i < distance; i++){
+        index = [self toIndexPosX:posX+i+1 posY:posY-distance+i+1];
+        if(index<=maxIndex && index >= 0){
+            [tileArray addObject:[[Map currentMap] getTileAtPosX:posX +  i + 1 posY:posY - distance + i + 1]];
+        }
+    }
+    for(int i = 0;i < distance; i++){
+        index = [self toIndexPosX:posX-i-1 posY:posY+distance-i-1];
+        if(index<=maxIndex && index >= 0){
+            [tileArray addObject:[[Map currentMap] getTileAtPosX:posX - i - 1 posY:posY + distance - i - 1]];
+        }
+    }
+    for(int i = 0;i < distance; i++){
+        index = [self toIndexPosX:posX-i posY:posY-distance+i];
+        if(index<=maxIndex && index >= 0){
+            [tileArray addObject:[[Map currentMap] getTileAtPosX:posX - i posY:posY - distance + i]];
+        }
+    }
+    
     return tileArray;
 }
 
--(NSMutableArray *)getNeighbours{
-    NSMutableArray *tileArray = [[NSMutableArray alloc] init];
-    [tileArray addObject:[[Map currentMap] getTileAtPosX:posX+0 posY:+1]];
-    [tileArray addObject:[[Map currentMap] getTileAtPosX:posX+1 posY:+0]];
-    [tileArray addObject:[[Map currentMap] getTileAtPosX:posX-1 posY:+0]];
-    [tileArray addObject:[[Map currentMap] getTileAtPosX:posX+0 posY:-1]];
-    return tileArray;
+
+
+-(BOOL)hasNeighbour{
+    for(id obj in [self getArrayWithRadius:1]){
+        if([obj card]!=0){
+            return YES;
+        }
+    }
+    return NO;
 }
 
+-(BOOL)climateOK:(Card *)selectedCard{
+    NSMutableArray *toCompare = [self getOccupiedTiles:[self getArrayWithRadius:1]];
+    
+    for (Tile* neighbourTile in toCompare){
+        if([[[[neighbourTile card]climates] objectAtIndex:0] isEqual:@"ANY"]){
+            return YES;
+        }
+        for( NSString* neighbourClimate in [[neighbourTile card] climates]){
+            for(NSString* selfClimate in [selectedCard climates]){
+                if([selfClimate isEqual:neighbourClimate]){
+                    return YES;
+                }
+            }
+            
+        }
+       
+    }
+    return NO;
+}
+
+-(BOOL)terrainOK:(Card *)selectedCard{
+    NSMutableArray *toCompare = [self getOccupiedTiles:[self getArrayWithRadius:1]];
+    
+    for (Tile* neighbourTile in toCompare){
+        if([[[[neighbourTile card]terrains] objectAtIndex:0] isEqual:@"ANY"]){
+            return YES;
+        }
+        for( NSString* neighbourClimate in [[neighbourTile card] terrains]){
+            for(NSString* selfClimate in [selectedCard terrains]){
+                if([selfClimate isEqual:neighbourClimate]){
+                    return YES;
+                }
+            }
+            
+        }
+        
+    }
+    return NO;
+}
+
+-(BOOL)foodChainOK:(Card *)selectedCard{
+    NSMutableArray *toCompare = [self getOccupiedTiles:[self getArrayWithRadius:1]];
+    if([selectedCard foodChain] == 1){
+        return YES;
+    }else if([selectedCard foodChain] == 2){
+        for (Tile* neighbourTile in toCompare){
+            if([[neighbourTile card] foodChain] == 1){
+                return YES;
+            }
+        }
+    }else if([selectedCard foodChain] == 3){
+        for (Tile* neighbourTile in toCompare){
+            if([[neighbourTile card] foodChain] == 2){
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
+
+-(int)toIndexPosX: (int)x posY:(int)y{
+    return (y-1)*22+(x-1);
+}
+
+-(NSMutableArray *)getOccupiedTiles: (NSMutableArray *)arr{
+    NSMutableArray * rtn = [[NSMutableArray alloc]init];
+    for (Tile* obj in arr){
+        if([obj card] != 0){
+            [rtn addObject:obj];
+        }
+    }
+    return rtn;
+}
 @end

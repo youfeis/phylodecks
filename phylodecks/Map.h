@@ -19,12 +19,18 @@
     Card *selected;
     Card *home;
     Card *target;
+    int maxInventory;
+    int stepCounter;
+    
 }
 @property (retain,readwrite) NSMutableArray *mapInventory;
 @property (retain,readwrite) NSMutableArray *tiles;
 @property (retain,readwrite) Card *selected;
 @property (retain,readwrite) Card *home;
 @property (retain,readwrite) Card *target;
+@property (assign,readwrite) int maxInventory;
+@property (assign,readwrite) int stepCounter;
+
 
 +(Map *)currentMap;
 -(void)generateNewMap:(int)level;

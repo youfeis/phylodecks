@@ -17,7 +17,7 @@
     // always call super init
     self = [super init];
     if (self != nil) {
-
+        // only Inventory Selection Layer needed in this scene
         InventorySelectionLayer *inventorySelectionLayer = [InventorySelectionLayer node];
         [self addChild: inventorySelectionLayer z:0 tag:inventorySelectionLayerTag];
         

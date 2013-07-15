@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "CCLayerPanZoom.h"
+#import "HUDLayer.h"
+
 
 @interface GameBoardLayer : CCLayer <CCLayerPanZoomClickDelegate>{
     

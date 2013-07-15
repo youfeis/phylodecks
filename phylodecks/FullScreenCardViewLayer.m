@@ -37,7 +37,8 @@ enum nodeTags2
         
         CCSprite *background = [CCSprite spriteWithTexture:[card texture]];
         background.anchorPoint = ccp(0,0);
-        background.scale = CC_CONTENT_SCALE_FACTOR();
+        [background setScaleY: 480/background.contentSize.height];
+        [background setScaleX: 320/background.contentSize.width];
         [_panZoomer addChild: background
                           z :-1
                          tag: fullSizeCardTag];
@@ -122,9 +123,9 @@ enum nodeTags2
     }
     
     if( [[self parent] isKindOfClass:[ChallengeModeScene class]] ) {
-        [[[self parent] getChildByTag:gameBoardLayerTag ]showSelected: _card atPos:[recognizer locationInView:[UIApplication sharedApplication].keyWindow]];
+        [(GameBoardLayer *)[[self parent] getChildByTag:gameBoardLayerTag ]showSelected: _card atPos:[recognizer locationInView:[UIApplication sharedApplication].keyWindow]];
         [[[Map currentMap] mapInventory] removeObject:_card];
-        [[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
+        [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
         
         [self removeFromParentAndCleanup:YES];
     }

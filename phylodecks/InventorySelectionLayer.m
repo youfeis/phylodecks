@@ -18,6 +18,7 @@ enum nodeTags2
 	kScrollLayer = 256,
 	kAdviceLabel = 257,
 	kFastPageChangeMenu = 258,
+    mapInventoryCounterTag,
 };
 
 // on "init" you need to initialize your instance
@@ -26,6 +27,8 @@ enum nodeTags2
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
+        
+        [[Map currentMap] setMapInventory:[[NSMutableArray alloc] init]];
         
         cardSprites = [[NSMutableArray alloc] init];
         [self loadCardDatabase];
@@ -47,9 +50,11 @@ enum nodeTags2
         
         
           
-            CCLabelTTF *labelWithNumber = [CCLabelTTF labelWithString:@"go>>" fontName:@"Marker Felt" fontSize:22];
+        CCLabelTTF *labelWithNumber = [CCLabelTTF labelWithString:@"go>>" fontName:@"Marker Felt" fontSize:22];
         CCMenuItemLabel *item = [CCMenuItemLabel itemWithLabel:labelWithNumber block:^(id sender){
-            [self transitToChallengeModeScene];
+            if([[[Map currentMap] mapInventory] count] <= [[Map currentMap] maxInventory]){
+                [self transitToChallengeModeScene];
+            }
         }];
             [playMenu addChild: item z: 0];
         
@@ -58,6 +63,10 @@ enum nodeTags2
         CGSize screenSize = [CCDirector sharedDirector].winSize;
         playMenu.position = ccp( 0.9f * screenSize.width, 15.0f);
         
+        NSString *countString = [NSString stringWithFormat:@"%1i/%2i",[[[Map currentMap] mapInventory] count],[[Map currentMap] maxInventory]];
+        CCLabelTTF *inventoryCount = [CCLabelTTF labelWithString:countString fontName:@"Marker Felt" fontSize:22];
+        inventoryCount.position = ccp( 0.1f * screenSize.width, 15.0f);
+        [self addChild:inventoryCount z:0 tag:mapInventoryCounterTag];
         
 	}
 	return self;
@@ -297,15 +306,32 @@ enum nodeTags2
     
     for(id obj in cardSprites){
         CCMenuItem *item = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[obj imageName]] selectedSprite:nil block:^(id sender){
-            NSLog(@"%i is clicked", [obj cardID]);
-            [[[Map currentMap] mapInventory] addObject:obj];
             
+            
+            // implement card click event here
+            
+            
+            if([[[Map currentMap] mapInventory] containsObject:obj]){
+                [(CCSprite *)sender setColor:ccWHITE];
+                [[[Map currentMap] mapInventory] removeObject:obj];
+            }else{
+            
+                [[[Map currentMap] mapInventory] addObject:obj];
+                [(CCSprite *)sender setColor:ccGRAY];
+            }
+           
             FullScreenCardViewLayer * viewer = [[FullScreenCardViewLayer alloc] initWithCard:obj];
-            [(CCSprite *)sender setColor:ccGRAY];
             [[self parent]addChild:viewer];
             [self setPosition:CGPointMake(-1000, -1000)];
             
-            
+            NSString *countString = [NSString stringWithFormat:@"%1i/%2i",[[[Map currentMap] mapInventory] count],[[Map currentMap] maxInventory]];
+            CCLabelTTF *inventoryCount = [CCLabelTTF labelWithString:countString fontName:@"Marker Felt" fontSize:22];
+            inventoryCount.position = ccp( 0.1f * screenSize.width, 15.0f);
+            if([[[Map currentMap] mapInventory] count] > [[Map currentMap] maxInventory]){
+                [inventoryCount setColor:ccRED];
+            }
+            [self removeChildByTag:mapInventoryCounterTag cleanup:YES];
+            [self addChild:inventoryCount z:0 tag:mapInventoryCounterTag];
             
         }];
         if(i>5){

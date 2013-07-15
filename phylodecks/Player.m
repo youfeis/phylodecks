@@ -70,7 +70,6 @@ static Player *sharedInstance = nil;
         GDataXMLElement *card = (GDataXMLElement *)obj;
         [_playerInventory  addObject: [NSNumber numberWithInt:card.stringValue.intValue]];
     }
-    NSLog(@"%@",_playerInventory);
     
 }
 

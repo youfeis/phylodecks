@@ -27,19 +27,20 @@
 
 
 -(id)initWithData:(FMResultSet*)rs card:(int)card{
+    //Initlize card information from a database resultset
+    
     
     point = [rs intForColumn:@"point"];
     move = [rs intForColumn:@"move"];
     foodChain = [rs intForColumn:@"foodChain"];
     cardID = card;
-    imageName = [rs stringForColumn:@"image"];
-    thumbnail = [rs stringForColumn:@"thumbnail"];
-    diet =  [rs stringForColumn:@"diet"];
-    type = [rs stringForColumn:@"type"];
-    climates = [[rs stringForColumn:@"climates"] componentsSeparatedByString:@","];
-    terrains = [[rs stringForColumn:@"terrains"] componentsSeparatedByString:@","];
-    keywords = [[rs stringForColumn:@"keywords"] componentsSeparatedByString:@","];
-	
+    self.imageName = [rs stringForColumn:@"image"];
+    self.thumbnail = [rs stringForColumn:@"thumbnail"];
+    self.diet =  [rs stringForColumn:@"diet"];
+    self.type = [rs stringForColumn:@"type"];
+    self.climates = [NSMutableArray arrayWithArray:[[rs stringForColumn:@"climates"] componentsSeparatedByString:@","]];
+    self.terrains = [NSMutableArray arrayWithArray:[[rs stringForColumn:@"terrains"] componentsSeparatedByString:@","]];
+    self.keywords = [NSMutableArray arrayWithArray:[[rs stringForColumn:@"keywords"] componentsSeparatedByString:@","]];
     
     return self;
 }

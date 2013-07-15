@@ -14,16 +14,18 @@
 @interface Tile : NSObject {
     Card *card;
     int posX;
-    int posY;
+    int posY;    
+    BOOL isTarget;
 }
 
 @property (retain,readwrite) Card* card;
 @property (assign,readonly) int posX;
 @property (assign,readonly) int posY;
+@property (assign,readwrite) BOOL isTarget;
+
 -(id)initWithPosX: (int)x posY: (int)y;
 -(BOOL)isCompatible: (Card*) card;
 -(NSMutableArray *)getArrayWithRadius: (int)distance;
--(NSMutableArray *)getNeighbours;
 
 
 @end
