@@ -124,6 +124,10 @@
         
     }
     else{
+        //add card back to inventory
+        [[[Map currentMap] mapInventory] addObject: [[Map currentMap] selected]];
+      //  [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
+       //todo: cant reformat here, will look into it later
         CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
         [emptyCard setScaleY: 72/emptyCard.contentSize.height];
         [emptyCard setScaleX: 52/emptyCard.contentSize.width];

@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "CCLayerPanZoom.h"
 #import "HUDLayer.h"
+#import "MapInventoryLayer.h"
 
 
 @interface GameBoardLayer : CCLayer <CCLayerPanZoomClickDelegate>{

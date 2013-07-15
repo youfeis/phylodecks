@@ -12,6 +12,7 @@
 #import "Card.h"
 #import "InventorySelectionLayer.h"
 #import "ChallengeModeScene.h"
+#import "MapInventoryLayer.h"
 
 @interface FullScreenCardViewLayer : CCLayer <CCLayerPanZoomClickDelegate> {
     CCLayerPanZoom *_panZoomer;
