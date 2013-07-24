@@ -103,6 +103,7 @@ enum nodeTags2
                                                  [obj setPosition:CGPointMake(-1000, -1000)];
                                              }
                                              [[self parent]addChild:viewer];
+                                             [[[Map currentMap] mapInventory] removeObject:obj];
  
                                          }];
 		[item setScaleY: 72/item.contentSize.height];
@@ -171,6 +172,9 @@ enum nodeTags2
 }
 
 - (void) reformatMenu{
+    [[self getChildByTag:kMenu] removeAllChildrenWithCleanup:YES];
+    [[self getChildByTag:kWidget] removeAllChildrenWithCleanup:YES];
+    [self removeChildByTag:kMenu cleanup:YES];
     [self removeChildByTag:kWidget cleanup:YES];
     CCNode *widget = [self widget];
     [self addChild: widget z: 1 tag: kWidget];

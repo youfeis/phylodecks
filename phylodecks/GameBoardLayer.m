@@ -123,16 +123,28 @@
         }
         
     }
-    else{
+    else if(_toConfirm != 0){
         //add card back to inventory
         [[[Map currentMap] mapInventory] addObject: [[Map currentMap] selected]];
-      //  [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
-       //todo: cant reformat here, will look into it later
+        [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
+        //todo: cant reformat here, will look into it later
         CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
         [emptyCard setScaleY: 72/emptyCard.contentSize.height];
         [emptyCard setScaleX: 52/emptyCard.contentSize.width];
         [_toConfirm setTexture:[emptyCard texture]];
         _toConfirm = 0;
+    }
+    else{
+        for (CCSprite* tile in _tilesArray){
+            if(CGRectContainsPoint([tile boundingBox], point)){
+                int index = [_tilesArray indexOfObject:tile];
+                if([[[[Map currentMap] tiles] objectAtIndex:index] hasCard]){
+                    NSLog(@"a card on map is clicked");
+                    NSLog(@"%@",[[[[Map currentMap] tiles] objectAtIndex:index] card]);
+                }
+                
+            }
+        }
         
     }
     [self dragSelectedCard: point];

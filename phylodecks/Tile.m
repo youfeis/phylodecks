@@ -155,4 +155,13 @@
     }
     return rtn;
 }
+
+-(BOOL)hasCard{
+    if(card == 0){
+        return NO;
+    }else{
+        return YES;
+    }
+
+}
 @end

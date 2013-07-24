@@ -26,6 +26,7 @@
 -(id)initWithPosX: (int)x posY: (int)y;
 -(BOOL)isCompatible: (Card*) card;
 -(NSMutableArray *)getArrayWithRadius: (int)distance;
+-(BOOL)hasCard;
 
 
 @end
