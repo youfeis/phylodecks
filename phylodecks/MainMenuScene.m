@@ -58,10 +58,11 @@
         
         if (alert.alertViewStyle == UIAlertViewStylePlainTextInput){
             [[Player currentPlayer] setPlayerName: [[alert textFieldAtIndex:0] text]];
+            //save this player data
         }
     }
     if(buttonIndex==1) {
-        //goto player selection scene
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[PlayerSelectionScene alloc] init] withColor:ccWHITE]];
     }
 }
 

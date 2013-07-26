@@ -18,6 +18,7 @@ static Player *sharedInstance = nil;
 @synthesize GPSBattleLeft;
 @synthesize playerInventory = _playerInventory;
 @synthesize lastLogin = _lastLogin;
+@synthesize _xmlDoc;
 
 -(id) init{
     self = [super init];
@@ -41,15 +42,14 @@ static Player *sharedInstance = nil;
     NSString *filePath = [self dataFilePath: NO];
     xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
     NSError *error;
-    _xmlDoc = [[GDataXMLDocument alloc] initWithData:xmlData
-                                   options:0 error:&error];
+    [self set_xmlDoc:[[GDataXMLDocument alloc] initWithData:xmlData
+                                                    options:0 error:&error]];
 }
 
 -(void) loadRecentPlayer{
     NSArray *playerInfo = [_xmlDoc.rootElement elementsForName:@"Player"];
     GDataXMLElement *currentName = (GDataXMLElement *)[playerInfo objectAtIndex:0];
     playerName = currentName.stringValue;
-    NSLog(@"%@",playerName);
 }
 
 -(void) loadPlayerStats{
@@ -85,7 +85,7 @@ static Player *sharedInstance = nil;
     NSString *dateStr = date.stringValue;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyyMMdd"];
-    lastLogin = [dateFormat dateFromString:dateStr];
+    [self setLastLogin: [dateFormat dateFromString:dateStr]];
     
 }
 
@@ -118,6 +118,96 @@ static Player *sharedInstance = nil;
 
 
 - (oneway void)release{
+    
+}
+
+-(void)reloadPlayer{
+    
+}
+
+-(NSArray *)loadAllPlayerName{
+    NSArray *playerList;
+    NSString *xPath;
+    xPath = [NSString stringWithFormat:@"//Users/Player/Name"];
+    playerList = [_xmlDoc.rootElement nodesForXPath:xPath error: nil];
+    NSMutableArray *rtn = [[NSMutableArray alloc] init];
+    for (GDataXMLElement* obj in playerList){
+        [rtn addObject:obj.stringValue];
+    }
+    
+    return rtn;
+    
+}
+
+-(void)saveData{
+    
+    GDataXMLElement * usersElement =
+    [GDataXMLNode elementWithName:@"Users"];
+    
+    GDataXMLElement * recentPlayer =
+    [GDataXMLNode elementWithName:@"Player"];
+    
+    NSArray *attr = [[NSArray alloc]
+                     initWithObjects:[GDataXMLNode namespaceWithName:@"recent"
+                                                         stringValue:@"YES"], nil];
+    
+    [recentPlayer setNamespaces:attr];
+    
+    GDataXMLElement * playerElement =
+    [GDataXMLNode elementWithName:@"Player"];
+    
+    GDataXMLElement * nameElement =
+    [GDataXMLNode elementWithName:@"Name" stringValue:playerName];
+    
+    GDataXMLElement * levelElement =
+    [GDataXMLNode elementWithName:@"Level" stringValue:[NSString stringWithFormat:@"%i",playerLevel]];
+    
+    GDataXMLElement * expElement =
+    [GDataXMLNode elementWithName:@"Experience" stringValue:[NSString stringWithFormat:@"%i",playerExp]];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    NSString *dateString =[dateFormat stringFromDate:lastLogin];
+    
+    GDataXMLElement * lastLoginElement =
+    [GDataXMLNode elementWithName:@"LastLogin" stringValue: dateString];
+    
+    GDataXMLElement * battleLeftElement =
+    [GDataXMLNode elementWithName:@"GPSBattleLeft" stringValue:[NSString stringWithFormat:@"%i",GPSBattleLeft]];
+    
+    GDataXMLElement * inventoryElement =
+    [GDataXMLNode elementWithName:@"Inventory"];
+    
+    
+    for(NSNumber *card in _playerInventory){
+        GDataXMLElement * cardElement =
+        [GDataXMLNode elementWithName:@"CardID" stringValue:[NSString stringWithFormat:@"%i",card.intValue]];
+        [inventoryElement addChild:cardElement];
+    }
+    
+    [recentPlayer addChild:nameElement];
+    [usersElement addChild:recentPlayer];
+    [playerElement addChild:nameElement];
+    [playerElement addChild:levelElement];
+    [playerElement addChild:expElement];
+    [playerElement addChild:lastLoginElement];
+    [playerElement addChild:battleLeftElement];
+    [playerElement addChild:inventoryElement];
+    [usersElement addChild:playerElement];
+    
+
+    
+    GDataXMLDocument *document = [[[GDataXMLDocument alloc]
+                                   initWithRootElement:usersElement] autorelease];
+    
+    NSData *data = document.XMLData;
+    
+
+    
+    NSString *filePath = [self dataFilePath:YES];
+    NSLog(@"Saving xml data to %@...", filePath);
+    [data writeToFile:filePath atomically:YES];
+
     
 }
 

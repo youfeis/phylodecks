@@ -27,11 +27,15 @@
 @property (retain,readwrite) NSMutableArray *playerInventory;
 @property (retain,readwrite) NSDate *lastLogin;
 @property (assign,readwrite) int GPSBattleLeft;
+@property (retain,readwrite) GDataXMLDocument *_xmlDoc;
 
 +(Player *)currentPlayer;
 -(void)loadXMLFile;
 -(void)loadRecentPlayer;
 -(void)loadPlayerStats;
 -(void)releaseXMLFile;
+-(void)reloadPlayer;
+-(void)saveData;
+-(NSArray *)loadAllPlayerName;
 
 @end
