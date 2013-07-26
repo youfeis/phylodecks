@@ -11,14 +11,13 @@
 
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
-#import "TutorialLayer.h"
 
-// MainMenuLayer
-@interface MainMenuLayer : CCLayer
+// HelloWorldLayer
+@interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
 }
 
-// returns a CCScene that contains the MainMenuLayer as the only child
+// returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
 
 @end
