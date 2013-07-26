@@ -1,4 +1,0 @@
-phylodecks
-==========
-
-The Phylodecks game.
