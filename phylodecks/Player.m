@@ -147,11 +147,7 @@ static Player *sharedInstance = nil;
     GDataXMLElement * recentPlayer =
     [GDataXMLNode elementWithName:@"Player"];
     
-    NSArray *attr = [[NSArray alloc]
-                     initWithObjects:[GDataXMLNode namespaceWithName:@"recent"
-                                                         stringValue:@"YES"], nil];
-    
-    [recentPlayer setNamespaces:attr];
+    [recentPlayer addAttribute:[GDataXMLElement attributeWithName:@"recent:" stringValue:@"YES"]];
     
     GDataXMLElement * playerElement =
     [GDataXMLNode elementWithName:@"Player"];

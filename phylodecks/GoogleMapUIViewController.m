@@ -17,26 +17,26 @@
 // You don't need to modify the default initWithNibName:bundle: method.
 
 - (void)loadView {
-    // Create a GMSCameraPosition that tells the map to display the
-    // coordinate -33.86,151.20 at zoom level 6.
+    
     CGSize size = [[CCDirector sharedDirector] winSize];
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
-                                                            longitude:151.20
-                                                                 zoom:6];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locationManager.location.coordinate.latitude
+                                                            longitude:locationManager.location.coordinate.longitude
+                                                                 zoom:20];
     mapView_ = [GMSMapView mapWithFrame: CGRectMake(0,0,size.width,350) camera:camera];
     mapView_.myLocationEnabled = YES;
     
     self.view = mapView_;
-    mapView_.mapType = kGMSTypeSatellite;
     
     // Creates a marker of player home
     // todo
     GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
-    marker.title = @"Sydney";
-    marker.snippet = @"Australia";
+    marker.position = CLLocationCoordinate2DMake(locationManager.location.coordinate.longitude, locationManager.location.coordinate.longitude);
+    marker.title = @"Current Location";
+    marker.snippet = @"Player";
     marker.map = mapView_;
     //todo
     //create a marker for player current location
 }
+
+
 @end

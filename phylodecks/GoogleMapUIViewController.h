@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface GoogleMapUIViewController : UIViewController {
-    
+    IBOutlet CLLocationManager *locationManager;
+    IBOutlet UILabel *latLabel;
+    IBOutlet UILabel *longLabel;
 }
+
 
 @end
