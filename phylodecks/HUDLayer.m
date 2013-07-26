@@ -19,6 +19,15 @@
         CCLabelTTF *stepCount = [CCLabelTTF labelWithString:stepCountString fontName:@"Marker Felt" fontSize:22];
         stepCount.position = ccp( 0.8f * screenSize.width, 15.0f);
         [self addChild:stepCount z:0 tag:HUDStepCounterTag];
+        
+        CCSprite *inventory = [CCSprite spriteWithFile:@"inventory.png"];
+        inventory.scaleX = screenSize.width/inventory.contentSize.width;
+        inventory.scaleY = 75/inventory.contentSize.height;
+        inventory.opacity = 128;
+        [inventory setPosition:ccp(screenSize.width * 0.5f, 80.0f)];
+        [self addChild:inventory];
+        
+        
     }
     return self;
 }

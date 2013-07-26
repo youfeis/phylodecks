@@ -34,6 +34,8 @@
         
         _tutorialGameboard.rubberEffectRatio = 0.1f;
         
+        _tutorialGameboard.bottomFrameMargin = 180.0f;
+        
         _tilesArray = [[NSMutableArray alloc] init];
         
         [[Map currentMap]generateNewMap:[[Player currentPlayer] playerLevel]];
@@ -97,7 +99,7 @@
 	   clickedAtPoint: (CGPoint) point
              tapCount: (NSUInteger) tapCount
 {
-	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f }", sender, point.x, point.y);
+	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f } tap count %i", sender, point.x, point.y,tapCount);
     if(CGRectContainsPoint([_toConfirm boundingBox], point)){
         [_toConfirm setColor:ccWHITE];
         int dragIndex = [_tilesArray indexOfObject:_toConfirm];
@@ -112,12 +114,13 @@
             [emptyCard setScaleY: 72/emptyCard.contentSize.height];
             [emptyCard setScaleX: 52/emptyCard.contentSize.width];
             [_toConfirm setTexture:[emptyCard texture]];
+            [_toConfirm setVisible:NO];
             _toConfirm = 0;
         }
         
         [Map currentMap].stepCounter--;
         [(HUDLayer*)[[self parent] getChildByTag:HUDLayerTag] updateHUD];
-  //      NSLog(@"%@",[[[Map currentMap] selected] climates]);
+  
         if([Map currentMap].stepCounter == 0){
             //game end
         }
@@ -185,6 +188,7 @@
     if(_selectedCard != 0){
         if([self draggedToTile:endPos]!= -1){
             [[_tilesArray objectAtIndex: [self draggedToTile:endPos]] setTexture:[_selectedCard texture]];
+            [[_tilesArray objectAtIndex:[self draggedToTile:endPos]] setVisible:YES];
             [_tutorialGameboard removeChildByTag:dragableTag cleanup:YES];
             _toConfirm = [_tilesArray objectAtIndex: [self draggedToTile:endPos]];
             [_toConfirm setColor:ccGRAY];
@@ -236,6 +240,7 @@
         CCSprite * card;
         if ([obj card] == 0){
             card = [CCSprite spriteWithFile:@"emptyTile.png"];
+            [card setVisible:NO];
             
         }else{
             card = [obj card];

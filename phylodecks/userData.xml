@@ -7,6 +7,8 @@
         <Name>Test</Name>
         <Level>1</Level>
         <Experience>0</Experience>
+        <LastLogin>20130724</LastLogin>
+        <GPSBattleLeft>3</GPSBattleLeft>
         <Inventory>
             <CardID>1</CardID>
             <CardID>2</CardID>

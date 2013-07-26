@@ -11,6 +11,8 @@
 
 @interface Player : NSObject
 {
+    NSDate *lastLogin;
+    int GPSBattleLeft;
     int playerLevel;
     int playerExp;
     NSMutableArray *playerInventory;
@@ -23,6 +25,8 @@
 @property (retain,readwrite) NSString *playerName;
 @property (assign,readonly) BOOL isLastPlayerExist;
 @property (retain,readwrite) NSMutableArray *playerInventory;
+@property (retain,readwrite) NSDate *lastLogin;
+@property (assign,readwrite) int GPSBattleLeft;
 
 +(Player *)currentPlayer;
 -(void)loadXMLFile;

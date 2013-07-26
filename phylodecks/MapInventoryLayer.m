@@ -12,10 +12,6 @@
 
 enum nodeTags2
 {
-	// Tags to distinguish what button was pressed.
-	kItemVerticalTest,
-	kItemHorizontalTest,
-	kItemPriorityTest,
 	
 	// Tag to get children in updateForScreenReshape
 	kMenu,
@@ -108,15 +104,12 @@ enum nodeTags2
                                          }];
 		[item setScaleY: 72/item.contentSize.height];
         [item setScaleX: 52/item.contentSize.width];
-	//	[[item selectedImage] setScaleY: 10000/[item selectedImage].contentSize.height];
-	//	[[item selectedImage] setScaleX: 7500/[item selectedImage].contentSize.width];
-		// Add it.
 		[menu addChild: item];
 	}
 	
 	// Enable Debug Draw (available only when DEBUG is defined )
 #ifdef DEBUG
-	menu.debugDraw = YES;
+	menu.debugDraw = NO;
 #endif
 	
 	// Setup Menu Alignment.
@@ -144,7 +137,7 @@ enum nodeTags2
 	
 	menu.boundaryRect = CGRectMake( 25.0f,
 								   0.5f * winSize.height - 3.5f * [menu boundingBox].size.height ,
-								   winSize.width - 50.0f,
+								   50.0f,
 								   [menu boundingBox].size.height );
 
 	// Show first menuItem (scroll max to the left).

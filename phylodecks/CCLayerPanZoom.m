@@ -67,7 +67,7 @@ enum nodeTags
             leftFrameMargin = _leftFrameMargin, rightFrameMargin = _rightFrameMargin;
 
 - (void) draw
-{/*
+{
 #if COCOS2D_VERSION >= 0x00020000
     ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0);
 #else
@@ -81,7 +81,7 @@ enum nodeTags
     ccDrawLine(ccp(0.0f, self.bottomFrameMargin), 
                ccp(self.contentSize.width, self.bottomFrameMargin));
     ccDrawLine(ccp(0.0f, self.contentSize.height - self.topFrameMargin), 
-               ccp(self.contentSize.width, self.contentSize.height - self.topFrameMargin));  */
+               ccp(self.contentSize.width, self.contentSize.height - self.topFrameMargin));  
 }
 
 @end

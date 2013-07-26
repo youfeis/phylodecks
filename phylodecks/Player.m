@@ -15,7 +15,9 @@ static Player *sharedInstance = nil;
 @synthesize playerLevel;
 @synthesize playerName;
 @synthesize isLastPlayerExist;
+@synthesize GPSBattleLeft;
 @synthesize playerInventory = _playerInventory;
+@synthesize lastLogin = _lastLogin;
 
 -(id) init{
     self = [super init];
@@ -64,12 +66,26 @@ static Player *sharedInstance = nil;
     GDataXMLElement *exp = (GDataXMLElement *)[playerInfo objectAtIndex:0];
     playerExp = exp.stringValue.intValue;
     
+    xPath = [NSString stringWithFormat:@"//Users/Player[Name = \"%@\"]/GPSBattleLeft",playerName];
+    playerInfo = [_xmlDoc.rootElement nodesForXPath:xPath error: nil];
+    GDataXMLElement *count = (GDataXMLElement *)[playerInfo objectAtIndex:0];
+    GPSBattleLeft = count.stringValue.intValue;
+    
     xPath = [NSString stringWithFormat:@"//Users/Player[Name = \"%@\"]/Inventory/CardID",playerName];
     playerInfo = [_xmlDoc.rootElement nodesForXPath:xPath error: nil];
     for(id obj in playerInfo){
         GDataXMLElement *card = (GDataXMLElement *)obj;
         [_playerInventory  addObject: [NSNumber numberWithInt:card.stringValue.intValue]];
+        
     }
+    
+    xPath = [NSString stringWithFormat:@"//Users/Player[Name = \"%@\"]/LastLogin",playerName];
+    playerInfo = [_xmlDoc.rootElement nodesForXPath:xPath error: nil];
+    GDataXMLElement *date = (GDataXMLElement *)[playerInfo objectAtIndex:0];
+    NSString *dateStr = date.stringValue;
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyyMMdd"];
+    lastLogin = [dateFormat dateFromString:dateStr];
     
 }
 

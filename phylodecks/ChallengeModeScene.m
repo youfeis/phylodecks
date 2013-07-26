@@ -20,7 +20,7 @@
         [self addChild:gameBoardLayer z: -1 tag:gameBoardLayerTag];
         // add map inventory layer
         MapInventoryLayer *mapInventoryLayer = [MapInventoryLayer node];
-        [self addChild:mapInventoryLayer z: 0 tag:mapInventoryLayerTag];
+        [self addChild:mapInventoryLayer z: 1 tag:mapInventoryLayerTag];
         // add HUD display gaming stats
         HUDLayer *hud = [HUDLayer node];
         [self addChild:hud z:0 tag:HUDLayerTag];

@@ -18,6 +18,13 @@
     self = [super init];
     if (self != nil) {
         // only Inventory Selection Layer needed in this scene
+        
+        CCSprite *background = [CCSprite spriteWithFile:@"background.png"];
+        background.anchorPoint = ccp(0,0);
+        [background setScaleY: 480/background.contentSize.height];
+        [background setScaleX: 320/background.contentSize.width];
+        [self addChild:background z:-2];
+        
         InventorySelectionLayer *inventorySelectionLayer = [InventorySelectionLayer node];
         [self addChild: inventorySelectionLayer z:0 tag:inventorySelectionLayerTag];
         

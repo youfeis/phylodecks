@@ -1,16 +1,16 @@
 //
-//  MainMenuLayer.h
+//  PlayerSelectionScene.h
 //  phylodecks
 //
-//  Created by Sun, You Fei on 13-06-29.
+//  Created by Sun, You Fei on 13-07-25.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "SettingLayer.h"
+#import "PlayerSelectionLayer.h"
 
-@interface MainMenuLayer : CCLayer {
+@interface PlayerSelectionScene : CCScene {
     
 }
 

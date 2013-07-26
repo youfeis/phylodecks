@@ -21,11 +21,13 @@
 		// create and initialize a Label
         // todo: change text labels to images
         // todo: add a background layer for the mainmenuscene/setting scene
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"PHYLODECKS" fontName:@"Marker Felt" fontSize:64];
+        
+        CCSprite *label = [CCSprite spriteWithFile:@"title.png"];
         
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
         
+        [label setScale:0.5f];
 		// position the label on the center top of the screen
 		label.position =  ccp( size.width /2 , 4*size.height/5 );
 		
@@ -57,11 +59,16 @@
 		CCMenu *menuLine1 = [CCMenu menuWithItems:itemChallengeMode, itemGPSBattle, nil];
         //todo: add a counter to show how many chances left for playing a GPS Battle
 		
-		[menuLine1 alignItemsHorizontallyWithPadding:20];
-		[menuLine1 setPosition:ccp( size.width/2, size.height - 150)];
+		[menuLine1 alignItemsVerticallyWithPadding:20];
+		[menuLine1 setPosition:ccp( size.width/2, size.height - 200)];
         
         // Add the menu to the layer
 		[self addChild:menuLine1];
+        
+        NSString *battleLeftString = [NSString stringWithFormat:@"You have %i GPS battle left today.",[[Player currentPlayer] GPSBattleLeft]];
+        CCLabelTTF *battleLeftInfo = [CCLabelTTF labelWithString:battleLeftString fontName:@"Marker Felt" fontSize:22];;
+        [battleLeftInfo setPosition:ccp(size.width/2, 200)];
+        [self addChild:battleLeftInfo];
 
     }
     return self;
