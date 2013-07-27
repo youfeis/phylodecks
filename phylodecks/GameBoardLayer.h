@@ -22,6 +22,7 @@
     
 }
 
+
 -(void) updateForScreenReshape;
 -(void) setToSheetMode;
 -(void) setToFrameMode;

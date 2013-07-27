@@ -86,6 +86,9 @@
         _selectedCard = dragable;
         [self setToFrameMode];
     }else{
+        //add card back to inventory
+        [[[Map currentMap] mapInventory] addObject: [[Map currentMap] selected]];
+        [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
         _selectedCard = 0;
         [_tutorialGameboard removeChildByTag:dragableTag cleanup:YES];
         [self setToSheetMode];
@@ -99,6 +102,9 @@
 	   clickedAtPoint: (CGPoint) point
              tapCount: (NSUInteger) tapCount
 {
+    if ( _toConfirm == 0){
+        [self dragSelectedCard: point];
+    }
 	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f } tap count %i", sender, point.x, point.y,tapCount);
     if(CGRectContainsPoint([_toConfirm boundingBox], point)){
         [_toConfirm setColor:ccWHITE];
@@ -110,12 +116,12 @@
             [[[[Map currentMap] tiles] objectAtIndex:dragIndex] setCard:[[Map currentMap] selected]];
             _toConfirm = 0;
         }else{
-            CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
-            [emptyCard setScaleY: 72/emptyCard.contentSize.height];
-            [emptyCard setScaleX: 52/emptyCard.contentSize.width];
-            [_toConfirm setTexture:[emptyCard texture]];
-            [_toConfirm setVisible:NO];
-            _toConfirm = 0;
+            [_toConfirm setColor:ccRED];
+            id fadeOut  = [CCFadeOut actionWithDuration:0.5f];
+            id clearCard = [CCCallFuncN actionWithTarget:self selector:@selector(cardFadeOutFinished)];
+            id sequence = [CCSequence actions:fadeOut,clearCard, nil];
+            [_toConfirm runAction:sequence];
+            
         }
         
         [Map currentMap].stepCounter--;
@@ -130,11 +136,11 @@
         //add card back to inventory
         [[[Map currentMap] mapInventory] addObject: [[Map currentMap] selected]];
         [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
-        //todo: cant reformat here, will look into it later
         CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
         [emptyCard setScaleY: 72/emptyCard.contentSize.height];
         [emptyCard setScaleX: 52/emptyCard.contentSize.width];
         [_toConfirm setTexture:[emptyCard texture]];
+        [_toConfirm setVisible:NO];
         _toConfirm = 0;
     }
     else{
@@ -150,7 +156,7 @@
         }
         
     }
-    [self dragSelectedCard: point];
+    
 }
 
 - (void) layerPanZoom: (CCLayerPanZoom *) sender
@@ -192,6 +198,7 @@
             [_tutorialGameboard removeChildByTag:dragableTag cleanup:YES];
             _toConfirm = [_tilesArray objectAtIndex: [self draggedToTile:endPos]];
             [_toConfirm setColor:ccGRAY];
+            
             _selectedCard = 0;
             
             [self setToSheetMode];
@@ -210,7 +217,6 @@
 -(void) showSelected :(id) sender atPos:(CGPoint)pos
 {
     [self setToFrameMode];
-    NSLog(@"%@",sender);
     CCSprite *dragable = [CCSprite spriteWithTexture:[sender texture]];
     [dragable setScaleY: 72/dragable.contentSize.height];
     [dragable setScaleX: 52/dragable.contentSize.width];
@@ -318,5 +324,16 @@
 
 -(int) toIndexPosX:(int)x posY:(int)y{
     return (y-1)*22+(x-1);
+}
+
+-(void) cardFadeOutFinished{
+    
+    CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
+    [emptyCard setScaleY: 72/emptyCard.contentSize.height];
+    [emptyCard setScaleX: 52/emptyCard.contentSize.width];
+    [_toConfirm setTexture:[emptyCard texture]];
+    [_toConfirm setVisible:NO];
+    _toConfirm = 0;
+    
 }
 @end

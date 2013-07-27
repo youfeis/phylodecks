@@ -18,27 +18,12 @@
 
 -(id) init {
     if( (self=[super init]) ) {
-        
-		// create and initialize a Label
-        // todo: change text labels to images
-        // todo: add a background layer for the mainmenuscene/setting scene
-		CCSprite *label = [CCSprite spriteWithFile:@"title.png"];
-        
-		// ask director for the window size
-		CGSize size = [[CCDirector sharedDirector] winSize];
-        
-        [label setScale:0.5f];
-		// position the label on the center top of the screen
-		label.position =  ccp( size.width /2 , 4*size.height/5 );
+        CCSprite *background = [CCSprite spriteWithFile:@"background.png"];
+        background.anchorPoint = ccp(0,0);
+        [background setScaleY: 480/background.contentSize.height];
+        [background setScaleX: 320/background.contentSize.width];
+        [self addChild:background z:-2];
 		
-		// add the label as a child to this Layer
-		[self addChild: label z:0];
-        
-        CCLabelTTF *loading = [CCLabelTTF labelWithString:@"Now Loading..." fontName:@"Marker Felt" fontSize:64];
-        
-        loading.position =  ccp( size.width /2 , 2*size.height/5 );
-        
-        [self addChild: loading];
     }
     return self;
 }
