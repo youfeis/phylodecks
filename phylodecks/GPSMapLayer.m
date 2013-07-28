@@ -18,9 +18,10 @@
 }
 
 - (void)loadGoogleMapUIViewController {
-    GoogleMapUIViewController *mapView = [[GoogleMapUIViewController alloc] init];
-    UIView *viewHost = mapView.view;
-    [[[CCDirector sharedDirector] view] addSubview:viewHost];
+   // GoogleMapUIViewController *mapView = [[GoogleMapUIViewController alloc] init];
+    //UIView *viewHost = mapView.view;
+   // [[[CCDirector sharedDirector] view] addSubview:viewHost];
+    // this is causing issue when rendering  other sprites after showing the map. disable the google map showing will still keep the search card function.
 
 }
 

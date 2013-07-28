@@ -22,7 +22,7 @@
     int maxInventory;
     int stepCounter;
     int gameMode;
-    
+    NSArray *terrainSet;
 }
 @property (retain,readwrite) NSMutableArray *mapInventory;
 @property (retain,readwrite) NSMutableArray *tiles;
@@ -32,6 +32,7 @@
 @property (assign,readwrite) int maxInventory;
 @property (assign,readwrite) int stepCounter;
 @property (assign,readwrite) int gameMode;
+@property (retain,readwrite) NSArray *terrainSet;
 
 
 +(Map *)currentMap;

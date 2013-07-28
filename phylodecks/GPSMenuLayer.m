@@ -18,12 +18,12 @@
     if( (self=[super init]) ) {
         
         CGSize size = [[CCDirector sharedDirector] winSize];
-    
+        NSMutableArray *terrains = [[NSMutableArray alloc] init];
         // Create menu items
         [CCMenuItemFont setFontSize:28];
         CCMenuItem *item = [CCMenuItemFont itemWithString:@"Hunt for a card!" block:^(id sender) {
             NSString *apiKey = @"AIzaSyD6OH4YfybdlJQJZgZPVRRA51MwTDsIiV4";
-         /*
+         
             NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/xml?location=%1f,%2f&radius=1000&sensor=true&key=%@&types=park|natural_feature|point_of_interest&name=park",locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude,apiKey];
             
             NSString *finalURL = [urlString  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -40,6 +40,10 @@
                                            GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:data options:0 error:&error];
                                            if(![[xml.rootElement stringValue] isEqual:@"ZERO_RESULTS"]){
                                                //select target card from grassland/forest/urban
+                                               [terrains addObject:@"FOREST"];
+                                               [terrains addObject:@"GRASSLAND"];
+                                               [terrains addObject:@"URBAN"];
+                                               
                                            }
                                            
                                        }
@@ -64,6 +68,8 @@
                                            GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:data options:0 error:&error];
                                            if(![[xml.rootElement stringValue] isEqual:@"ZERO_RESULTS"]){
                                                //select target card from freshwater/urban
+                                               [terrains addObject:@"URBAN"];
+                                               [terrains addObject:@"FRESHWATER"];
                                            }
                                            
                                        }
@@ -87,6 +93,9 @@
                                            GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:data options:0 error:&error];
                                            if(![[xml.rootElement stringValue] isEqual:@"ZERO_RESULTS"]){
                                                //select target card from forest/tundra/urban
+                                               [terrains addObject:@"URBAN"];
+                                               [terrains addObject:@"FOREST"];
+                                               [terrains addObject:@"TUNDRA"];
                                            }
                                            
                                        }
@@ -110,15 +119,20 @@
                                            GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:data options:0 error:&error];
                                            if(![[xml.rootElement stringValue] isEqual:@"ZERO_RESULTS"]){
                                                //select target card from ocean/urban
+                                               [terrains addObject:@"URBAN"];
+                                               [terrains addObject:@"OCEAN"];
                                            }
                                            
                                        }
                                    }
              
              ];
+            [terrains addObject:@"URBAN"];
+            NSArray *array = [[NSSet setWithArray:terrains] allObjects];
+            NSLog(@"%@",terrains);
+            [[Map currentMap] setTerrainSet:array];
                                       
-                                      
-            */
+            
             [self removeMap];
             [self transitToInventorySelectionLayer];
             

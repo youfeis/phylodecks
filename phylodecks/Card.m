@@ -29,7 +29,6 @@
 -(id)initWithData:(FMResultSet*)rs card:(int)card{
     //Initlize card information from a database resultset
     
-    
     point = [rs intForColumn:@"point"];
     move = [rs intForColumn:@"move"];
     foodChain = [rs intForColumn:@"foodChain"];

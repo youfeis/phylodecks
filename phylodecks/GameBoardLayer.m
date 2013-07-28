@@ -302,8 +302,12 @@
 -(void) locateHomeAndTarget{
     [[[[Map currentMap] tiles] objectAtIndex:99] setCard:[[Map currentMap] home]];
     int distance;
-    if([[Player currentPlayer] playerLevel] == 1){
+    if([[Player currentPlayer] playerLevel] < 3){
         distance = 4;
+    }else if ([[Player currentPlayer] playerLevel] <6){
+        distance = 5;
+    }else if ([[Player currentPlayer] playerLevel] <9){
+        distance = 6;
     }
     NSMutableArray *targetList = [[[[Map currentMap] tiles] objectAtIndex:99] getArrayWithRadius:distance];
     int randomIndex = arc4random() % [targetList count];

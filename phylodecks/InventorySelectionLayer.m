@@ -368,8 +368,22 @@ enum nodeTags2
     [[Map currentMap] setHome:home];
     rs = [db executeQuery:@"SELECT * FROM card WHERE type = \"SPECIES\" ORDER BY RANDOM() LIMIT 1" ];
     [rs next];
-    Card *target = [[Card spriteWithFile:[rs stringForColumn:@"image"]]  initWithData:rs card:[rs intForColumn:@"cardID"]];
-    [[Map currentMap] setTarget:target];
+    NSMutableArray * targetRandomSet = [[NSMutableArray alloc]init];
+    if ([[Map currentMap] gameMode] == 0){
+        Card *target = [[Card spriteWithFile:[rs stringForColumn:@"image"]]  initWithData:rs card:[rs intForColumn:@"cardID"]];
+        [[Map currentMap] setTarget:target];
+    }else{
+        for(NSString * terrain in [[Map currentMap] terrainSet]){
+            NSString * query = [NSString stringWithFormat:@"SELECT * FROM card WHERE type = \"SPECIES\" AND terrains LIKE \"%%%@%%\" ORDER BY RANDOM() LIMIT 1",terrain];
+            rs = [db executeQuery:query];
+            [rs next];
+            Card *target = [[Card spriteWithFile:[rs stringForColumn:@"image"]]  initWithData:rs card:[rs intForColumn:@"cardID"]];
+            [targetRandomSet addObject:target];
+        }
+        int randomIndex = arc4random() % [targetRandomSet count];
+        [[Map currentMap] setTarget:[targetRandomSet objectAtIndex:randomIndex]];
+    }
+    
 }
 
 @end
