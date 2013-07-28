@@ -21,7 +21,7 @@
     CGSize size = [[CCDirector sharedDirector] winSize];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locationManager.location.coordinate.latitude
                                                             longitude:locationManager.location.coordinate.longitude
-                                                                 zoom:20];
+                                                                 zoom:5];
     mapView_ = [GMSMapView mapWithFrame: CGRectMake(0,0,size.width,350) camera:camera];
     mapView_.myLocationEnabled = YES;
     
@@ -30,7 +30,7 @@
     // Creates a marker of player home
     // todo
     GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(locationManager.location.coordinate.longitude, locationManager.location.coordinate.longitude);
+    marker.position = CLLocationCoordinate2DMake(locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
     marker.title = @"Current Location";
     marker.snippet = @"Player";
     marker.map = mapView_;

@@ -28,13 +28,14 @@
 @property (retain,readwrite) NSDate *lastLogin;
 @property (assign,readwrite) int GPSBattleLeft;
 @property (retain,readwrite) GDataXMLDocument *_xmlDoc;
+@property (assign,readwrite) int playerExp;
 
 +(Player *)currentPlayer;
 -(void)loadXMLFile;
 -(void)loadRecentPlayer;
 -(void)loadPlayerStats;
 -(void)releaseXMLFile;
--(void)reloadPlayer;
+-(void)resetPlayer;
 -(void)saveData;
 -(NSArray *)loadAllPlayerName;
 

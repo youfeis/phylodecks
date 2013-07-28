@@ -27,8 +27,39 @@ enum nodeTags
 		// Create vertical scroll widget.
 		CCNode *widget = [self widget];
 		[self addChild: widget z: 0 tag: kWidget];
-		
-		// Show current player status and delete/new button 
+        
+        NSString *level = [NSString stringWithFormat:@"level: %i",[[Player currentPlayer] playerLevel]];
+        NSString *exp = [NSString stringWithFormat:@"exp: %i",[[Player currentPlayer] playerExp]];
+        NSString *cardCount = [NSString stringWithFormat:@"card total: %i",[[[Player currentPlayer] playerInventory] count]];
+        
+        CCLabelTTF *line1 = [CCLabelTTF labelWithString:level fontName:@"Marker Felt" fontSize:24];
+        CCLabelTTF *line2 = [CCLabelTTF labelWithString:exp fontName:@"Marker Felt" fontSize:24];
+        CCLabelTTF *line3 = [CCLabelTTF labelWithString:cardCount fontName:@"Marker Felt" fontSize:24];
+        
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        line1.position = ccp(size.width*0.75,size.height*0.7);
+        line2.position = ccp(size.width*0.75,size.height*0.6);
+        line3.position = ccp(size.width*0.75,size.height*0.5);
+        [self addChild:line1];
+        [self addChild:line2];
+        [self addChild:line3];
+        
+        
+        CCLabelTTF *resetLabel = [CCLabelTTF labelWithString:@"Reset" fontName:@"Marker Felt" fontSize:24];
+        
+        CCMenuItemLabel *reset = [CCMenuItemLabel itemWithLabel: resetLabel target: self selector: @selector(resetPlayer:)];
+        
+        
+		CCLabelTTF *backLabel = [CCLabelTTF labelWithString:@"Back" fontName:@"Marker Felt" fontSize:24];
+        
+        CCMenuItemLabel *back = [CCMenuItemLabel itemWithLabel: backLabel target: self selector: @selector(backToMainMenu:)];
+        
+        CCMenu* menuReset = [CCMenu menuWithItems:reset, nil];
+        menuReset.position = ccp(size.width*0.75,size.height*0.3);
+        CCMenu* menuBack = [CCMenu menuWithItems:back, nil];
+        menuBack.position = ccp(size.width*0.75,size.height*0.1);
+        [self addChild:menuReset];
+        [self addChild:menuBack];
         
         
 		// Do initial layout.
@@ -98,12 +129,34 @@ enum nodeTags
 
 - (void) itemPressed: (CCNode *) sender
 {
-    id name = [[[[[sender children] objectAtIndex:0] children] objectAtIndex:0] string];
+/*    id name = [[[[[sender children] objectAtIndex:0] children] objectAtIndex:0] string];
     NSLog(@"%@",name);
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Switch User" message:[NSString stringWithFormat:@"Switching to user %@?",name] delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:@"Not now", nil];
     alert.alertViewStyle = UIAlertViewStyleDefault;
     [[Player currentPlayer] saveData];
+    [alert show];*/
+}
+
+- (void)backToMainMenu: (id)sender{
+    [[self parent] removeAllChildrenWithCleanup:YES];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[MainMenuScene alloc] init] withColor:ccWHITE]];
+}
+
+- (void) resetPlayer: (id)sender{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"All game progress will be cleared! And game will resatrt!" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+    alert.alertViewStyle = UIAlertViewStyleDefault;
+    
     [alert show];
 }
+
+- (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==1) {
+        [[Player currentPlayer] resetPlayer];
+        [[Player currentPlayer] saveData];
+        exit(0);
+    }
+}
+
 
 @end

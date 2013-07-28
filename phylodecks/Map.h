@@ -21,6 +21,7 @@
     Card *target;
     int maxInventory;
     int stepCounter;
+    int gameMode;
     
 }
 @property (retain,readwrite) NSMutableArray *mapInventory;
@@ -30,6 +31,7 @@
 @property (retain,readwrite) Card *target;
 @property (assign,readwrite) int maxInventory;
 @property (assign,readwrite) int stepCounter;
+@property (assign,readwrite) int gameMode;
 
 
 +(Map *)currentMap;

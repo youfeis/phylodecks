@@ -49,6 +49,7 @@
                                     ];
         
 		CCMenuItem *itemChallengeMode = [CCMenuItemFont itemWithString:@"Challenge Mode" block:^(id sender) {
+            [[Map currentMap] setGameMode:0];
             [self transitToChallengeModePrepareScene];
 		}
                                         ];

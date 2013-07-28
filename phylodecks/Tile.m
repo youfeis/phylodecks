@@ -32,6 +32,8 @@
         return NO;
     }else if(![self terrainOK:selectedCard]){
         return NO;
+    }else if(![self foodChainOK:selectedCard]){
+        return NO;
     }
     
     // todo: implement foodChain,diet,scale,and special requirement relations.
@@ -129,13 +131,19 @@
     }else if([selectedCard foodChain] == 2){
         for (Tile* neighbourTile in toCompare){
             if([[neighbourTile card] foodChain] == 1){
-                return YES;
+                if([[neighbourTile card] scale] <= [selectedCard scale])
+                    if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"HERBIVORE"]){
+                        return YES;
+                    }
             }
         }
     }else if([selectedCard foodChain] == 3){
         for (Tile* neighbourTile in toCompare){
             if([[neighbourTile card] foodChain] == 2){
-                return YES;
+                if([[neighbourTile card] scale] <= [selectedCard scale])
+                    if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"CARNIVORE"]){
+                        return YES;
+                    }
             }
         }
     }

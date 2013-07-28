@@ -18,7 +18,7 @@ static Map *sharedInstance = nil;
 @synthesize target = _target;
 @synthesize maxInventory;
 @synthesize stepCounter;
-
+@synthesize gameMode;
 
 -(id) init{
     self = [super init];

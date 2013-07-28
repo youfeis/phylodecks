@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "Player.h"
 #import "CCMenuAdvanced.h"
+#import "MainMenuScene.h"
 
 @interface PlayerSelectionLayer : CCLayer {
     

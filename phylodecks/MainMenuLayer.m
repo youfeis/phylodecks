@@ -67,9 +67,8 @@
         
 		CCMenuItem *itemExit = [CCMenuItemImage itemWithNormalImage:@"quit1.png" selectedImage:@"quit2.png" block:^(id sender) {
 			
-			//todo: save user profile
-			NSLog(@"itemExitClicked");
-           // exit(0);
+			[[Player currentPlayer]saveData];
+            exit(0);
 		}
                                 ];
         [itemExit setScale:0.5f];

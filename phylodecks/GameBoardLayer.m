@@ -102,9 +102,6 @@
 	   clickedAtPoint: (CGPoint) point
              tapCount: (NSUInteger) tapCount
 {
-    if ( _toConfirm == 0){
-        [self dragSelectedCard: point];
-    }
 	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f } tap count %i", sender, point.x, point.y,tapCount);
     if(CGRectContainsPoint([_toConfirm boundingBox], point)){
         [_toConfirm setColor:ccWHITE];
@@ -198,6 +195,7 @@
             [_tutorialGameboard removeChildByTag:dragableTag cleanup:YES];
             _toConfirm = [_tilesArray objectAtIndex: [self draggedToTile:endPos]];
             [_toConfirm setColor:ccGRAY];
+            [_toConfirm setVisible:YES];
             
             _selectedCard = 0;
             

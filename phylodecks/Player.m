@@ -19,6 +19,7 @@ static Player *sharedInstance = nil;
 @synthesize playerInventory = _playerInventory;
 @synthesize lastLogin = _lastLogin;
 @synthesize _xmlDoc;
+@synthesize playerExp;
 
 -(id) init{
     self = [super init];
@@ -28,7 +29,7 @@ static Player *sharedInstance = nil;
         [self loadRecentPlayer];
         [self loadPlayerStats];
         [self releaseXMLFile];
-        if([playerName isEqualToString:@""]){
+        if([playerName isEqualToString:@"Test"]){
             isLastPlayerExist = NO;
         }else{
             isLastPlayerExist = YES;
@@ -73,6 +74,7 @@ static Player *sharedInstance = nil;
     
     xPath = [NSString stringWithFormat:@"//Users/Player[Name = \"%@\"]/Inventory/CardID",playerName];
     playerInfo = [_xmlDoc.rootElement nodesForXPath:xPath error: nil];
+    _playerInventory = [[NSMutableArray alloc]init];
     for(id obj in playerInfo){
         GDataXMLElement *card = (GDataXMLElement *)obj;
         [_playerInventory  addObject: [NSNumber numberWithInt:card.stringValue.intValue]];
@@ -121,20 +123,22 @@ static Player *sharedInstance = nil;
     
 }
 
--(void)reloadPlayer{
+-(void)resetPlayer{
+    NSString * filePath = [[NSBundle mainBundle] pathForResource:@"userData" ofType:@"xml"];
+    xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
+    NSError *error;
     
+    [self set_xmlDoc:[[GDataXMLDocument alloc] initWithData:xmlData
+                                                    options:0 error:&error]];
+    [self loadRecentPlayer];
+    [self loadPlayerStats];
+    [self releaseXMLFile];
 }
 
 -(NSArray *)loadAllPlayerName{
-    NSArray *playerList;
-    NSString *xPath;
-    xPath = [NSString stringWithFormat:@"//Users/Player/Name"];
-    playerList = [_xmlDoc.rootElement nodesForXPath:xPath error: nil];
+ 
     NSMutableArray *rtn = [[NSMutableArray alloc] init];
-    for (GDataXMLElement* obj in playerList){
-        [rtn addObject:obj.stringValue];
-    }
-    
+    [rtn addObject:playerName];
     return rtn;
     
 }
@@ -147,7 +151,7 @@ static Player *sharedInstance = nil;
     GDataXMLElement * recentPlayer =
     [GDataXMLNode elementWithName:@"Player"];
     
-    [recentPlayer addAttribute:[GDataXMLElement attributeWithName:@"recent:" stringValue:@"YES"]];
+    [recentPlayer addAttribute:[GDataXMLElement attributeWithName:@"recent" stringValue:@"YES"]];
     
     GDataXMLElement * playerElement =
     [GDataXMLNode elementWithName:@"Player"];

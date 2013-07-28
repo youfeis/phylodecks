@@ -57,7 +57,11 @@
     if(buttonIndex==0) {
         
         if (alert.alertViewStyle == UIAlertViewStylePlainTextInput){
-            [[Player currentPlayer] setPlayerName: [[alert textFieldAtIndex:0] text]];
+            if([[[alert textFieldAtIndex:0] text] isEqual:@""]){
+                [[Player currentPlayer] setPlayerName: @"Player"];
+            }else{
+                [[Player currentPlayer] setPlayerName: [[alert textFieldAtIndex:0] text]];
+            }
             //save this player data
         }
     }
