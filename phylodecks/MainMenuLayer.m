@@ -9,6 +9,7 @@
 #import "MainMenuLayer.h"
 #import "GameModeChoiceLayer.h"
 #import "nodeTags.h"
+#import "TutorialLayer.h"
 
 
 @implementation MainMenuLayer
@@ -40,10 +41,8 @@
 
 		CCMenuItem *itemTutorial = [CCMenuItemImage itemWithNormalImage:@"tutorial1.png" selectedImage:@"tutorial2.png" block:^(id sender) {
 			
-			
-			NSLog(@"itemTutorialClicked");
             
-  //          [self toTutorialScene];
+            [self toTutorialScene];
 		}
                                     ];
         [itemTutorial setScale:0.5f];
@@ -101,6 +100,10 @@
 -(void) showSettingLayer{
     SettingLayer *settingLayer = [SettingLayer node];
     [[self parent] addChild: settingLayer z:-1];
+}
+
+-(void) toTutorialScene{
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[TutorialLayer scene] withColor:ccWHITE]];
 }
 
 @end

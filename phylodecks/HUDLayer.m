@@ -57,7 +57,7 @@
         }], nil];
         [debugMenu alignItemsVerticallyWithPadding:3.0f];
         debugMenu.position = ccp( 0.8f * screenSize.width, screenSize.height - 15.0f);
-        [self addChild:debugMenu];
+        //[self addChild:debugMenu];
     }
     return self;
 }

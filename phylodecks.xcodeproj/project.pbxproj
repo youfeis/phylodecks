@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		092371C317A69D1C006CF96E /* TutorialLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 092371C217A69D10006CF96E /* TutorialLayer.m */; };
+		0923736917A6ACB7006CF96E /* tut1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0923736817A6ACB2006CF96E /* tut1.png */; };
 		0938AA4B17889BC8009A3D34 /* MapInventoryLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0938AA4A17889BC8009A3D34 /* MapInventoryLayer.m */; };
 		0938AA4E17891B27009A3D34 /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0938AA4D17891B26009A3D34 /* Tile.m */; };
 		0938AA5017892792009A3D34 /* emptyTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 0938AA4F17892792009A3D34 /* emptyTile.png */; };
@@ -244,6 +245,7 @@
 /* Begin PBXFileReference section */
 		092371C117A69D0A006CF96E /* TutorialLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialLayer.h; sourceTree = "<group>"; };
 		092371C217A69D10006CF96E /* TutorialLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialLayer.m; sourceTree = "<group>"; };
+		0923736817A6ACB2006CF96E /* tut1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tut1.png; sourceTree = "<group>"; };
 		0938AA4917889BC7009A3D34 /* MapInventoryLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapInventoryLayer.h; sourceTree = "<group>"; };
 		0938AA4A17889BC8009A3D34 /* MapInventoryLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapInventoryLayer.m; sourceTree = "<group>"; };
 		0938AA4C17891B25009A3D34 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
@@ -819,6 +821,7 @@
 		09792EDC177F6E4D0065057E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0923736817A6ACB2006CF96E /* tut1.png */,
 				0938AA5617892FB4009A3D34 /* 1.png */,
 				0938AA5717892FB4009A3D34 /* 2.png */,
 				0938AA5817892FB4009A3D34 /* 3.png */,
@@ -1367,6 +1370,7 @@
 				DF1A85D917A6225400E0A8D0 /* YouLose.png in Resources */,
 				DF1A85DA17A6225400E0A8D0 /* YouWin.png in Resources */,
 				DF1A85DB17A6225400E0A8D0 /* Back.png in Resources */,
+				0923736917A6ACB7006CF96E /* tut1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

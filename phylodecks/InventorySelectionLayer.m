@@ -29,6 +29,7 @@ enum nodeTags2
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
         CGSize screenSize = [CCDirector sharedDirector].winSize;
+        
         CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
         CCSprite *back2 = [CCSprite spriteWithFile:@"Back.png"];
         back2.color = ccGRAY;

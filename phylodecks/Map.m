@@ -42,7 +42,7 @@ static Map *sharedInstance = nil;
 
 -(void)generateNewMap:(int)level{
     maxInventory = 9+[[Player currentPlayer] playerLevel] * 3;
-    stepCounter = maxInventory + 5;
+    stepCounter = [[Player currentPlayer] playerLevel] + 3;
     _tiles = [[NSMutableArray alloc] init];
     
     
