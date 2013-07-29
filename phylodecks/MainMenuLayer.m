@@ -38,7 +38,7 @@
 		//
 		
 
-		CCMenuItem *itemTutorial = [CCMenuItemImage itemWithNormalImage:@"tutorial2.png" selectedImage:@"tutorial1.png" block:^(id sender) {
+		CCMenuItem *itemTutorial = [CCMenuItemImage itemWithNormalImage:@"tutorial1.png" selectedImage:@"tutorial2.png" block:^(id sender) {
 			
 			
 			NSLog(@"itemTutorialClicked");

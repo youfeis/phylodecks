@@ -127,7 +127,11 @@ enum nodeTags2
         [[[Map currentMap] mapInventory] removeObject:_card];
         [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
         
+        [[[self parent] getChildByTag:mapInventoryLayerTag] setPosition:ccp(-1000,-1000)];
+        [[[self parent] getChildByTag:HUDLayerTag] setPosition:ccp(-1000,-1000)];
+        
         [self removeFromParentAndCleanup:YES];
+        
     }
    
 }

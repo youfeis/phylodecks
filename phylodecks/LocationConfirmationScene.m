@@ -19,9 +19,9 @@
     if (self != nil) {
         // add the googlemap layer into locationconfirmationscene
         GPSMapLayer *mapLayer = [GPSMapLayer node];
-        [self addChild: mapLayer z:0];
-        GPSMenuLayer *menuLayer = [GPSMenuLayer node];
-        [self addChild: menuLayer z:0];
+        [self addChild: mapLayer z:0 tag:GPSMapLayerTag];
+     //   GPSMenuLayer *menuLayer = [GPSMenuLayer node];
+     //   [self addChild: menuLayer z:0];
     }
     return self;
 }

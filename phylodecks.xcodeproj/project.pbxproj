@@ -93,7 +93,6 @@
 		09792EEA177F6E4D0065057E /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 09792EE9177F6E4D0065057E /* Icon-Small-50.png */; };
 		09792EEC177F6E4D0065057E /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 09792EEB177F6E4D0065057E /* Icon-Small.png */; };
 		09792EEE177F6E4D0065057E /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09792EED177F6E4D0065057E /* Icon-Small@2x.png */; };
-		09792EF0177F6E4D0065057E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 09792EEF177F6E4D0065057E /* Icon.png */; };
 		09792EF2177F6E4D0065057E /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09792EF1177F6E4D0065057E /* Icon@2x.png */; };
 		09792EF5177F6E4D0065057E /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 09792EF4177F6E4D0065057E /* iTunesArtwork */; };
 		09792EFA177F6E4D0065057E /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 09792EF9177F6E4D0065057E /* CCAction.m */; };
@@ -223,6 +222,9 @@
 		DF694B9817936A3D00DE0881 /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = DF694B8B17936A3D00DE0881 /* title.png */; };
 		DF694B9917936A3D00DE0881 /* tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = DF694B8C17936A3D00DE0881 /* tutorial2.png */; };
 		DF694B9A17936A3D00DE0881 /* tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = DF694B8D17936A3D00DE0881 /* tutorial1.png */; };
+		DFBC8DF817A5C56800C63B57 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = DFBC8DF717A5C56800C63B57 /* GameOverScene.m */; };
+		DFBC8DFB17A5C59900C63B57 /* GameOverLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DFBC8DFA17A5C59800C63B57 /* GameOverLayer.m */; };
+		DFBC8DFD17A5D58B00C63B57 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DFBC8DFC17A5D58B00C63B57 /* icon.png */; };
 		DFD9A85E1783911100D632CC /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD9A85C1783911100D632CC /* GDataXMLNode.m */; };
 		DFD9A860178392C900D632CC /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DFD9A85F178392C900D632CC /* GoogleMaps.bundle */; };
 /* End PBXBuildFile section */
@@ -340,7 +342,6 @@
 		09792EE9177F6E4D0065057E /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Resources/Icon-Small-50.png"; sourceTree = "<group>"; };
 		09792EEB177F6E4D0065057E /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "Resources/Icon-Small.png"; sourceTree = "<group>"; };
 		09792EED177F6E4D0065057E /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Resources/Icon-Small@2x.png"; sourceTree = "<group>"; };
-		09792EEF177F6E4D0065057E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
 		09792EF1177F6E4D0065057E /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
 		09792EF3177F6E4D0065057E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		09792EF4177F6E4D0065057E /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
@@ -612,6 +613,11 @@
 		DF694B8B17936A3D00DE0881 /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		DF694B8C17936A3D00DE0881 /* tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial2.png; sourceTree = "<group>"; };
 		DF694B8D17936A3D00DE0881 /* tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial1.png; sourceTree = "<group>"; };
+		DFBC8DF617A5C56800C63B57 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		DFBC8DF717A5C56800C63B57 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		DFBC8DF917A5C59800C63B57 /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
+		DFBC8DFA17A5C59800C63B57 /* GameOverLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverLayer.m; sourceTree = "<group>"; };
+		DFBC8DFC17A5D58B00C63B57 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		DFD9A85C1783911100D632CC /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		DFD9A85D1783911100D632CC /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		DFD9A85F178392C900D632CC /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
@@ -737,11 +743,11 @@
 				0978C5AF179466440094495B /* HUDLayer.h */,
 				0978C5B0179466450094495B /* HUDLayer.m */,
 				09793067177F76E00065057E /* IntroLayer.h */,
+				09793068177F76E00065057E /* IntroLayer.m */,
 				0938AA511789281E009A3D34 /* FullScreenCardViewLayer.h */,
 				0938AA521789281F009A3D34 /* FullScreenCardViewLayer.m */,
-				09793068177F76E00065057E /* IntroLayer.m */,
-				09793064177F74830065057E /* IntroScene.h */,
 				09793065177F74830065057E /* IntroScene.m */,
+				09793064177F74830065057E /* IntroScene.h */,
 				0938AA4C17891B25009A3D34 /* Tile.h */,
 				0938AA4D17891B26009A3D34 /* Tile.m */,
 				0960AA961786637C009E76FF /* InventorySelectionLayer.h */,
@@ -771,6 +777,10 @@
 				098F3BD017A1EA760045B536 /* PlayerSelectionLayer.m */,
 				098F3BCC17A1EA5D0045B536 /* PlayerSelectionScene.h */,
 				098F3BCD17A1EA5E0045B536 /* PlayerSelectionScene.m */,
+				DFBC8DF617A5C56800C63B57 /* GameOverScene.h */,
+				DFBC8DF717A5C56800C63B57 /* GameOverScene.m */,
+				DFBC8DF917A5C59800C63B57 /* GameOverLayer.h */,
+				DFBC8DFA17A5C59800C63B57 /* GameOverLayer.m */,
 			);
 			path = phylodecks;
 			sourceTree = "<group>";
@@ -833,8 +843,8 @@
 				09792EE7177F6E4D0065057E /* Icon-72.png */,
 				09792EE9177F6E4D0065057E /* Icon-Small-50.png */,
 				09792EEB177F6E4D0065057E /* Icon-Small.png */,
+				DFBC8DFC17A5D58B00C63B57 /* icon.png */,
 				09792EED177F6E4D0065057E /* Icon-Small@2x.png */,
-				09792EEF177F6E4D0065057E /* Icon.png */,
 				09792EF1177F6E4D0065057E /* Icon@2x.png */,
 				09792EF3177F6E4D0065057E /* Info.plist */,
 				09792EF4177F6E4D0065057E /* iTunesArtwork */,
@@ -1252,7 +1262,6 @@
 				09792EEA177F6E4D0065057E /* Icon-Small-50.png in Resources */,
 				09792EEC177F6E4D0065057E /* Icon-Small.png in Resources */,
 				09792EEE177F6E4D0065057E /* Icon-Small@2x.png in Resources */,
-				09792EF0177F6E4D0065057E /* Icon.png in Resources */,
 				09792EF2177F6E4D0065057E /* Icon@2x.png in Resources */,
 				09792EF5177F6E4D0065057E /* iTunesArtwork in Resources */,
 				09793033177F6E4F0065057E /* ChangeLog in Resources */,
@@ -1307,6 +1316,7 @@
 				DF694B9817936A3D00DE0881 /* title.png in Resources */,
 				DF694B9917936A3D00DE0881 /* tutorial2.png in Resources */,
 				DF694B9A17936A3D00DE0881 /* tutorial1.png in Resources */,
+				DFBC8DFD17A5D58B00C63B57 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1452,6 +1462,8 @@
 				098F3BCB17A10C960045B536 /* SettingLayer.m in Sources */,
 				098F3BCE17A1EA5F0045B536 /* PlayerSelectionScene.m in Sources */,
 				098F3BD117A1EA770045B536 /* PlayerSelectionLayer.m in Sources */,
+				DFBC8DF817A5C56800C63B57 /* GameOverScene.m in Sources */,
+				DFBC8DFB17A5C59900C63B57 /* GameOverLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

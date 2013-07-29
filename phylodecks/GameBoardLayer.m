@@ -86,6 +86,8 @@
         _selectedCard = dragable;
         [self setToFrameMode];
     }else{
+        [[[self parent] getChildByTag:mapInventoryLayerTag] setPosition:CGPointZero];
+        [[[self parent] getChildByTag:HUDLayerTag] setPosition:CGPointZero];
         //add card back to inventory
         [[[Map currentMap] mapInventory] addObject: [[Map currentMap] selected]];
         [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
@@ -104,6 +106,8 @@
 {
 	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f } tap count %i", sender, point.x, point.y,tapCount);
     if(CGRectContainsPoint([_toConfirm boundingBox], point)){
+        [[[self parent] getChildByTag:mapInventoryLayerTag] setPosition:CGPointZero];
+        [[[self parent] getChildByTag:HUDLayerTag] setPosition:CGPointZero];
         [_toConfirm setColor:ccWHITE];
         int dragIndex = [_tilesArray indexOfObject:_toConfirm];
         
@@ -123,13 +127,21 @@
         
         [Map currentMap].stepCounter--;
         [(HUDLayer*)[[self parent] getChildByTag:HUDLayerTag] updateHUD];
+        
   
-        if([Map currentMap].stepCounter == 0){
-            //game end
+        if([[[[Map currentMap] tiles] objectAtIndex:[[Map currentMap] targetIndex]] isCompatible:[[Map currentMap] target]]){
+            //success
+            NSLog(@"you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        }
+        if([Map currentMap].stepCounter == 0 || [[[Map currentMap] mapInventory] count] == 0){
+            NSLog(@"game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            //game over
         }
         
     }
     else if(_toConfirm != 0){
+        [[[self parent] getChildByTag:mapInventoryLayerTag] setPosition:CGPointZero];
+        [[[self parent] getChildByTag:HUDLayerTag] setPosition:CGPointZero];
         //add card back to inventory
         [[[Map currentMap] mapInventory] addObject: [[Map currentMap] selected]];
         [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
@@ -190,16 +202,19 @@
     NSLog(@"released finger at position %@  {%f,%f}",sender,endPos.x,endPos.y);
     if(_selectedCard != 0){
         if([self draggedToTile:endPos]!= -1){
-            [[_tilesArray objectAtIndex: [self draggedToTile:endPos]] setTexture:[_selectedCard texture]];
-            [[_tilesArray objectAtIndex:[self draggedToTile:endPos]] setVisible:YES];
-            [_tutorialGameboard removeChildByTag:dragableTag cleanup:YES];
-            _toConfirm = [_tilesArray objectAtIndex: [self draggedToTile:endPos]];
-            [_toConfirm setColor:ccGRAY];
-            [_toConfirm setVisible:YES];
+            if(![[[[Map currentMap] tiles] objectAtIndex:[self draggedToTile:endPos]] hasCard]){
+                [[_tilesArray objectAtIndex: [self draggedToTile:endPos]] setTexture:[_selectedCard texture]];
+                [[_tilesArray objectAtIndex:[self draggedToTile:endPos]] setVisible:YES];
+                [_tutorialGameboard removeChildByTag:dragableTag cleanup:YES];
+                _toConfirm = [_tilesArray objectAtIndex: [self draggedToTile:endPos]];
+                [_toConfirm setColor:ccGRAY];
+                [_toConfirm setVisible:YES];
+                
+                _selectedCard = 0;
+                
+                [self setToSheetMode];
+            }
             
-            _selectedCard = 0;
-            
-            [self setToSheetMode];
         }
     }
 }
@@ -313,6 +328,8 @@
     int randomIndex = arc4random() % [targetList count];
     [[targetList objectAtIndex:randomIndex] setCard:[[Map currentMap] target]];
     [[targetList objectAtIndex:randomIndex] setIsTarget:YES];
+    [[Map currentMap] setTargetIndex:[[[Map currentMap] tiles] indexOfObject:[targetList objectAtIndex:randomIndex]]];
+    
         
     
 }
@@ -335,6 +352,7 @@
     [emptyCard setScaleX: 52/emptyCard.contentSize.width];
     [_toConfirm setTexture:[emptyCard texture]];
     [_toConfirm setVisible:NO];
+    [_toConfirm setOpacity:255];
     _toConfirm = 0;
     
 }

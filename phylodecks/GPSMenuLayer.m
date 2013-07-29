@@ -20,7 +20,7 @@
         CGSize size = [[CCDirector sharedDirector] winSize];
         NSMutableArray *terrains = [[NSMutableArray alloc] init];
         // Create menu items
-        [CCMenuItemFont setFontSize:28];
+        [CCMenuItemFont setFontSize:18];
         CCMenuItem *item = [CCMenuItemFont itemWithString:@"Hunt for a card!" block:^(id sender) {
             NSString *apiKey = @"AIzaSyD6OH4YfybdlJQJZgZPVRRA51MwTDsIiV4";
          
@@ -138,9 +138,15 @@
             
         }];
         
+        CCMenuItem *item2 = [CCMenuItemFont itemWithString:@"relocate yourself!" block:^(id sender) {
+            //todo
+        }];
         CCMenu *menu = [CCMenu menuWithItems:item, nil];
-		[menu setPosition:ccp( size.width/2, size.height * 0.2)];
+        CCMenu *menu2 = [CCMenu menuWithItems:item2,nil];
+		[menu setPosition:ccp( size.width/2, size.height * 0.15)];
+        [menu2 setPosition:ccp( size.width/2, size.height * 0.25)];
         [self addChild: menu];
+        [self addChild: menu2];
     }
     return self;
 }

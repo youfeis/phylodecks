@@ -19,6 +19,7 @@
     Card *selected;
     Card *home;
     Card *target;
+    int targetIndex;
     int maxInventory;
     int stepCounter;
     int gameMode;
@@ -33,6 +34,7 @@
 @property (assign,readwrite) int stepCounter;
 @property (assign,readwrite) int gameMode;
 @property (retain,readwrite) NSArray *terrainSet;
+@property (assign,readwrite) int targetIndex;
 
 
 +(Map *)currentMap;

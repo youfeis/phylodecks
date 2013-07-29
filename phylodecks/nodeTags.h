@@ -19,7 +19,8 @@ enum nodeTags
     dragableTag,
     inventorySelectionLayerTag,
     HUDStepCounterTag,
-    HUDLayerTag
+    HUDLayerTag,
+    GPSMapLayerTag
 };
 
 

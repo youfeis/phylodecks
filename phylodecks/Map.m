@@ -20,6 +20,7 @@ static Map *sharedInstance = nil;
 @synthesize stepCounter;
 @synthesize gameMode;
 @synthesize terrainSet;
+@synthesize targetIndex;
 
 -(id) init{
     self = [super init];

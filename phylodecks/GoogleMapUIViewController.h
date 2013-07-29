@@ -10,11 +10,17 @@
 #import "cocos2d.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface GoogleMapUIViewController : UIViewController {
+@interface GoogleMapUIViewController : UIViewController <CLLocationManagerDelegate>  {
     IBOutlet CLLocationManager *locationManager;
     IBOutlet UILabel *latLabel;
     IBOutlet UILabel *longLabel;
 }
+
+
+-(void)loadView;
+-(void)relocate;
+-(float)latitude;
+-(float)longitude;
 
 
 @end

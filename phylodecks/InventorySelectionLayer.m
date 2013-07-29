@@ -382,6 +382,7 @@ enum nodeTags2
         }
         int randomIndex = arc4random() % [targetRandomSet count];
         [[Map currentMap] setTarget:[targetRandomSet objectAtIndex:randomIndex]];
+        
     }
     
 }
