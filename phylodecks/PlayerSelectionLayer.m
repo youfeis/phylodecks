@@ -8,13 +8,9 @@
 
 #import "PlayerSelectionLayer.h"
 #import "GDataXMLNode.h"
+#import "MainMenuLayer.h"
 
 
-enum nodeTags
-{
-	playerListTag,
-    kWidget
-};
 
 @implementation PlayerSelectionLayer
 
@@ -23,43 +19,52 @@ enum nodeTags
 {
 	if ( (self = [super init]) )
 	{
-		
+		CGSize size = [[CCDirector sharedDirector] winSize];
 		// Create vertical scroll widget.
-		CCNode *widget = [self widget];
-		[self addChild: widget z: 0 tag: kWidget];
+	//	CCNode *widget = [self widget];
+	//	[self addChild: widget z: 0 tag: kWidget];
         
-        NSString *level = [NSString stringWithFormat:@"level: %i",[[Player currentPlayer] playerLevel]];
-        NSString *exp = [NSString stringWithFormat:@"exp: %i",[[Player currentPlayer] playerExp]];
+        CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
+        CCSprite *back2 = [CCSprite spriteWithFile:@"Back.png"];
+        back2.color = ccGRAY;
+        CCMenuItemSprite * itemBack = [CCMenuItemSprite itemWithNormalSprite:back1 selectedSprite:back2 block:^(id sender){
+            [self backToMainMenu:nil];
+            
+        }];
+        [itemBack setScale:0.5f];
+        CCMenu *backMenu = [CCMenu menuWithItems:itemBack, nil];
+        backMenu.position = ccp(40.0f,size.height - 20.0f);
+        [self addChild:backMenu];
+        
+        NSString *level = [NSString stringWithFormat:@"level: %1i",[[Player currentPlayer] playerLevel]];
+        NSString *exp = [NSString stringWithFormat:@"exp: %1i/%2i",[[Player currentPlayer] playerExp],[[Player currentPlayer]levelUP]];
         NSString *cardCount = [NSString stringWithFormat:@"card total: %i",[[[Player currentPlayer] playerInventory] count]];
         
+        CCLabelTTF *line = [CCLabelTTF labelWithString: [[Player currentPlayer] playerName] fontName:@"Marker Felt" fontSize:34];
         CCLabelTTF *line1 = [CCLabelTTF labelWithString:level fontName:@"Marker Felt" fontSize:24];
         CCLabelTTF *line2 = [CCLabelTTF labelWithString:exp fontName:@"Marker Felt" fontSize:24];
         CCLabelTTF *line3 = [CCLabelTTF labelWithString:cardCount fontName:@"Marker Felt" fontSize:24];
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
-        line1.position = ccp(size.width*0.75,size.height*0.7);
-        line2.position = ccp(size.width*0.75,size.height*0.6);
-        line3.position = ccp(size.width*0.75,size.height*0.5);
+        line.position = ccp(size.width*0.5,size.height*0.8);
+        line1.position = ccp(size.width*0.5,size.height*0.6);
+        line2.position = ccp(size.width*0.5,size.height*0.5);
+        line3.position = ccp(size.width*0.5,size.height*0.4);
+        [self addChild:line];
         [self addChild:line1];
         [self addChild:line2];
         [self addChild:line3];
         
         
+        
         CCLabelTTF *resetLabel = [CCLabelTTF labelWithString:@"Reset" fontName:@"Marker Felt" fontSize:24];
         
         CCMenuItemLabel *reset = [CCMenuItemLabel itemWithLabel: resetLabel target: self selector: @selector(resetPlayer:)];
-        
-        
-		CCLabelTTF *backLabel = [CCLabelTTF labelWithString:@"Back" fontName:@"Marker Felt" fontSize:24];
-        
-        CCMenuItemLabel *back = [CCMenuItemLabel itemWithLabel: backLabel target: self selector: @selector(backToMainMenu:)];
-        
+        reset.color = ccRED;
         CCMenu* menuReset = [CCMenu menuWithItems:reset, nil];
         menuReset.position = ccp(size.width*0.75,size.height*0.3);
-        CCMenu* menuBack = [CCMenu menuWithItems:back, nil];
-        menuBack.position = ccp(size.width*0.75,size.height*0.1);
+
         [self addChild:menuReset];
-        [self addChild:menuBack];
+
         
         
 		// Do initial layout.
@@ -104,12 +109,12 @@ enum nodeTags
 
 
 - (void) updateWidget
-{
+{/*
 	CGSize winSize = [[CCDirector sharedDirector] winSize];
 	
     // Menu at the Left.
     {
-        CCMenuAdvanced *menu = (CCMenuAdvanced *) [self getChildByTag:kWidget];
+    //    CCMenuAdvanced *menu = (CCMenuAdvanced *) [self getChildByTag:kWidget];
         
         //widget
         menu.anchorPoint = ccp(0.5f, 1);
@@ -123,7 +128,7 @@ enum nodeTags
                                        winSize.height - 50.0f );
         
         [menu fixPosition];
-    }
+    }*/
     
     }
 

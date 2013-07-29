@@ -89,7 +89,7 @@
 }
 
 -(void) hideMainMenuLayer{
-    [self removeFromParentAndCleanup:YES];
+    [self removeFromParentAndCleanup:NO];
     
 }
 

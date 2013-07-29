@@ -217,4 +217,13 @@ static Player *sharedInstance = nil;
     
 }
 
+-(int)levelUP{
+    double rtn = 97 + pow(2.71,playerLevel);
+    return (int)rtn;
+}
+
+-(void)addTargetToInventory{
+    [_playerInventory addObject:[NSNumber numberWithInt:[[[Map currentMap] target] cardID]]];
+}
+
 @end

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "GDataXMLNode.h"
+#import "math.h"
+#import "Map.h"
 
 @interface Player : NSObject
 {
@@ -38,5 +40,7 @@
 -(void)resetPlayer;
 -(void)saveData;
 -(NSArray *)loadAllPlayerName;
+-(int)levelUP;
+-(void)addTargetToInventory;
 
 @end

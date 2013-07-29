@@ -8,13 +8,28 @@
 
 #import "GPSMapLayer.h"
 #import "AppDelegate.h"
-
+#import "MainMenuLayer.h"
 
 @implementation GPSMapLayer
 -(id)init{
     self =[super init];
     if(self != nil){
         CGSize size = [[CCDirector sharedDirector] winSize];
+        
+        CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
+        CCSprite *back2 = [CCSprite spriteWithFile:@"Back.png"];
+        back2.color = ccGRAY;
+        CCMenuItemSprite * itemBack = [CCMenuItemSprite itemWithNormalSprite:back1 selectedSprite:back2 block:^(id sender){
+            [[self parent] removeAllChildrenWithCleanup:YES];
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[MainMenuScene alloc] init] withColor:ccWHITE]];
+            
+        }];
+        [itemBack setScale:0.5f];
+        CCMenu *backMenu = [CCMenu menuWithItems:itemBack, nil];
+        backMenu.position = ccp(40.0f,size.height - 20.0f);
+        [self addChild:backMenu];
+
+        
         mapView = [[GoogleMapUIViewController alloc] init];
         [mapView loadView];
         
@@ -144,7 +159,6 @@
              ];
             [terrains addObject:@"URBAN"];
             NSArray *array = [[NSSet setWithArray:terrains] allObjects];
-            NSLog(@"%@",terrains);
             [[Map currentMap] setTerrainSet:array];
             
             [self transitToInventorySelectionLayer];

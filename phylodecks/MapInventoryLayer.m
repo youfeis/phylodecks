@@ -36,21 +36,8 @@ enum nodeTags2
 {
 	if ( (self=[super init]) )
 	{
-        CGSize s = [[CCDirector sharedDirector] winSize];
-		// Create advice label.
-		        
-        CCLabelTTF *labelBack = [CCLabelTTF labelWithString:@"Back <<" fontName:@"Marker Felt" fontSize:24];
-        
         CCNode *widget = [self widget];
         [self addChild: widget z: 1 tag: kWidget];
-        
-        CCMenuItemLabel *back = [CCMenuItemLabel itemWithLabel: labelBack target: self selector: @selector(backToMainMenu:)];
-        
-        CCMenu *menu = [CCMenu menuWithItems: back,nil];
-        
-        [menu setPosition: ccp(18.0f + s.width / 20, s.height - 30.0f)];
-        
-        [self addChild: menu];
 		
 		[self updateForScreenReshape];
 	}

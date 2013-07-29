@@ -9,7 +9,7 @@
 #import "GameModeChoiceLayer.h"
 #import "LocationConfirmationScene.h"
 #import "ChallengeModePrepareScene.h"
-
+#import "MainMenuLayer.h"
 
 @implementation GameModeChoiceLayer
 
@@ -43,6 +43,18 @@
 		[CCMenuItemFont setFontSize:28];
 		
 		// Create mainmenu items
+        CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
+        CCSprite *back2 = [CCSprite spriteWithFile:@"Back.png"];
+        back2.color = ccGRAY;
+        CCMenuItemSprite * itemBack = [CCMenuItemSprite itemWithNormalSprite:back1 selectedSprite:back2 block:^(id sender){
+            [[self parent] addChild:[[MainMenuLayer alloc] init] z:0 tag:mainMenuLayerTag];
+            [self removeFromParentAndCleanup:NO];
+            
+        }];
+        [itemBack setScale:0.5f];
+        CCMenu *backMenu = [CCMenu menuWithItems:itemBack, nil];
+        backMenu.position = ccp(40.0f,size.height - 20.0f);
+        [self addChild:backMenu];
 		
         CCSprite *gpsBattleSprite1 = [CCSprite spriteWithFile:@"GPSMode1.png"];
         CCSprite *gpsBattleSprite2 = [CCSprite spriteWithFile:@"GPSMode2.png"];
@@ -77,7 +89,7 @@
         
         NSString *battleLeftString = [NSString stringWithFormat:@"You have %i GPS battle left today.",[[Player currentPlayer] GPSBattleLeft]];
         CCLabelTTF *battleLeftInfo = [CCLabelTTF labelWithString:battleLeftString fontName:@"Marker Felt" fontSize:22];;
-        [battleLeftInfo setPosition:ccp(size.width/2, 200)];
+        [battleLeftInfo setPosition:ccp(size.width/2, 170)];
         [self addChild:battleLeftInfo];
 
     }

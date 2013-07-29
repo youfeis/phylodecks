@@ -200,6 +200,7 @@
 		09793073177F83AA0065057E /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 09793072177F83AA0065057E /* MainMenuLayer.m */; };
 		097930771780479D0065057E /* GameModeChoiceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 097930761780479C0065057E /* GameModeChoiceLayer.m */; };
 		097FCEF6178337F000893549 /* userData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 097FCEF5178337F000893549 /* userData.xml */; };
+		098CA25217A64287002CBE91 /* GameWinLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 098CA25117A64287002CBE91 /* GameWinLayer.m */; };
 		098F3BCB17A10C960045B536 /* SettingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 098F3BCA17A10C950045B536 /* SettingLayer.m */; };
 		098F3BCE17A1EA5F0045B536 /* PlayerSelectionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 098F3BCD17A1EA5E0045B536 /* PlayerSelectionScene.m */; };
 		098F3BD117A1EA770045B536 /* PlayerSelectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 098F3BD017A1EA760045B536 /* PlayerSelectionLayer.m */; };
@@ -598,6 +599,8 @@
 		097930751780479C0065057E /* GameModeChoiceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModeChoiceLayer.h; sourceTree = "<group>"; };
 		097930761780479C0065057E /* GameModeChoiceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModeChoiceLayer.m; sourceTree = "<group>"; };
 		097FCEF5178337F000893549 /* userData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = userData.xml; sourceTree = "<group>"; };
+		098CA25017A64286002CBE91 /* GameWinLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameWinLayer.h; sourceTree = "<group>"; };
+		098CA25117A64287002CBE91 /* GameWinLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameWinLayer.m; sourceTree = "<group>"; };
 		098F3BC917A10C940045B536 /* SettingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingLayer.h; sourceTree = "<group>"; };
 		098F3BCA17A10C950045B536 /* SettingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingLayer.m; sourceTree = "<group>"; };
 		098F3BCC17A1EA5D0045B536 /* PlayerSelectionScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSelectionScene.h; sourceTree = "<group>"; };
@@ -802,6 +805,8 @@
 				DFBC8DF717A5C56800C63B57 /* GameOverScene.m */,
 				DFBC8DF917A5C59800C63B57 /* GameOverLayer.h */,
 				DFBC8DFA17A5C59800C63B57 /* GameOverLayer.m */,
+				098CA25017A64286002CBE91 /* GameWinLayer.h */,
+				098CA25117A64287002CBE91 /* GameWinLayer.m */,
 			);
 			path = phylodecks;
 			sourceTree = "<group>";
@@ -1504,6 +1509,7 @@
 				098F3BD117A1EA770045B536 /* PlayerSelectionLayer.m in Sources */,
 				DFBC8DF817A5C56800C63B57 /* GameOverScene.m in Sources */,
 				DFBC8DFB17A5C59900C63B57 /* GameOverLayer.m in Sources */,
+				098CA25217A64287002CBE91 /* GameWinLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

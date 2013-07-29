@@ -88,7 +88,7 @@
     NSMutableArray *toCompare = [self getOccupiedTiles:[self getArrayWithRadius:1]];
     
     for (Tile* neighbourTile in toCompare){
-        if([[[[neighbourTile card]climates] objectAtIndex:0] isEqual:@"ANY"]){
+        if([[[[neighbourTile card]climates] objectAtIndex:0] isEqual:@"ANY"]||[[[selectedCard climates] objectAtIndex:0] isEqual:@"ANY"]){
             return YES;
         }
         for( NSString* neighbourClimate in [[neighbourTile card] climates]){
@@ -108,7 +108,7 @@
     NSMutableArray *toCompare = [self getOccupiedTiles:[self getArrayWithRadius:1]];
     
     for (Tile* neighbourTile in toCompare){
-        if([[[[neighbourTile card]terrains] objectAtIndex:0] isEqual:@"ANY"]){
+        if([[[[neighbourTile card]terrains] objectAtIndex:0] isEqual:@"ANY"]||[[[selectedCard terrains] objectAtIndex:0] isEqual:@"ANY"]){
             return YES;
         }
         for( NSString* neighbourClimate in [[neighbourTile card] terrains]){
@@ -131,29 +131,22 @@
     }else if([selectedCard foodChain] == 2){
         for (Tile* neighbourTile in toCompare){
             if([[neighbourTile card] foodChain] == 1){
-                
-                    if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"HERBIVORE"]){
-                        return YES;
-                    }
+                return YES;
             }
         }
     }else if([selectedCard foodChain] == 3){
         for (Tile* neighbourTile in toCompare){
-            if([[neighbourTile card] foodChain] == 2){
-                
-                    if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"CARNIVORE"]){
-                        return YES;
-                    }
-            }
-            if([[neighbourTile card] foodChain] == 1){
-                
-                if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"HERBIVORE"]){
+            if([[neighbourTile card] foodChain] == 3){
+                if([selectedCard scale]>=[[neighbourTile card] scale]){
                     return YES;
                 }
             }
-            if([[neighbourTile card] foodChain] == 3){
+            if([[neighbourTile card] foodChain] == 2){
+                return YES;
+            }
+            if([[neighbourTile card] foodChain] == 1){
                 
-                if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"HERBIVORE"]){
+                if([[selectedCard diet] isEqual:@"OMNIVORE"]){
                     return YES;
                 }
             }

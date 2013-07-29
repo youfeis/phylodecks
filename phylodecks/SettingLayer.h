@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "MainMenuLayer.h"
 #import "PlayerSelectionScene.h"
+#import "nodeTags.h"
 
 @interface SettingLayer : CCLayer {
     

@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "CCLayerPanZoom.h"
 #import "HUDLayer.h"
+#import "GameOverScene.h"
 #import "MapInventoryLayer.h"
 
 

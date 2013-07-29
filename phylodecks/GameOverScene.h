@@ -6,8 +6,15 @@
 //
 //
 
-#import "CCScene.h"
+#import <Foundation/Foundation.h>
+#import "cocos2d.h"
+#import "GameOverLayer.h"
+#import "GameWinLayer.h"
+#import "Player.h"
+#import "Map.h"
 
-@interface GameOverScene : CCScene
-
+@interface GameOverScene : CCScene{
+    int mode;
+}
+-(id)initWithMode:(int)modeCode;
 @end

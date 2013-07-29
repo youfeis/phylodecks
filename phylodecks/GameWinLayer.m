@@ -1,14 +1,17 @@
 //
-//  GameOverLayer.m
+//  GameWinLayer.m
 //  phylodecks
 //
-//  Created by Youfei Sun on 7/28/13.
-//
+//  Created by Sun, You Fei on 13-07-28.
+//  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
 
-#import "GameOverLayer.h"
+#import "GameWinLayer.h"
+#import "MainMenuScene.h"
 
-@implementation GameOverLayer
+
+@implementation GameWinLayer
+
 -(id)init{
     [super init];
     if (self != nil){
@@ -21,7 +24,7 @@
 -(void)onEnter{
     [super onEnter];
     CGSize s = [[CCDirector sharedDirector] winSize];
-    CCSprite *win = [CCSprite spriteWithFile:@"YouLose.png"];
+    CCSprite *win = [CCSprite spriteWithFile:@"YouWin.png"];
     [win setScale:0.5f];
     win.position = ccp(s.width/2,s.height*0.8);
     win.opacity = 0;
@@ -54,7 +57,7 @@
     int expGet=0;
     for(Tile* tile in [[Map currentMap] tiles]){
         if([[[tile card] type] isEqualToString:@"SPECIES"]){
-            expGet = expGet + 1;
+            expGet = expGet + [[tile card] point];
         }
     }
     
@@ -69,8 +72,14 @@
     NSString *exp = [NSString stringWithFormat:@"exp: %1i+%2i/%3i",[[Player currentPlayer] playerExp],expGet,[[Player currentPlayer]levelUP]];
     [Player currentPlayer].playerExp = [Player currentPlayer].playerExp + expGet;
     NSString *cardCount;
-    cardCount = [NSString stringWithFormat:@"card total: %i",[[[Player currentPlayer] playerInventory] count]];
-   
+    
+    if([[Map currentMap]gameMode] == 1){
+        cardCount = [NSString stringWithFormat:@"card total: %i + 1",[[[Player currentPlayer] playerInventory] count]];
+        [[Player currentPlayer] addTargetToInventory];
+    }else{
+        
+        cardCount = [NSString stringWithFormat:@"card total: %i",[[[Player currentPlayer] playerInventory] count]];
+    }
     CCLabelTTF *line1 = [CCLabelTTF labelWithString:level fontName:@"Marker Felt" fontSize:24];
     CCLabelTTF *line2 = [CCLabelTTF labelWithString:exp fontName:@"Marker Felt" fontSize:24];
     CCLabelTTF *line3 = [CCLabelTTF labelWithString:cardCount fontName:@"Marker Felt" fontSize:24];
@@ -82,7 +91,7 @@
     [self addChild:line1];
     [self addChild:line2];
     [self addChild:line3];
-    
+   
     
     [[Player currentPlayer] saveData];
 }

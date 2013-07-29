@@ -18,6 +18,7 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
+        
         _tutorialGameboard = [[CCLayerPanZoom node] retain];
         [self addChild: _tutorialGameboard];
 		_tutorialGameboard.delegate = self;
@@ -130,12 +131,10 @@
         
   
         if([[[[Map currentMap] tiles] objectAtIndex:[[Map currentMap] targetIndex]] isCompatible:[[Map currentMap] target]]){
-            //success
-            NSLog(@"you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!you win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[GameOverScene alloc] initWithMode:1] withColor:ccWHITE]];
         }
         if([Map currentMap].stepCounter == 0 || [[[Map currentMap] mapInventory] count] == 0){
-            NSLog(@"game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            //game over
+           [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[GameOverScene alloc] initWithMode:0] withColor:ccWHITE]];
         }
         
     }
@@ -317,13 +316,8 @@
 -(void) locateHomeAndTarget{
     [[[[Map currentMap] tiles] objectAtIndex:99] setCard:[[Map currentMap] home]];
     int distance;
-    if([[Player currentPlayer] playerLevel] < 3){
-        distance = 4;
-    }else if ([[Player currentPlayer] playerLevel] <6){
-        distance = 5;
-    }else if ([[Player currentPlayer] playerLevel] <9){
-        distance = 6;
-    }
+    distance = [[Player currentPlayer] playerLevel] + 1;
+    
     NSMutableArray *targetList = [[[[Map currentMap] tiles] objectAtIndex:99] getArrayWithRadius:distance];
     int randomIndex = arc4random() % [targetList count];
     [[targetList objectAtIndex:randomIndex] setCard:[[Map currentMap] target]];
@@ -356,4 +350,6 @@
     _toConfirm = 0;
     
 }
+
+
 @end

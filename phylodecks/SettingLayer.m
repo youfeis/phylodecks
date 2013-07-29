@@ -36,19 +36,29 @@
 		[CCMenuItemFont setFontSize:28];
 		
 		// Create mainmenu items
-		CCMenuItem *itemUserProfile = [CCMenuItemFont itemWithString:@"User Profile" block:^(id sender) {
-			[self transitToPlayerProfileScene];	
-		}
-                                     ];
-        
-        CCMenuItem *itemBack = [CCMenuItemFont itemWithString:@"Back" block:^(id sender) {
-			[[self parent] addChild:[MainMenuLayer node]];
-            [self removeFromParentAndCleanup:YES];
+		CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
+        CCSprite *back2 = [CCSprite spriteWithFile:@"Back.png"];
+        back2.color = ccGRAY;
+        CCMenuItemSprite * itemBack = [CCMenuItemSprite itemWithNormalSprite:back1 selectedSprite:back2 block:^(id sender){
+            [[self parent] addChild:[[MainMenuLayer alloc] init] z:0 tag:mainMenuLayerTag];
+            [self removeFromParentAndCleanup:NO];
             
-		}
-                                       ];
+        }];
+        [itemBack setScale:0.5f];
+        CCMenu *backMenu = [CCMenu menuWithItems:itemBack, nil];
+        backMenu.position = ccp(40.0f,size.height - 20.0f);
+        [self addChild:backMenu];
+		
+        CCSprite *userProfileSprite1 = [CCSprite spriteWithFile:@"UserProfile1.png"];
+        CCSprite *userProfileSprite2 = [CCSprite spriteWithFile:@"UserProfile2.png"];
+        CCMenuItemSprite * itemUserProfile = [CCMenuItemSprite itemWithNormalSprite:userProfileSprite1 selectedSprite:userProfileSprite2 block:^(id sender){
+                [self transitToPlayerProfileScene];
+            
+        }];
+        [itemUserProfile setScale:0.5f];
         
-        CCMenu *menuLine1 = [CCMenu menuWithItems:itemUserProfile,itemBack, nil];
+        CCMenu *menuLine1 = [CCMenu menuWithItems:itemUserProfile,nil];
+        //todo: add a counter to show how many chances left for playing a GPS Battle
 		
 		[menuLine1 alignItemsVerticallyWithPadding:20];
 		[menuLine1 setPosition:ccp( size.width/2, size.height - 200)];
