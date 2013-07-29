@@ -5,6 +5,12 @@
 //  Created by Sun, You Fei on 13-07-04.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
+//
+//  One of the major layers, this is the game board layer contains graphical tiles and cards.
+//  Also provides the funcationallity of camera control of the game board
+//
+//
+//
 
 #import "GameBoardLayer.h"
 #import "nodeTags.h"
@@ -18,7 +24,7 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
-        
+        //set pan zoomm layer as retain so ARC wont release it
         _tutorialGameboard = [[CCLayerPanZoom node] retain];
         [self addChild: _tutorialGameboard];
 		_tutorialGameboard.delegate = self;
@@ -30,13 +36,13 @@
                                   z :-1
                                  tag: gameBoardBackgroundTag];
         
-        
+        //initialize the pan zoom layer proprties
         _tutorialGameboard.mode = kCCLayerPanZoomModeSheet;
         
         _tutorialGameboard.rubberEffectRatio = 0.1f;
         
         _tutorialGameboard.bottomFrameMargin = 180.0f;
-        
+        // initialize graphical tiles array
         _tilesArray = [[NSMutableArray alloc] init];
         
         [[Map currentMap]generateNewMap:[[Player currentPlayer] playerLevel]];
@@ -59,6 +65,7 @@
 	[super dealloc];
 }
 
+// this function gives the camera control function
 - (void) updateForScreenReshape
 {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -79,6 +86,7 @@
     _tutorialGameboard.maxScale =  25.0f *  winSize.width / [background boundingBox].size.width;
 }
 
+// when a card is shown on map this function decides to drag it (if user click and drag on card,or set it back to inventory)
 - (void) dragSelectedCard: (CGPoint) point
 {
     CCSprite *dragable = (CCSprite *)[_tutorialGameboard getChildByTag: dragableTag];
@@ -101,12 +109,15 @@
     
 }
 
+//this function emits by the time user clicks screen without a shown card, used for confirm a card location or
+//putting card back to inventory
 - (void) layerPanZoom: (CCLayerPanZoom *) sender
 	   clickedAtPoint: (CGPoint) point
              tapCount: (NSUInteger) tapCount
 {
 	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f } tap count %i", sender, point.x, point.y,tapCount);
     if(CGRectContainsPoint([_toConfirm boundingBox], point)){
+        //get back hud and inventory when a click happened
         [[[self parent] getChildByTag:mapInventoryLayerTag] setPosition:CGPointZero];
         [[[self parent] getChildByTag:HUDLayerTag] setPosition:CGPointZero];
         [_toConfirm setColor:ccWHITE];
@@ -118,6 +129,7 @@
             [[[[Map currentMap] tiles] objectAtIndex:dragIndex] setCard:[[Map currentMap] selected]];
             _toConfirm = 0;
         }else{
+            //animation of the imcompatitable card disappearing
             [_toConfirm setColor:ccRED];
             id fadeOut  = [CCFadeOut actionWithDuration:0.5f];
             id clearCard = [CCCallFuncN actionWithTarget:self selector:@selector(cardFadeOutFinished)];
@@ -125,25 +137,27 @@
             [_toConfirm runAction:sequence];
             
         }
-        
+        // refreashing step counter
         [Map currentMap].stepCounter--;
         [(HUDLayer*)[[self parent] getChildByTag:HUDLayerTag] updateHUD];
         
-  
+        //determine wiining or losing state each 
         if([[[[Map currentMap] tiles] objectAtIndex:[[Map currentMap] targetIndex]] isCompatible:[[Map currentMap] target]]){
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[GameOverScene alloc] initWithMode:1] withColor:ccWHITE]];
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[GameOverScene alloc] initWithMode:1] withColor:ccWHITE]]; // mode 1 -> win
         }
         if([Map currentMap].stepCounter == 0 || [[[Map currentMap] mapInventory] count] == 0){
-           [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[GameOverScene alloc] initWithMode:0] withColor:ccWHITE]];
+           [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[GameOverScene alloc] initWithMode:0] withColor:ccWHITE]]; //mode 2 -> lose
         }
         
     }
     else if(_toConfirm != 0){
+        //get back hud and inventory when a click happened
         [[[self parent] getChildByTag:mapInventoryLayerTag] setPosition:CGPointZero];
         [[[self parent] getChildByTag:HUDLayerTag] setPosition:CGPointZero];
         //add card back to inventory
         [[[Map currentMap] mapInventory] addObject: [[Map currentMap] selected]];
         [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
+        //make occupied tile back to empty state
         CCSprite *emptyCard = [CCSprite spriteWithFile:@"emptyTile.png"];
         [emptyCard setScaleY: 72/emptyCard.contentSize.height];
         [emptyCard setScaleX: 52/emptyCard.contentSize.width];
@@ -152,6 +166,7 @@
         _toConfirm = 0;
     }
     else{
+        //determine which tile player clicked on, used for future implementation
         for (CCSprite* tile in _tilesArray){
             if(CGRectContainsPoint([tile boundingBox], point)){
                 int index = [_tilesArray indexOfObject:tile];
@@ -167,6 +182,7 @@
     
 }
 
+// dragging a card
 - (void) layerPanZoom: (CCLayerPanZoom *) sender
  touchPositionUpdated: (CGPoint) newPos
 {
@@ -196,11 +212,14 @@
     }
 }
 
+// this function emits when player release  the finger and if a card was dragged, replace the ending tile with a
+// dragged card, making fake snipping effect
 -(void) layerPanZoom: (CCLayerPanZoom *) sender touchMoveEndAtPosition:(CGPoint) endPos
 {
     NSLog(@"released finger at position %@  {%f,%f}",sender,endPos.x,endPos.y);
     if(_selectedCard != 0){
         if([self draggedToTile:endPos]!= -1){
+            //dont drag to a occupide tile
             if(![[[[Map currentMap] tiles] objectAtIndex:[self draggedToTile:endPos]] hasCard]){
                 [[_tilesArray objectAtIndex: [self draggedToTile:endPos]] setTexture:[_selectedCard texture]];
                 [[_tilesArray objectAtIndex:[self draggedToTile:endPos]] setVisible:YES];
@@ -226,6 +245,8 @@
 {
     _tutorialGameboard.mode = kCCLayerPanZoomModeFrame;
 }
+
+// when mapinventory item clicked, call this function with sender card.
 -(void) showSelected :(id) sender atPos:(CGPoint)pos
 {
     [self setToFrameMode];

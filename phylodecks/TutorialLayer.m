@@ -5,7 +5,7 @@
 //  Created by Sun, You Fei on 13-07-29.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
-
+//  contains static slide show style tutrial , swipe to turn page
 #import "TutorialLayer.h"
 #import "MainMenuScene.h"
 

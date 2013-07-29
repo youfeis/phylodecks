@@ -4,7 +4,7 @@
 //
 //  Created by Youfei Sun on 7/28/13.
 //
-//
+//  If player loses, player wont get a card for prize, only several experience is added
 
 #import "GameOverLayer.h"
 
@@ -17,7 +17,7 @@
     }
     return self;
 }
-
+//showing animation of losing
 -(void)onEnter{
     [super onEnter];
     CGSize s = [[CCDirector sharedDirector] winSize];
@@ -36,6 +36,7 @@
     
 }
 
+//after animation show stats of this game result
 -(void)fadeInDoneSelector{
     CGSize size = [[CCDirector sharedDirector] winSize];
     CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];

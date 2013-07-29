@@ -5,6 +5,8 @@
 //  Created by Sun, You Fei on 13-07-04.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
+//  This class loads sqlite databse and card informations convert cardIDs into card objects
+
 
 #import "InventorySelectionLayer.h"
 #import "MainMenuLayer.h"
@@ -29,7 +31,7 @@ enum nodeTags2
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
         CGSize screenSize = [CCDirector sharedDirector].winSize;
-        
+        // back button
         CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
         CCSprite *back2 = [CCSprite spriteWithFile:@"Back.png"];
         back2.color = ccGRAY;
@@ -64,7 +66,7 @@ enum nodeTags2
         CCMenu *playMenu = [CCMenu menuWithItems: nil];
         
         
-          
+        
         CCLabelTTF *labelWithNumber = [CCLabelTTF labelWithString:@"go>>" fontName:@"Marker Felt" fontSize:22];
         CCMenuItemLabel *item = [CCMenuItemLabel itemWithLabel:labelWithNumber block:^(id sender){
             if([[[Map currentMap] mapInventory] count] <= [[Map currentMap] maxInventory]){
@@ -76,7 +78,7 @@ enum nodeTags2
         [self addChild: playMenu z: 0];
     
         playMenu.position = ccp( 0.9f * screenSize.width, 15.0f);
-        
+        // showing inventory limit
         NSString *countString = [NSString stringWithFormat:@"%1i/%2i",[[[Map currentMap] mapInventory] count],[[Map currentMap] maxInventory]];
         CCLabelTTF *inventoryCount = [CCLabelTTF labelWithString:countString fontName:@"Marker Felt" fontSize:22];
         inventoryCount.position = ccp( 0.1f * screenSize.width, 15.0f);
@@ -149,20 +151,8 @@ enum nodeTags2
 // Returns array of CCLayers - pages for ScrollLayer.
 - (NSArray *) scrollLayerPages
 {
-	
-    // PAGE 2 - Custom Font Menu in the center.
+	// 1 page initially
 	CCLayer *pageOne = [CCLayer node];
-    /*
-	CCLabelTTF *labelTwo = [CCLabelTTF labelWithString:@"Add Page!" fontName:@"Marker Felt" fontSize:44];
-	CCMenuItemLabel *titem = [CCMenuItemLabel itemWithLabel:labelTwo target:self selector:@selector(addPagePressed:)];
-	CCLabelTTF *labelTwo2 = [CCLabelTTF labelWithString:@"Remove Page!" fontName:@"Marker Felt" fontSize:44];
-	CCMenuItemLabel *titem2 = [CCMenuItemLabel itemWithLabel:labelTwo2 target:self selector:@selector(removePagePressed:)];
-    CCLabelTTF *labelTwo3 = [CCLabelTTF labelWithString:@"Change dots color!" fontName:@"Marker Felt" fontSize:40];
-	CCMenuItemLabel *titem3 = [CCMenuItemLabel itemWithLabel:labelTwo3 target:self selector:@selector(changeColorPressed:)];
-	CCMenu *menu = [CCMenu menuWithItems: titem, titem2, titem3, nil];
-	[menu alignItemsVertically];
-	menu.position = ccp(screenSize.width/2, screenSize.height/2);
-	[pageOne addChild:menu]; */
 	
 	return [NSArray arrayWithObjects: pageOne,nil];
 }
@@ -262,24 +252,10 @@ enum nodeTags2
 	NSLog(@"CCScrollLayerTestLayer#scrollLayer:scrolledToPageNumber: %@ %d", sender, page);
 }
 
+//links database 
 -(void)loadCardDatabase{
  	NSLog(@">>>>>>>>>>>>>>>>> openDatabase");
-    //	BOOL success;
-    //	NSFileManager *fileManager = [NSFileManager defaultManager];
-    //	NSError *error;
-    //	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, TRUE);
-    //	NSString *documentsDirectory = [paths objectAtIndex:0];
-    //	NSString *writableDBPath = [[NSBundle mainBundle] pathForResource:@"db" ofType:@"sqlite3"];
 	NSString *defaultDBPath = [[NSBundle mainBundle] pathForResource:@"db" ofType:@"sqlite3"];
-    //[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"db.sqlite3"];
-	
-    //	BOOL forceRefresh = FALSE; // Just for testing
-	
-    //	success = [fileManager fileExistsAtPath:writableDBPath];
-    //	if (!success || forceRefresh) {
-    //		success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
-    //		NSLog(@"initial creation of writable database (%@) from resources database (%@)", writableDBPath, defaultDBPath);
-    //	}
 	
 	db = [[FMDatabase databaseWithPath:defaultDBPath] retain];
 	
@@ -299,6 +275,8 @@ enum nodeTags2
     }
 }
 
+// get result set of cards that in players inventory
+
 -(void)inventoryInit{
     FMResultSet * rs;
     for(id obj in [[Player currentPlayer] playerInventory]){
@@ -311,6 +289,8 @@ enum nodeTags2
     
     
 }
+
+//show cards on the screen
 - (void) placeInventoryCards{
     CGSize screenSize = [CCDirector sharedDirector].winSize;
     CCMenuAdvanced* menu = [CCMenuAdvanced menuWithItems: nil];
@@ -323,6 +303,7 @@ enum nodeTags2
             
             
             // implement card click event here
+            // toggles the card selection status
             
             
             if([[[Map currentMap] mapInventory] containsObject:obj]){
@@ -370,10 +351,11 @@ enum nodeTags2
 }
 
 -(void)transitToChallengeModeScene{
-       [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[ChallengeModeScene alloc] init] withColor:ccWHITE]];
+       [[CCDirector sharedDirector] replaceScene:[[ChallengeModeScene alloc] init]];
 }
 
-
+// if gamemode = 0 -> challenge mode, just randomly get a card from database
+// if gamemode = 1 -> GPS mode , get a card according to the terrian set player is located to
 -(void)homeAndTargetInit{
     FMResultSet * rs;
     rs = [db executeQuery:@"SELECT * FROM card WHERE cardID = 1"];

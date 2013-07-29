@@ -15,12 +15,9 @@
 }
 
 
-// You don't need to modify the default initWithNibName:bundle: method.
 
-
+// make GPS start refreshing
 - (void)loadView {
-    
-//    CGSize size = [[CCDirector sharedDirector] winSize];
     
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -30,23 +27,6 @@
     NSLog(@"%1f,%2f",locationManager.location.coordinate.latitude
           ,locationManager.location.coordinate.longitude);
 
-   /* GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locationManager.location.coordinate.latitude
-                                                            longitude:locationManager.location.coordinate.longitude
-                                                                 zoom:5];
-    mapView_ = [GMSMapView mapWithFrame: CGRectMake(0,0,size.width,350) camera:camera];
-    mapView_.myLocationEnabled = YES;
-    
-    self.view = mapView_;
-    
-    // Creates a marker of player home
-    // todo
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
-    marker.title = @"Current Location";
-    marker.snippet = @"Player";
-    marker.map = mapView_;
-    //todo
-    //create a marker for player current location*/
 }
 
 -(void)relocate{

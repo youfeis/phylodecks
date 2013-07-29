@@ -77,14 +77,12 @@
 		097897CF1780F582001EA837 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 097897CE1780F582001EA837 /* libz.dylib */; };
 		097897D11780F5A4001EA837 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097897D01780F5A4001EA837 /* SystemConfiguration.framework */; };
 		097897D4178112A7001EA837 /* GoogleMapUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097897D3178112A7001EA837 /* GoogleMapUIViewController.m */; };
-		097897D717815B3E001EA837 /* GPSMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 097897D617815B3D001EA837 /* GPSMenuLayer.m */; };
 		097897DA17824A78001EA837 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 097897D917824A78001EA837 /* Player.m */; };
 		0978AD0F1786028100455B03 /* GameBoardLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD0E1786028100455B03 /* GameBoardLayer.m */; };
 		0978AD141786094B00455B03 /* CCMenuAdvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD111786094B00455B03 /* CCMenuAdvanced.m */; };
 		0978AD151786094B00455B03 /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD131786094B00455B03 /* CCLayerPanZoom.m */; };
 		0978AD1817860B4800455B03 /* ChallengeModeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD1717860B4800455B03 /* ChallengeModeScene.m */; };
 		0978AD1A17860FC500455B03 /* gameboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 0978AD1917860FC500455B03 /* gameboard.png */; };
-		0978C5AE1793C0F50094495B /* ChallengeModeLoadingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978C5AD1793C0F40094495B /* ChallengeModeLoadingLayer.m */; };
 		0978C5B1179466460094495B /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0978C5B0179466450094495B /* HUDLayer.m */; };
 		09792ECA177F6E4D0065057E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09792EC9177F6E4D0065057E /* QuartzCore.framework */; };
 		09792ECC177F6E4D0065057E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09792ECB177F6E4D0065057E /* OpenGLES.framework */; };
@@ -339,8 +337,6 @@
 		097897D01780F5A4001EA837 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		097897D2178112A7001EA837 /* GoogleMapUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleMapUIViewController.h; sourceTree = "<group>"; };
 		097897D3178112A7001EA837 /* GoogleMapUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleMapUIViewController.m; sourceTree = "<group>"; };
-		097897D517815B3D001EA837 /* GPSMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSMenuLayer.h; sourceTree = "<group>"; };
-		097897D617815B3D001EA837 /* GPSMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSMenuLayer.m; sourceTree = "<group>"; };
 		097897D817824A78001EA837 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		097897D917824A78001EA837 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		0978AD0D1786028100455B03 /* GameBoardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardLayer.h; sourceTree = "<group>"; };
@@ -352,8 +348,6 @@
 		0978AD1617860B4700455B03 /* ChallengeModeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeModeScene.h; sourceTree = "<group>"; };
 		0978AD1717860B4800455B03 /* ChallengeModeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeModeScene.m; sourceTree = "<group>"; };
 		0978AD1917860FC500455B03 /* gameboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameboard.png; sourceTree = "<group>"; };
-		0978C5AC1793C0F40094495B /* ChallengeModeLoadingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeModeLoadingLayer.h; sourceTree = "<group>"; };
-		0978C5AD1793C0F40094495B /* ChallengeModeLoadingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeModeLoadingLayer.m; sourceTree = "<group>"; };
 		0978C5AF179466440094495B /* HUDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDLayer.h; sourceTree = "<group>"; };
 		0978C5B0179466450094495B /* HUDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDLayer.m; sourceTree = "<group>"; };
 		09792EC6177F6E4D0065057E /* phylodecks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = phylodecks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -773,8 +767,6 @@
 				0960AA70178624EB009E76FF /* ChallengeModePrepareScene.m */,
 				0978AD1617860B4700455B03 /* ChallengeModeScene.h */,
 				0978AD1717860B4800455B03 /* ChallengeModeScene.m */,
-				0978C5AC1793C0F40094495B /* ChallengeModeLoadingLayer.h */,
-				0978C5AD1793C0F40094495B /* ChallengeModeLoadingLayer.m */,
 				0978AD0D1786028100455B03 /* GameBoardLayer.h */,
 				0978AD0E1786028100455B03 /* GameBoardLayer.m */,
 				097930751780479C0065057E /* GameModeChoiceLayer.h */,
@@ -783,8 +775,6 @@
 				097897D3178112A7001EA837 /* GoogleMapUIViewController.m */,
 				097897B71780EB9B001EA837 /* GPSMapLayer.h */,
 				097897B81780EB9B001EA837 /* GPSMapLayer.m */,
-				097897D517815B3D001EA837 /* GPSMenuLayer.h */,
-				097897D617815B3D001EA837 /* GPSMenuLayer.m */,
 				0978C5AF179466440094495B /* HUDLayer.h */,
 				0978C5B0179466450094495B /* HUDLayer.m */,
 				09793067177F76E00065057E /* IntroLayer.h */,
@@ -1523,7 +1513,6 @@
 				097897B61780EB6E001EA837 /* LocationConfirmationScene.m in Sources */,
 				097897B91780EB9B001EA837 /* GPSMapLayer.m in Sources */,
 				097897D4178112A7001EA837 /* GoogleMapUIViewController.m in Sources */,
-				097897D717815B3E001EA837 /* GPSMenuLayer.m in Sources */,
 				097897DA17824A78001EA837 /* Player.m in Sources */,
 				DFD9A85E1783911100D632CC /* GDataXMLNode.m in Sources */,
 				0978AD0F1786028100455B03 /* GameBoardLayer.m in Sources */,
@@ -1543,7 +1532,6 @@
 				0938AA4B17889BC8009A3D34 /* MapInventoryLayer.m in Sources */,
 				0938AA4E17891B27009A3D34 /* Tile.m in Sources */,
 				0938AA531789281F009A3D34 /* FullScreenCardViewLayer.m in Sources */,
-				0978C5AE1793C0F50094495B /* ChallengeModeLoadingLayer.m in Sources */,
 				0978C5B1179466460094495B /* HUDLayer.m in Sources */,
 				098F3BCB17A10C960045B536 /* SettingLayer.m in Sources */,
 				098F3BCE17A1EA5F0045B536 /* PlayerSelectionScene.m in Sources */,

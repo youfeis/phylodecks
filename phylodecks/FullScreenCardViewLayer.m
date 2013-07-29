@@ -5,6 +5,9 @@
 //  Created by Sun, You Fei on 13-07-06.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
+//
+//  This class also uses ccpanzoomlayer, to view the card full screen , and provides camera control
+//
 
 #import "FullScreenCardViewLayer.h"
 #import "nodeTags.h"
@@ -21,13 +24,14 @@ enum nodeTags2
     // always call super init
     self = [self init];
     if (self != nil) {
-        
+        // set the card as a background full screen
+        //recognize a holding 
         _card = card;
         UILongPressGestureRecognizer* recognizer =
         [[UILongPressGestureRecognizer alloc]
          initWithTarget:self
          action:@selector(handleLongPressFrom:)];
-        recognizer.minimumPressDuration = 1.0; // seconds
+        recognizer.minimumPressDuration = 0.5; // seconds
         [[[CCDirector sharedDirector] view]
          addGestureRecognizer:recognizer];
         
@@ -60,6 +64,7 @@ enum nodeTags2
 	[super dealloc];
 }
 
+//camera control funcition
 - (void) updateForScreenReshape
 {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -80,6 +85,7 @@ enum nodeTags2
     _panZoomer.maxScale =  2.0f *  winSize.width / [background boundingBox].size.width;
 }
 
+// this function moves back hud and inventory, also adds back the shown card to the inventory
 - (void) layerPanZoom: (CCLayerPanZoom *) sender
 	   clickedAtPoint: (CGPoint) point
              tapCount: (NSUInteger) tapCount
@@ -117,11 +123,11 @@ enum nodeTags2
 
 }
 
+// if it holds more than 0.5 seconds on challenge mode, this function shows the card to the gameboard and removes hud and inventory.
 -(void) handleLongPressFrom:(UILongPressGestureRecognizer*)recognizer{
     if ( recognizer.state != UIGestureRecognizerStateBegan ){
         return;
     }
-    NSLog(@"2 seconds hold");
     for(id obj in [[self parent] children]){
         [obj setPosition:CGPointZero];
     }

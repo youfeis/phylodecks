@@ -73,7 +73,7 @@
         [itemExit setScale:0.5f];
         
         //Locating menu items before adding them to the layer
-        //todo: relocate them to fit in protrait view
+    
 		
 		CCMenu *menuLine1 = [CCMenu menuWithItems:itemTutorial, itemSinglePlayer ,itemSetting,itemExit, nil];
 		

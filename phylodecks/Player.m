@@ -4,7 +4,7 @@
 //
 //  Created by Sun, You Fei on 13-07-01.
 //
-//
+//  A singleton class saves all the player status and also r/w player info
 
 #import "Player.h"
 
@@ -47,12 +47,15 @@ static Player *sharedInstance = nil;
                                                     options:0 error:&error]];
 }
 
+// stub for future multiplayer on one phone
 -(void) loadRecentPlayer{
     NSArray *playerInfo = [_xmlDoc.rootElement elementsForName:@"Player"];
     GDataXMLElement *currentName = (GDataXMLElement *)[playerInfo objectAtIndex:0];
     playerName = currentName.stringValue;
 }
 
+
+// queries xpath to retrieve information 
 -(void) loadPlayerStats{
     NSString *xPath;
     NSArray *playerInfo;
@@ -81,6 +84,7 @@ static Player *sharedInstance = nil;
         
     }
     
+    // if the date is changed reset gps battle left to 3
     xPath = [NSString stringWithFormat:@"//Users/Player[Name = \"%@\"]/LastLogin",playerName];
     playerInfo = [_xmlDoc.rootElement nodesForXPath:xPath error: nil];
     GDataXMLElement *date = (GDataXMLElement *)[playerInfo objectAtIndex:0];
@@ -88,8 +92,7 @@ static Player *sharedInstance = nil;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyyMMdd"];
     if(![dateStr isEqual:[dateFormat stringFromDate:[NSDate date]]]){
-        NSLog(@"%@",[dateFormat dateFromString:dateStr]);
-        NSLog(@"%@",[NSDate date]);
+        
         [self setGPSBattleLeft:3];
     }
     [self setLastLogin: [dateFormat dateFromString:dateStr]];
@@ -109,6 +112,7 @@ static Player *sharedInstance = nil;
     return sharedInstance;
 }
 
+// loads from bundle if no in preset path
 - (NSString *)dataFilePath:(BOOL)forSave {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                          NSUserDomainMask, YES);
@@ -129,6 +133,7 @@ static Player *sharedInstance = nil;
     
 }
 
+// delets player profile xml
 -(void)resetPlayer{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                          NSUserDomainMask, YES);
@@ -139,10 +144,11 @@ static Player *sharedInstance = nil;
 
    
         [[NSFileManager defaultManager] removeItemAtPath:documentsPath error:&err];
-        NSLog(@"remove");
+       
     
 }
 
+// stub
 -(NSArray *)loadAllPlayerName{
  
     NSMutableArray *rtn = [[NSMutableArray alloc] init];
@@ -151,6 +157,8 @@ static Player *sharedInstance = nil;
     
 }
 
+
+//write xml file back to preset location
 -(void)saveData{
     
     GDataXMLElement * usersElement =

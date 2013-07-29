@@ -5,6 +5,7 @@
 //  Created by Sun, You Fei on 13-07-25.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
+//  layer/scene showing player stats, can be used as setting in future
 
 #import "SettingLayer.h"
 

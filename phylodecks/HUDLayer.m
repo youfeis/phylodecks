@@ -16,7 +16,7 @@
     self = [super init];
     if (self != nil) {
         CGSize screenSize = [CCDirector sharedDirector].winSize;
-        
+        //back button
         CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
         CCSprite *back2 = [CCSprite spriteWithFile:@"Back.png"];
         back2.color = ccGRAY;
@@ -29,12 +29,12 @@
         CCMenu *backMenu = [CCMenu menuWithItems:itemBack, nil];
         backMenu.position = ccp(40.0f,screenSize.height - 20.0f);
         [self addChild:backMenu];
-        
+        //set step counter
         NSString *stepCountString = [NSString stringWithFormat:@"%i",[[Map currentMap] stepCounter]];
         CCLabelTTF *stepCount = [CCLabelTTF labelWithString:stepCountString fontName:@"Marker Felt" fontSize:22];
         stepCount.position = ccp( 0.8f * screenSize.width, 15.0f);
         [self addChild:stepCount z:0 tag:HUDStepCounterTag];
-        
+        //set inventory image
         CCSprite *inventory = [CCSprite spriteWithFile:@"inventory.png"];
         inventory.scaleX = screenSize.width/inventory.contentSize.width;
         inventory.scaleY = 75/inventory.contentSize.height;
@@ -43,7 +43,7 @@
         [self addChild:inventory];
         
         
-        
+        //debug use
         CCLabelTTF *debug1 = [CCLabelTTF labelWithString:@"wingame" fontName:@"Marker Felt" fontSize:22];
         
 
@@ -57,11 +57,11 @@
         }], nil];
         [debugMenu alignItemsVerticallyWithPadding:3.0f];
         debugMenu.position = ccp( 0.8f * screenSize.width, screenSize.height - 15.0f);
-        //[self addChild:debugMenu];
+        //[self addChild:debugMenu]; debug use
     }
     return self;
 }
-
+// after each move, refresh the hud counter
 -(void)updateHUD{
     [self removeChildByTag:HUDStepCounterTag cleanup:YES];
     CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -72,6 +72,7 @@
     
 }
 
+//debug use, for directly winning /losing the game
 -(void)winGame{
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[GameOverScene alloc] initWithMode:1] withColor:ccWHITE]];
 }

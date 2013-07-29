@@ -5,6 +5,7 @@
 //  Created by Sun, You Fei on 13-07-06.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
+//  The class displays users card on hand
 
 #import "MapInventoryLayer.h"
 #import "MainMenuScene.h"
@@ -46,7 +47,7 @@ enum nodeTags2
 }
 
 
-
+//enabling dragging horizontally the inventory
 - (void) updateForScreenReshape
 {
 	CGSize s = [CCDirector sharedDirector].winSize;
@@ -70,16 +71,12 @@ enum nodeTags2
 	for (id obj in [[Map currentMap] mapInventory])
 	{
         
-        //       CCSprite *originalImage = [CCSprite spriteWithFile: fileName];
-   //     CCSprite *scaledImage = obj;
-   //     [scaledImage setScaleY: 72/scaledImage.contentSize.height];
-   //     [scaledImage setScaleX: 52/scaledImage.contentSize.width];
-		// Create menu item.
-        
 		CCMenuItemSprite *item =
 		[CCMenuItemSprite itemWithNormalSprite: obj
 								selectedSprite: nil
                                          block:^(id sender){
+                                             
+                                             //if clicked showing the full screen cards and remove other layers
                                              [[Map currentMap] setSelected:obj];
                                              FullScreenCardViewLayer * viewer = [[FullScreenCardViewLayer alloc] initWithCard:obj];
                                              for(id obj in [[self parent] children]){
@@ -105,11 +102,8 @@ enum nodeTags2
 	return menu;
 }
 
-- (CCNode *) widgetReversed
-{
-    return nil;
-}
 
+// enabling dragging the inventory
 - (void) updateWidget
 {
 	CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -132,10 +126,7 @@ enum nodeTags2
 	
     [menu fixPosition];
 }
-- (void) itemPressed: (id) sender
-{
 
-}
 
 - (void) backToMainMenu: (id) sender
 {
@@ -144,13 +135,7 @@ enum nodeTags2
     
 }
 
-- (void) toggleTutorialText: (id) sender
-{
-    [self removeChildByTag:kAdvice cleanup:YES];
-    [self removeChildByTag:toggleButtonTag cleanup:YES];
-    
-}
-
+//refreshes menu if a card is removed or added back
 - (void) reformatMenu{
     [[self getChildByTag:kMenu] removeAllChildrenWithCleanup:YES];
     [[self getChildByTag:kWidget] removeAllChildrenWithCleanup:YES];
@@ -161,18 +146,5 @@ enum nodeTags2
     [self updateForScreenReshape];
 }
 
--(void) removeCard:(CCSprite *) cardSprite
-{
-    
-}
-
--(void) cardMoveLeft:(CCSprite*) cardSprite
-{
-    
-}
--(void) addCard:(CCSprite *) cardSprite
-{
-    
-}
 
 @end

@@ -42,7 +42,7 @@
 		// Set font size
 		[CCMenuItemFont setFontSize:28];
 		
-		// Create mainmenu items
+		// back item
         CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
         CCSprite *back2 = [CCSprite spriteWithFile:@"Back.png"];
         back2.color = ccGRAY;
@@ -56,6 +56,8 @@
         backMenu.position = ccp(40.0f,size.height - 20.0f);
         [self addChild:backMenu];
 		
+        
+        // menu buttons
         CCSprite *gpsBattleSprite1 = [CCSprite spriteWithFile:@"GPSMode1.png"];
         CCSprite *gpsBattleSprite2 = [CCSprite spriteWithFile:@"GPSMode2.png"];
         CCMenuItemSprite * itemGPSBattle = [CCMenuItemSprite itemWithNormalSprite:gpsBattleSprite1 selectedSprite:gpsBattleSprite2 block:^(id sender){
@@ -74,17 +76,15 @@
         }];
         [itemChallengeMode setScale:0.5f];
         
-        //Locating menu items before adding them to the layer
-        //todo: relocate them to fit in protrait view
-        //todo: add return button layer
+    
 		
 		CCMenu *menuLine1 = [CCMenu menuWithItems:itemChallengeMode, itemGPSBattle, nil];
-        //todo: add a counter to show how many chances left for playing a GPS Battle
+        
 		
 		[menuLine1 alignItemsVerticallyWithPadding:20];
 		[menuLine1 setPosition:ccp( size.width/2, size.height - 200)];
         
-        // Add the menu to the layer
+        // text message showing how many gps battles left
 		[self addChild:menuLine1];
         
         NSString *battleLeftString = [NSString stringWithFormat:@"You have %i GPS battle left today.",[[Player currentPlayer] GPSBattleLeft]];

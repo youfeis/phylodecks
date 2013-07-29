@@ -5,7 +5,12 @@
 //  Created by Sun, You Fei on 13-07-25.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
+//
+//
+//  This class is a stub for implementing multi user on same device to switch profile.
 
+//  Currently, it only displys user stats and user can delete the profile
+//
 #import "PlayerSelectionLayer.h"
 #import "GDataXMLNode.h"
 #import "MainMenuLayer.h"
@@ -147,6 +152,7 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[[MainMenuScene alloc] init] withColor:ccWHITE]];
 }
 
+// pops up alert and delete profile if clicked yes
 - (void) resetPlayer: (id)sender{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert!" message:@"All game progress will be cleared! And game will resatrt!" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
     alert.alertViewStyle = UIAlertViewStyleDefault;

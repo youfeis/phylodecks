@@ -4,7 +4,8 @@
 //
 //  Created by Sun, You Fei on 13-07-05.
 //
-//
+//  A major class stores all the tiles and other map information in the game
+//  Singleton class used as global variables
 
 #import "Map.h"
 
@@ -40,6 +41,7 @@ static Map *sharedInstance = nil;
     return sharedInstance;
 }
 
+// refreshes map clear all the occupied cards
 -(void)generateNewMap:(int)level{
     maxInventory = 9+[[Player currentPlayer] playerLevel] * 3;
     stepCounter = [[Player currentPlayer] playerLevel] + 3;

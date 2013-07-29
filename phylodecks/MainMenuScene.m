@@ -29,6 +29,7 @@
         
         
         // when call player currentplayer side effect is that currentplayer will be initialized
+        // pops up the welcome window only once
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             if([[Player currentPlayer] isLastPlayerExist]){
@@ -55,7 +56,7 @@
 - (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex==0) {
-        
+        // saves players name and set a default name if player does not enter
         if (alert.alertViewStyle == UIAlertViewStylePlainTextInput){
             if([[[alert textFieldAtIndex:0] text] isEqual:@""]){
                 [[Player currentPlayer] setPlayerName: @"Player"];

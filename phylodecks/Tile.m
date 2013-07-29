@@ -4,8 +4,8 @@
 //
 //  Created by Sun, You Fei on 13-07-06.
 //
+//  A major class to determine if a card is logically compatible in a certain tile
 //
-
 #import "Tile.h"
 
 @implementation Tile
@@ -35,11 +35,10 @@
     }else if(![self foodChainOK:selectedCard]){
         return NO;
     }
-    
-    // todo: implement foodChain,diet,scale,and special requirement relations.
     return YES;
 }
 
+// return a circle of tiles has the same distance with itself
 -(NSMutableArray *)getArrayWithRadius: (int)distance{
     NSMutableArray *tileArray = [[NSMutableArray alloc] init];
     

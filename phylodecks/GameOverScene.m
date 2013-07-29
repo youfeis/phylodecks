@@ -4,7 +4,8 @@
 //
 //  Created by Youfei Sun on 7/28/13.
 //
-//
+//  When game ending condition meets, this scene will be actived and load layers depending on user
+// wining or losing the game
 
 #import "GameOverScene.h"
 
@@ -18,10 +19,10 @@
         [background setScaleY: 480/background.contentSize.height];
         [background setScaleX: 320/background.contentSize.width];
         [self addChild:background z:-2];
-        if(mode == 0){
+        if(mode == 0){ //lose
             CCLayer * gameover = [[GameOverLayer alloc]init];
             [self addChild:gameover];
-        }else{
+        }else{  //win
             CCLayer * gamewin = [[GameWinLayer alloc]init];
             [self addChild:gamewin];
         }
@@ -32,7 +33,7 @@
 }
 
 -(id)initWithMode:(int)modeCode{
-    mode = modeCode;
+    mode = modeCode;// mode 1 -> win mode 0-> lose
     [self init];
     return self;
 }

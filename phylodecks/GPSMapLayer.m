@@ -5,6 +5,8 @@
 //  Created by Sun, You Fei on 13-06-30.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
+//  This is the class to query for google places api, finding a target card matching player's location
+//
 
 #import "GPSMapLayer.h"
 #import "AppDelegate.h"
@@ -15,7 +17,7 @@
     self =[super init];
     if(self != nil){
         CGSize size = [[CCDirector sharedDirector] winSize];
-        
+        //back button
         CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
         CCSprite *back2 = [CCSprite spriteWithFile:@"Back.png"];
         back2.color = ccGRAY;
@@ -29,7 +31,7 @@
         backMenu.position = ccp(40.0f,size.height - 20.0f);
         [self addChild:backMenu];
 
-        
+        //load gps locater
         mapView = [[GoogleMapUIViewController alloc] init];
         [mapView loadView];
         
@@ -50,6 +52,10 @@
         [CCMenuItemFont setFontSize:18];
         CCSprite *battle1 = [CCSprite spriteWithFile:@"Battle1.png"];
         CCSprite *battle2 = [CCSprite spriteWithFile:@"Battle2.png"];
+        
+        
+        // this huge block querys for nearyby location with keywords within 1000 meters
+        // if a certain keyword is found nearby, then, adds it into an array, means that a certain types of card can be found in this location.
         
         CCMenuItemSprite *item = [CCMenuItemSprite itemWithNormalSprite:battle1 selectedSprite:battle2 block:^(id sender) {
             NSString *apiKey = @"AIzaSyD6OH4YfybdlJQJZgZPVRRA51MwTDsIiV4";
@@ -169,6 +175,8 @@
         CCSprite *rellocate2 = [CCSprite spriteWithFile:@"Rellocate2.png"];
         
         CCMenuItemSprite *item2 = [CCMenuItemSprite itemWithNormalSprite:rellocate1 selectedSprite:rellocate2 block:^(id sender) {
+            
+            // this block refreshes the gps location
             [[self getChildByTag:10] removeFromParentAndCleanup:YES];
             [[self getChildByTag:11] removeFromParentAndCleanup:YES];
             NSString *latitude = [NSString stringWithFormat:@"%f",mapView.latitude];

@@ -5,6 +5,7 @@
 //  Created by Sun, You Fei on 13-07-28.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
+// if a player wins, and if it is GPS mode, the target card will be added into player's inventory
 
 #import "GameWinLayer.h"
 #import "MainMenuScene.h"
@@ -21,6 +22,7 @@
     return self;
 }
 
+//showing animation of winning
 -(void)onEnter{
     [super onEnter];
     CGSize s = [[CCDirector sharedDirector] winSize];
@@ -39,6 +41,7 @@
     
 }
 
+//after animation show stats of this game result
 -(void)fadeInDoneSelector{
     CGSize size = [[CCDirector sharedDirector] winSize];
     CCSprite *back1 = [CCSprite spriteWithFile:@"Back.png"];
