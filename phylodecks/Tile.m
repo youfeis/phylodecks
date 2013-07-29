@@ -131,7 +131,7 @@
     }else if([selectedCard foodChain] == 2){
         for (Tile* neighbourTile in toCompare){
             if([[neighbourTile card] foodChain] == 1){
-                if([[neighbourTile card] scale] <= [selectedCard scale])
+                
                     if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"HERBIVORE"]){
                         return YES;
                     }
@@ -140,10 +140,16 @@
     }else if([selectedCard foodChain] == 3){
         for (Tile* neighbourTile in toCompare){
             if([[neighbourTile card] foodChain] == 2){
-                if([[neighbourTile card] scale] <= [selectedCard scale])
+                
                     if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"CARNIVORE"]){
                         return YES;
                     }
+            }
+            if([[neighbourTile card] foodChain] == 1){
+                
+                if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"HERBIVORE"]){
+                    return YES;
+                }
             }
         }
     }
@@ -157,7 +163,7 @@
 -(NSMutableArray *)getOccupiedTiles: (NSMutableArray *)arr{
     NSMutableArray * rtn = [[NSMutableArray alloc]init];
     for (Tile* obj in arr){
-        if([obj card] != 0){
+        if([obj card] != 0 && ![obj isTarget]){
             [rtn addObject:obj];
         }
     }

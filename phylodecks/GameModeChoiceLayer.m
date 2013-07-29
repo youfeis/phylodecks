@@ -48,6 +48,10 @@
 		}
                                     ];
         
+        [CCMenuItemSprite itemWithNormalSprite:<#(CCNode<CCRGBAProtocol> *)#> selectedSprite:<#(CCNode<CCRGBAProtocol> *)#> block:^(id sender){
+            
+        }
+        
 		CCMenuItem *itemChallengeMode = [CCMenuItemFont itemWithString:@"Challenge Mode" block:^(id sender) {
             [[Map currentMap] setGameMode:0];
             [self transitToChallengeModePrepareScene];
