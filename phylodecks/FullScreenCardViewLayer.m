@@ -85,6 +85,10 @@ enum nodeTags2
              tapCount: (NSUInteger) tapCount
 {
 	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f }", sender, point.x, point.y);
+    if( [[self parent] isKindOfClass:[ChallengeModeScene class]] ) {
+        [[[Map currentMap] mapInventory] addObject: [[Map currentMap] selected]];
+        [(MapInventoryLayer *)[[self parent] getChildByTag:mapInventoryLayerTag] reformatMenu];
+    }
     for(id obj in [[self parent] children]){
         [obj setPosition:CGPointZero];
     }

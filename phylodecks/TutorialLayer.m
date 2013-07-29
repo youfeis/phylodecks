@@ -37,7 +37,7 @@ enum nodeTags2
         [itemBack setScale:0.5f];
         CCMenu *backMenu = [CCMenu menuWithItems:itemBack, nil];
         backMenu.position = ccp(40.0f,screenSize.height - 20.0f);
-        [self addChild:backMenu];
+        [self addChild:backMenu z:100];
         
         // Add fast page change menu.
 		[self updateFastPageChangeMenu];
