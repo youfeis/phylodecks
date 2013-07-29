@@ -151,6 +151,12 @@
                     return YES;
                 }
             }
+            if([[neighbourTile card] foodChain] == 3){
+                
+                if([[[neighbourTile card] diet] isEqual:@"OMNIVORE"]||[[[neighbourTile card] diet] isEqual:@"HERBIVORE"]){
+                    return YES;
+                }
+            }
         }
     }
     return NO;

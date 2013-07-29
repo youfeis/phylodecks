@@ -380,6 +380,7 @@ enum nodeTags2
             Card *target = [[Card spriteWithFile:[rs stringForColumn:@"image"]]  initWithData:rs card:[rs intForColumn:@"cardID"]];
             [targetRandomSet addObject:target];
         }
+        [[Player currentPlayer] setGPSBattleLeft:[[Player currentPlayer] GPSBattleLeft]-1];
         int randomIndex = arc4random() % [targetRandomSet count];
         [[Map currentMap] setTarget:[targetRandomSet objectAtIndex:randomIndex]];
         

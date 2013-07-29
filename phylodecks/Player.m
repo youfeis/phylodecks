@@ -87,7 +87,13 @@ static Player *sharedInstance = nil;
     NSString *dateStr = date.stringValue;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyyMMdd"];
+    if(![dateStr isEqual:[dateFormat stringFromDate:[NSDate date]]]){
+        NSLog(@"%@",[dateFormat dateFromString:dateStr]);
+        NSLog(@"%@",[NSDate date]);
+        [self setGPSBattleLeft:3];
+    }
     [self setLastLogin: [dateFormat dateFromString:dateStr]];
+    
     
 }
 
@@ -167,7 +173,7 @@ static Player *sharedInstance = nil;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyyMMdd"];
-    NSString *dateString =[dateFormat stringFromDate:lastLogin];
+    NSString *dateString =[dateFormat stringFromDate:[NSDate date]];
     
     GDataXMLElement * lastLoginElement =
     [GDataXMLNode elementWithName:@"LastLogin" stringValue: dateString];

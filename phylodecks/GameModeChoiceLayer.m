@@ -47,7 +47,10 @@
         CCSprite *gpsBattleSprite1 = [CCSprite spriteWithFile:@"GPSMode1.png"];
         CCSprite *gpsBattleSprite2 = [CCSprite spriteWithFile:@"GPSMode2.png"];
         CCMenuItemSprite * itemGPSBattle = [CCMenuItemSprite itemWithNormalSprite:gpsBattleSprite1 selectedSprite:gpsBattleSprite2 block:^(id sender){
-            [self transitToLocationConfirmationScene]; 
+            if([[Player currentPlayer] GPSBattleLeft] != 0){
+                [self transitToLocationConfirmationScene];
+            }
+            
         }];
         [itemGPSBattle setScale:0.5f];
         
