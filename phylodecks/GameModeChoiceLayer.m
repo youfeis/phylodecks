@@ -43,20 +43,22 @@
 		[CCMenuItemFont setFontSize:28];
 		
 		// Create mainmenu items
-		CCMenuItem *itemGPSBattle = [CCMenuItemFont itemWithString:@"GPS Battle" block:^(id sender) {
-			[self transitToLocationConfirmationScene]; 
-		}
-                                    ];
+		
+        CCSprite *gpsBattleSprite1 = [CCSprite spriteWithFile:@"GPSMode1.png"];
+        CCSprite *gpsBattleSprite2 = [CCSprite spriteWithFile:@"GPSMode2.png"];
+        CCMenuItemSprite * itemGPSBattle = [CCMenuItemSprite itemWithNormalSprite:gpsBattleSprite1 selectedSprite:gpsBattleSprite2 block:^(id sender){
+            [self transitToLocationConfirmationScene]; 
+        }];
+        [itemGPSBattle setScale:0.5f];
         
-        [CCMenuItemSprite itemWithNormalSprite:<#(CCNode<CCRGBAProtocol> *)#> selectedSprite:<#(CCNode<CCRGBAProtocol> *)#> block:^(id sender){
-            
-        }
-        
-		CCMenuItem *itemChallengeMode = [CCMenuItemFont itemWithString:@"Challenge Mode" block:^(id sender) {
+        CCSprite *challengeSprite1 = [CCSprite spriteWithFile:@"Challenge1.png"];
+        CCSprite *challengeSprite2 = [CCSprite spriteWithFile:@"Challenge2.png"];
+        CCMenuItemSprite * itemChallengeMode = [CCMenuItemSprite itemWithNormalSprite:challengeSprite1 selectedSprite:challengeSprite2 block:^(id sender){
             [[Map currentMap] setGameMode:0];
             [self transitToChallengeModePrepareScene];
-		}
-                                        ];
+        }];
+        [itemChallengeMode setScale:0.5f];
+        
         //Locating menu items before adding them to the layer
         //todo: relocate them to fit in protrait view
         //todo: add return button layer
