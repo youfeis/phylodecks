@@ -130,15 +130,17 @@ static Player *sharedInstance = nil;
 }
 
 -(void)resetPlayer{
-    NSString * filePath = [[NSBundle mainBundle] pathForResource:@"userData" ofType:@"xml"];
-    xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
-    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *documentsPath = [documentsDirectory
+                               stringByAppendingPathComponent:@"userData.xml"];
+    NSError *err;
+
+   
+        [[NSFileManager defaultManager] removeItemAtPath:documentsPath error:&err];
+        NSLog(@"remove");
     
-    [self set_xmlDoc:[[GDataXMLDocument alloc] initWithData:xmlData
-                                                    options:0 error:&error]];
-    [self loadRecentPlayer];
-    [self loadPlayerStats];
-    [self releaseXMLFile];
 }
 
 -(NSArray *)loadAllPlayerName{

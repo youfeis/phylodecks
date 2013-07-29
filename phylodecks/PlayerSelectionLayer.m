@@ -158,7 +158,6 @@
 {
     if(buttonIndex==1) {
         [[Player currentPlayer] resetPlayer];
-        [[Player currentPlayer] saveData];
         exit(0);
     }
 }

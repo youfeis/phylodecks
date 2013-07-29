@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092371C317A69D1C006CF96E /* TutorialLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 092371C217A69D10006CF96E /* TutorialLayer.m */; };
 		0938AA4B17889BC8009A3D34 /* MapInventoryLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0938AA4A17889BC8009A3D34 /* MapInventoryLayer.m */; };
 		0938AA4E17891B27009A3D34 /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0938AA4D17891B26009A3D34 /* Tile.m */; };
 		0938AA5017892792009A3D34 /* emptyTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 0938AA4F17892792009A3D34 /* emptyTile.png */; };
@@ -241,6 +242,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		092371C117A69D0A006CF96E /* TutorialLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialLayer.h; sourceTree = "<group>"; };
+		092371C217A69D10006CF96E /* TutorialLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialLayer.m; sourceTree = "<group>"; };
 		0938AA4917889BC7009A3D34 /* MapInventoryLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapInventoryLayer.h; sourceTree = "<group>"; };
 		0938AA4A17889BC8009A3D34 /* MapInventoryLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapInventoryLayer.m; sourceTree = "<group>"; };
 		0938AA4C17891B25009A3D34 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
@@ -797,6 +800,8 @@
 				0979304F177F6E4F0065057E /* Supporting Files */,
 				097FCEF5178337F000893549 /* userData.xml */,
 				0938AA5417892F9D009A3D34 /* db.sqlite3 */,
+				092371C117A69D0A006CF96E /* TutorialLayer.h */,
+				092371C217A69D10006CF96E /* TutorialLayer.m */,
 				098F3BCF17A1EA750045B536 /* PlayerSelectionLayer.h */,
 				098F3BD017A1EA760045B536 /* PlayerSelectionLayer.m */,
 				098F3BCC17A1EA5D0045B536 /* PlayerSelectionScene.h */,
@@ -1510,6 +1515,7 @@
 				DFBC8DF817A5C56800C63B57 /* GameOverScene.m in Sources */,
 				DFBC8DFB17A5C59900C63B57 /* GameOverLayer.m in Sources */,
 				098CA25217A64287002CBE91 /* GameWinLayer.m in Sources */,
+				092371C317A69D1C006CF96E /* TutorialLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
